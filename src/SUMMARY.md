@@ -10,6 +10,7 @@
   - [CLUB-CANDIDATURE](./club/club-candidature.md)
   - [CLUB-DOSSIER](./club/club-dossier.md)
 - [SHARED](./shared.md)
+  - [DOSSIER-TEMPLATE](./shared/dossier-template.md)
   - [HEADER](./shared/header.md)
   - [SIDENAV](./shared/sidenav.md)
   - [LCF-FILE](./shared/lcf-file.md)

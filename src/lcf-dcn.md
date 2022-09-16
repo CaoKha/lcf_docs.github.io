@@ -24,7 +24,7 @@ dcn
 |__dcn.module.ts
 ```
 
-#### Routing:
+### Routing:
 
 `dcn-routing.module.ts`:
 
@@ -64,7 +64,9 @@ const routes: Routes = [
 ];
 ```
 
-### Functionality:
+### Functionalities:
+
+#### General:
 
 `dcn.component.ts`:
 
@@ -82,3 +84,15 @@ this component is just a parent component who contains 3 others child components
 - [header](./shared/header.md)
 - [sidenav](./shared/sidenav.md)
 - [dcn-accueil](./dcn/dcn-accueil.md) or [dcn-parameters](./dcn/dcn-parameters.md) or [dcn-dossier](./dcn/dcn-dossier.md)
+
+#### HTML:
+
+```html
+<lcf-header></lcf-header>
+
+<lcf-side-nav>
+  <router-outlet></router-outlet>
+</lcf-side-nav>
+```
+
+Plug in [HEADER](./shared/header.md) component and [SIDENAV](./shared/sidenav.md) component.

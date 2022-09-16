@@ -2,6 +2,7 @@
 
 ### Description:
 Shared folder is where all common and reusable components are stored.  
+- [DOSSIER-TEMPLATE](./shared/dossier-template.md)
 - [HEADER](./shared/header.md)
 - [SIDENAV](./shared/sidenav.md)
 - [LCF-FILE](./shared/lcf-file.md)

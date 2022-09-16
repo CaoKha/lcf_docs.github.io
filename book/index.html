@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js dark">
+<html lang="en" class="sidebar-visible no-js navy">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -37,7 +37,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "ayu" : "dark";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "ayu" : "navy";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -63,7 +63,7 @@
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
             html.classList.remove('no-js')
-            html.classList.remove('dark')
+            html.classList.remove('navy')
             html.classList.add(theme);
             html.classList.add('js');
         </script>
@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="lcf-accueil.html" class="active">ACCUEIL</a></li><li class="chapter-item "><a href="lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="dcn/dcn-accueil.html">DCN-ACCUEIL</a></li><li class="chapter-item "><a href="dcn/dcn-parameters.html">DCN-PARAMETERS</a></li><li class="chapter-item "><a href="dcn/dcn-dossier.html">DCN-DOSSIER</a></li></ol></li><li class="chapter-item "><a href="lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="club/club-accueil.html">CLUB-ACCUEIL</a></li><li class="chapter-item "><a href="club/club-candidature.html">CLUB-CANDIDATURE</a></li><li class="chapter-item "><a href="club/club-dossier.html">CLUB-DOSSIER</a></li></ol></li><li class="chapter-item "><a href="shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="shared/header.html">HEADER</a></li><li class="chapter-item "><a href="shared/sidenav.html">SIDENAV</a></li><li class="chapter-item "><a href="shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="lcf-accueil.html" class="active">ACCUEIL</a></li><li class="chapter-item "><a href="lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="dcn/dcn-accueil.html">DCN-ACCUEIL</a></li><li class="chapter-item "><a href="dcn/dcn-parameters.html">DCN-PARAMETERS</a></li><li class="chapter-item "><a href="dcn/dcn-dossier.html">DCN-DOSSIER</a></li></ol></li><li class="chapter-item "><a href="lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="club/club-accueil.html">CLUB-ACCUEIL</a></li><li class="chapter-item "><a href="club/club-candidature.html">CLUB-CANDIDATURE</a></li><li class="chapter-item "><a href="club/club-dossier.html">CLUB-DOSSIER</a></li></ol></li><li class="chapter-item "><a href="shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="shared/header.html">HEADER</a></li><li class="chapter-item "><a href="shared/sidenav.html">SIDENAV</a></li><li class="chapter-item "><a href="shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -103,7 +103,7 @@
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy (default)</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
@@ -151,40 +151,26 @@ It is currently a blank page with 2 clickable links:</p>
 </ul>
 <h3 id="files"><a class="header" href="#files">Files:</a></h3>
 <pre><code class="language-ignore">lcf-routing.module.ts
-lcf.component.ts 
+lcf.component.ts
 lcf.component.html
 lcf.component.scss
 lcf.module.ts
 </code></pre>
-<h3 id="functionality"><a class="header" href="#functionality">Functionality:</a></h3>
-<p><code>lcf.component.ts</code>:</p>
-<pre><code class="language-ts">ngOnInit(): void {
-    this.storageService.setUser = {};
-    this.storageService.setClCod = 0;
-    this.storageService.setTerrains = [];
-    this.storageService.setDossiers = [];
-    this.storageService.setSelectedDossier = {};
-    this.storageService.setSelectedSaisonSaNo = 0;
-  }
-</code></pre>
-<p>The page is rendered by the component <code>lcf.component.ts</code> and its html <code>lcf.component.html</code>.
-On initialization, we just reset all internal global states to their initial values.
-All the internal global states are store at <code>storage.service.ts</code> inside folder <code>/services</code>.
-This functionality is only used in <code>development</code> environment.</p>
+<h3 id="routing"><a class="header" href="#routing">Routing:</a></h3>
 <p><code>lcf-routing.module.ts</code>:</p>
 <pre><code class="language-ts">const routes: Routes = [
   {
-    path: '',
+    path: &quot;&quot;,
     component: LcfComponent,
   },
   {
-    path: 'dcn',
+    path: &quot;dcn&quot;,
     loadChildren: () =&gt; import(`./dcn/dcn.module`).then((m) =&gt; m.DcnModule),
     resolve: { dcn: DcnResolver },
   },
   {
-    path: 'club',
-    loadChildren: () =&gt; import('./club/club.module').then((m) =&gt; m.ClubModule),
+    path: &quot;club&quot;,
+    loadChildren: () =&gt; import(&quot;./club/club.module&quot;).then((m) =&gt; m.ClubModule),
     resolve: { club: ClubResolver },
   },
 ];
@@ -199,10 +185,26 @@ This functionality is only used in <code>development</code> environment.</p>
   exports: [RouterModule],
 })
 </code></pre>
-<p>Sometimes, the server does not support <code>HTML5 pushstate</code> required by <code>PathLocationStrategy</code> of <code>Angular</code>. 
+<p>Sometimes, the server does not support <code>HTML5 pushstate</code> required by <code>PathLocationStrategy</code> of <code>Angular</code>.
 In order to make redirection mechanism work, it is easier to use <code>HashLocationStrategy</code>.
 Each time we reload the page, the server will redirect to the current path found in the URL rather than redirect us to the homepage.<br>
-With this feature added, user can go directly to the dossier page by typing the dossier path in the URL. This feature is useful when user try to bookmark a dossier page, the next time they open that bookmark, <code>LCF</code> app will go directly to the dossier without passing through the homepage. </p>
+With this feature added, user can go directly to the dossier page by typing the dossier path in the URL. This feature is useful when user try to bookmark a dossier page, the next time they open that bookmark, <code>LCF</code> app will go directly to the dossier without passing through the homepage.</p>
+<h3 id="functionalities"><a class="header" href="#functionalities">Functionalities:</a></h3>
+<p><code>lcf.component.ts</code>:</p>
+<h4 id="general"><a class="header" href="#general">General:</a></h4>
+<pre><code class="language-ts">ngOnInit(): void {
+    this.storageService.setUser = {};
+    this.storageService.setClCod = 0;
+    this.storageService.setTerrains = [];
+    this.storageService.setDossiers = [];
+    this.storageService.setSelectedDossier = {};
+    this.storageService.setSelectedSaisonSaNo = 0;
+  }
+</code></pre>
+<p>The page is rendered by the component <code>lcf.component.ts</code> and its html <code>lcf.component.html</code>.
+On initialization, we just reset all internal global states to their initial values.
+All the internal global states are store at <code>storage.service.ts</code> inside folder <code>/services</code>.
+This functionality is only used in <code>development</code> environment.</p>
 
                     </main>
 
@@ -227,6 +229,22 @@ With this feature added, user can go directly to the dossier page by typing the 
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>SIDENAV - The lcf_ui documentations</title>
+        <title>DOSSIER-TEMPLATE - The lcf_ui documentations</title>
 
 
         <!-- Custom HTML head -->
@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="../lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dcn/dcn-accueil.html">DCN-ACCUEIL</a></li><li class="chapter-item "><a href="../dcn/dcn-parameters.html">DCN-PARAMETERS</a></li><li class="chapter-item "><a href="../dcn/dcn-dossier.html">DCN-DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../club/club-accueil.html">CLUB-ACCUEIL</a></li><li class="chapter-item "><a href="../club/club-candidature.html">CLUB-CANDIDATURE</a></li><li class="chapter-item "><a href="../club/club-dossier.html">CLUB-DOSSIER</a></li></ol></li><li class="chapter-item expanded "><a href="../shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="../shared/header.html">HEADER</a></li><li class="chapter-item expanded "><a href="../shared/sidenav.html" class="active">SIDENAV</a></li><li class="chapter-item "><a href="../shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="../shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="../shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="../shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="../lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dcn/dcn-accueil.html">DCN-ACCUEIL</a></li><li class="chapter-item "><a href="../dcn/dcn-parameters.html">DCN-PARAMETERS</a></li><li class="chapter-item "><a href="../dcn/dcn-dossier.html">DCN-DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../club/club-accueil.html">CLUB-ACCUEIL</a></li><li class="chapter-item "><a href="../club/club-candidature.html">CLUB-CANDIDATURE</a></li><li class="chapter-item "><a href="../club/club-dossier.html">CLUB-DOSSIER</a></li></ol></li><li class="chapter-item expanded "><a href="../shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../shared/dossier-template.html" class="active">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="../shared/header.html">HEADER</a></li><li class="chapter-item "><a href="../shared/sidenav.html">SIDENAV</a></li><li class="chapter-item "><a href="../shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="../shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="../shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="../shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -140,121 +140,17 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="sidenav"><a class="header" href="#sidenav">SIDENAV</a></h1>
-<p>The side navigation bar of the app.</p>
-<h3 id="description"><a class="header" href="#description">Description:</a></h3>
-<p>This sidenav always appears on the left of the application. There are two versions of the sidenav, one for <a href="../lcf-club.html">CLUB</a> and one for <a href="../lcf-dcn.html">DCN</a></p>
-<h3 id="files"><a class="header" href="#files">Files:</a></h3>
-<pre><code class="language-ignore">side-nav.component.html
-side-nav.component.scss
-side-nav.component.ts
-</code></pre>
-<h3 id="functionalities"><a class="header" href="#functionalities">Functionalities:</a></h3>
-<h4 id="general"><a class="header" href="#general">General:</a></h4>
-<pre><code class="language-ts">ngOnInit(): void {
-    if (this.storageService.getConnectId === 'dcn') {
-      this.showClubSideNavBar = false;
-    } else {
-      this.showClubSideNavBar = true;
-    }
-
-    this.sub = this.storageService.getSelectedSaisonSaNo$.subscribe(
-      (sa_no: number) =&gt; {
-        this.selectedSaisonSaNo = sa_no;
-      }
-    );
-}
-</code></pre>
-<p>Depending on who connected to the application (<a href="../lcf-club.html">CLUB</a> or <a href="../lcf-dcn.html">DCN</a>), show the corresponding <code>side-nav</code> version</p>
-<h4 id="specific"><a class="header" href="#specific">Specific:</a></h4>
-<pre><code class="language-ts">clickFirstEl() {
-    this.storageService.setFirstMenuItemActivated = true;
-    this.storageService.setSecondMenuItemActivated = false;
-}
-
-clickSecondEl() {
-    this.storageService.setFirstMenuItemActivated = false;
-    this.storageService.setSecondMenuItemActivated = true;
-}
-
-resetAllEl() {
-    this.storageService.setFirstMenuItemActivated = false;
-    this.storageService.setSecondMenuItemActivated = false;
-}
-</code></pre>
-<p>Highlight an item in <code>side-nav</code> upon clicking on it.</p>
-<h4 id="html"><a class="header" href="#html">HTML:</a></h4>
-<pre><code class="language-html">&lt;div class=&quot;container h100&quot;&gt;
-  &lt;div class=&quot;colG&quot; *ngIf=&quot;showClubSideNavBar&quot;&gt;
-    &lt;ul&gt;
-      &lt;li class=&quot;nv0&quot;&gt;
-        &lt;a [routerLink]=&quot;['/club',selectedSaisonSaNo]&quot; (click)=&quot;clickFirstEl()&quot;
-          &gt;Projet Club &lt;span&gt;&lt;/span
-        &gt;&lt;/a&gt;
-        &lt;ul class=&quot;nav&quot;&gt;
-          &lt;li class=&quot;nav-accueil&quot;&gt;
-            &lt;a
-              [ngClass]=&quot;{'active': storageService.getFirstMenuItemActivated$ | async}&quot;
-              [routerLink]=&quot;['/club', selectedSaisonSaNo]&quot;
-              (click)=&quot;clickFirstEl()&quot;
-              &gt;Accueil&lt;/a
-            &gt;
-          &lt;/li&gt;
-          &lt;li class=&quot;nav-licence&quot;&gt;
-            &lt;a
-              [ngClass]=&quot;{'active': storageService.getSecondMenuItemActivated$ | async}&quot;
-              [routerLink]=&quot;['/club', selectedSaisonSaNo,'lcf']&quot;
-              (click)=&quot;clickSecondEl()&quot;
-              &gt;Licence « Club Fédéral »&lt;/a
-            &gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/div&gt;
-
-  &lt;div class=&quot;colG nav2&quot; *ngIf=&quot;!showClubSideNavBar&quot;&gt;
-    &lt;ul class=&quot;vl margTop10&quot;&gt;
-      &lt;li class=&quot;nv0 nva&quot;&gt;
-        &lt;a
-          [routerLink]=&quot;['/dcn',selectedSaisonSaNo,'lcf']&quot;
-          (click)=&quot;clickFirstEl()&quot;
-          &gt;Licence « Club Fédéral » &lt;span&gt;&lt;/span
-        &gt;&lt;/a&gt;
-        &lt;ul class=&quot;nav&quot;&gt;
-          &lt;li class=&quot;nav-search&quot;&gt;
-            &lt;a
-              [ngClass]=&quot;{'active': storageService.getFirstMenuItemActivated$ | async}&quot;
-              [routerLink]=&quot;['/dcn',selectedSaisonSaNo,'lcf']&quot;
-              (click)=&quot;clickFirstEl()&quot;
-              &gt;Recherche / Liste&lt;/a
-            &gt;
-          &lt;/li&gt;
-          &lt;li class=&quot;nav-settings&quot;&gt;
-            &lt;a
-              [ngClass]=&quot;{'active': storageService.getSecondMenuItemActivated$ | async}&quot;
-              [routerLink]=&quot;['/dcn',selectedSaisonSaNo,'lcf','params']&quot;
-              (click)=&quot;clickSecondEl()&quot;
-              &gt;Paramètres&lt;/a
-            &gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/div&gt;
-  &lt;router-outlet&gt;&lt;/router-outlet&gt;
-&lt;/div&gt;
-</code></pre>
+                        <h1 id="dossier-template"><a class="header" href="#dossier-template">DOSSIER-TEMPLATE</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../shared/header.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../shared.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../shared/lcf-file.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../shared/header.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -264,11 +160,11 @@ resetAllEl() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../shared/header.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../shared.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../shared/lcf-file.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../shared/header.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

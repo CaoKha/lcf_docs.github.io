@@ -8,7 +8,7 @@ title = "The lcf_ui documentations"
 [output.html]
 additional-css = ["theme/css/additional.css"]
 additional-js = []
-default-theme = "dark"
+default-theme = "navy"
 preferred-dark-theme = "ayu"
 no-section-label = true
 site-url = "/"
