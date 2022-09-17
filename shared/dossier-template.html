@@ -592,7 +592,7 @@ The <code>isDossierValid</code> parameter is just there to differentiate situati
   return validToken1 &amp;&amp; validToken2;
 }
 </code></pre>
-<p>This function return wheter or not a dossier is <code>valid</code>.</p>
+<p>This function return whether or not a dossier is <code>valid</code>.</p>
 <h4 id="isinfogeneralvalid"><a class="header" href="#isinfogeneralvalid">isInfoGeneralValid</a></h4>
 <pre><code class="language-ts">private isInfoGeneralValid(info_general: FormGroup): boolean {
   let validToken: boolean = true;
@@ -1051,22 +1051,6 @@ setupDossierContent() {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 
