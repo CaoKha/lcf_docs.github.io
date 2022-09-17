@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="../lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dcn/dcn-accueil.html">DCN-ACCUEIL</a></li><li class="chapter-item "><a href="../dcn/dcn-parameters.html">DCN-PARAMETERS</a></li><li class="chapter-item "><a href="../dcn/dcn-dossier.html">DCN-DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../club/club-accueil.html">CLUB-ACCUEIL</a></li><li class="chapter-item "><a href="../club/club-candidature.html">CLUB-CANDIDATURE</a></li><li class="chapter-item "><a href="../club/club-dossier.html">CLUB-DOSSIER</a></li></ol></li><li class="chapter-item expanded "><a href="../shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item expanded "><a href="../shared/header.html" class="active">HEADER</a></li><li class="chapter-item "><a href="../shared/sidenav.html">SIDENAV</a></li><li class="chapter-item "><a href="../shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="../shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="../shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="../shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="../lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dcn/dcn-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../dcn/dcn-parameters.html">PARAMETERS</a></li><li class="chapter-item "><a href="../dcn/dcn-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../club/club-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../club/club-candidature.html">CANDIDATURE</a></li><li class="chapter-item "><a href="../club/club-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item expanded "><a href="../shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item expanded "><a href="../shared/header.html" class="active">HEADER</a></li><li class="chapter-item "><a href="../shared/sidenav.html">SIDENAV</a></li><li class="chapter-item "><a href="../shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="../shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="../shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="../shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,103 +142,153 @@
                     <main>
                         <h1 id="header"><a class="header" href="#header">HEADER</a></h1>
 <p>The header of the app.</p>
-<h3 id="description"><a class="header" href="#description">Description:</a></h3>
-<p>This header always appears on top of the application. There is a dropdown box on the right for choosing seasons.</p>
-<h3 id="files"><a class="header" href="#files">Files:</a></h3>
+<h2 id="description"><a class="header" href="#description">Description:</a></h2>
+<p>This header always appears on top of the application. There is a season selection dropdown box on the right of the header.</p>
+<h2 id="files"><a class="header" href="#files">Files:</a></h2>
 <pre><code class="language-ignore">header.component.html
 header.component.scss
 header.component.ts
 </code></pre>
-<h3 id="functionalities"><a class="header" href="#functionalities">Functionalities:</a></h3>
-<h4 id="general"><a class="header" href="#general">General:</a></h4>
+<h2 id="functionalities"><a class="header" href="#functionalities">Functionalities:</a></h2>
+<h3 id="general"><a class="header" href="#general">General:</a></h3>
 <pre><code class="language-ts">ngOnInit(): void {
-    this.currentUser = this.storageService.getUser;
-    this.updateLogoClubUrl();
-    this.subs.sink = this.subscribeDossiersFromSaNo(this.spawnSaNoObservable());
-    this.subs.sink = this.subscribeParametersFromSaNo(this.spawnSaNoObservable());
-  }
+  this.currentUser = this.storageService.user;
+  this.updateLogoClubUrl();
+  this.subs.sink = this.subscribeDossiersFromSaNo(this.spawnSaNoObservable());
+  this.subs.sink = this.subscribeParametersFromSaNo(this.spawnSaNoObservable());
+}
 </code></pre>
 <p>Upon initialization, this header will spawn 2 observables that listen to value changes of <code>season</code>.
 When a selected <code>season</code> changes, it invokes a call to backend and retrieves <code>dossiers</code> and <code>parameters</code> within the <code>season</code>.
-Also if connected <code>user</code> has a <code>cl_cod</code>, we update the club logo on the header.</p>
-<h4 id="specific"><a class="header" href="#specific">Specific:</a></h4>
+Also, if connected <code>user</code> has a <code>cl_cod</code>, we'll update the club logo at the top right of the header.</p>
+<h3 id="specific"><a class="header" href="#specific">Specific:</a></h3>
+<h4 id="spawnsanoobservable"><a class="header" href="#spawnsanoobservable">spawnSaNoObservable</a></h4>
 <pre><code class="language-ts">private spawnSaNoObservable() {
-    return this.storageService.getSelectedSaisonSaNo$.pipe(
-      tap((sa_no: number) =&gt; {
-        this.selectedSaisonSaNo = sa_no;
-      }),
-      distinctUntilChanged()
-    );
+  return this.storageService.getSelectedSaisonSaNo$.pipe(
+    tap((sa_no: number) =&gt; {
+      this.selectedSaisonSaNo = sa_no;
+    }),
+    distinctUntilChanged()
+  );
 }
 </code></pre>
 <p>Spawn an observable that listen to value changes of <code>season</code>.
-Upon receive a new one which is different from the old one (<code>distincUntilChanged()</code>), assign the new value to variable <code>selectedSaisonSaNo</code></p>
+Upon receive a new one which is different from the old one (<code>distincUntilChanged()</code>), assign the new value to variable <code>this.selectedSaisonSaNo</code></p>
+<h4 id="subscribedossiersfromsano"><a class="header" href="#subscribedossiersfromsano">subscribeDossiersFromSaNo</a></h4>
 <pre><code class="language-ts">private subscribeDossiersFromSaNo(saNo$: Observable&lt;number&gt;) {
-    return saNo$
-      .pipe(
-        switchMap((sa_no: number) =&gt; {
-          // in case connected as 'club'
-          if (
-            this.storageService.getConnectId === 'club' &amp;&amp;
+  return saNo$
+    .pipe(
+      switchMap((sa_no: number) =&gt; {
+        // in case connected as 'club'
+        if (
+          this.storageService.connectId === 'club' &amp;&amp;
+          this.currentUser.cl_cod
+        ) {
+          return this.dossierService.requestDossiers(
+            sa_no,
             this.currentUser.cl_cod
-          ) {
-            return this.dossierService.requestDossiers(
-              sa_no,
-              this.currentUser.cl_cod
-            );
-          }
-          // case connected as 'dcn', do nothing
-          else return of();
-        })
-      )
-      .subscribe({
-        next: (dossier: any) =&gt; {
-          console.log('storage.dossiers: ', dossier);
-          this.storageService.setDossiers = dossier;
-        },
-        error: (err: any) =&gt; {
-          console.error(err);
-        },
-      });
+          );
+        }
+        // case connected as 'dcn', do nothing
+        else return of();
+      })
+    )
+    .subscribe({
+      next: (dossier: any) =&gt; {
+        console.log('storage.dossiers: ', dossier);
+        this.storageService.dossiers = dossier;
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
 }
 </code></pre>
-<p>Suscribe to the <code>season</code> observable, upon a <code>season</code> changes, invoke a call to backend, retrieve and set the new <code>dossiers</code> of that <code>season</code> to the <code>storage</code>.</p>
+<p>Subscribe to the <code>season</code> observable. Upon a <code>season</code> changes, invoke a call to backend, retrieve and set the new <code>dossiers</code> of that <code>season</code> to the <code>storage</code>.</p>
+<h4 id="subscribeparametersfromsano"><a class="header" href="#subscribeparametersfromsano">subscribeParametersFromSaNo</a></h4>
 <pre><code class="language-ts">private subscribeParametersFromSaNo(saNo$: Observable&lt;number&gt;) {
-    return saNo$
-      .pipe(
-        switchMap((sa_no: number) =&gt; {
-          return this.parametersService.requestParameters(sa_no);
-        })
-      )
-      .subscribe({
-        next: (params: any) =&gt; {
-          console.log('storage.parameters: ', params.results);
-          this.storageService.setParameters = params.results;
-        },
-        error: (err: any) =&gt; {
-          console.error(err);
-        },
-      });
+  return saNo$
+    .pipe(
+      switchMap((sa_no: number) =&gt; {
+        return this.parametersService.requestParameters(sa_no);
+      })
+    )
+    .subscribe({
+      next: (params: any) =&gt; {
+        console.log('storage.parameters: ', params.results);
+        this.storageService.parameters = params.results;
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
 }
 </code></pre>
-<p>Suscribe to the <code>season</code> observable, upon a <code>season</code> changes, invoke a call to backend, retrieve and set the new <code>parameters</code> of that <code>season</code> to the <code>storage</code>.</p>
+<p>Suscribe to the <code>season</code> observable. Upon a <code>season</code> changes, invoke a call to backend, retrieve and set the new <code>parameters</code> of that <code>season</code> to the <code>storage</code>.</p>
+<h4 id="saisonchanged"><a class="header" href="#saisonchanged">saisonChanged</a></h4>
 <pre><code class="language-ts">saisonChanged($event: any) {
-    if ($event?.target?.value) {
-      const sa_no = parseInt($event.target.value);
-      this.storageService.setSelectedSaisonSaNo = sa_no;
-      this.changeRouteToSelectedSaisonSaNo(sa_no);
-    }
+  if ($event?.target?.value) {
+    const sa_no = parseInt($event.target.value);
+    this.storageService.selectedSaisonSaNo = sa_no;
+    this.changeRouteToSelectedSaisonSaNo(sa_no);
+  }
 }
 </code></pre>
 <p>Upon selecting another <code>season</code> in dropdown box, correcting the <code>season</code> string in url by using <code>regex</code> pattern matching.</p>
+<h4 id="changeroutetoselectedsaisonsano"><a class="header" href="#changeroutetoselectedsaisonsano">changeRouteToSelectedSaisonSaNo</a></h4>
 <pre><code class="language-ts">private changeRouteToSelectedSaisonSaNo(sa_no: number): void {
-    // console.log(this.router.url.match(/\d+/g)?.shift());
-    // console.log(this.router.url.replace(/\d+/, String(sa_no)));
-    const newUrl = this.router.url.replace(/\d+/, String(sa_no));
-    this.router.navigate([newUrl]);
+  const newUrl = this.router.url.replace(/\d+/, String(sa_no));
+  this.router.navigate([newUrl]);
 }
 </code></pre>
-<p>Do <code>regex</code> pattern matching, replace the <code>season</code> string then redirect to that new path. </p>
+<p>Do <code>regex</code> pattern matching, replace the <code>season</code> string then redirect to that new path.</p>
+<h3 id="html"><a class="header" href="#html">HTML:</a></h3>
+<pre><code class="language-html">&lt;header&gt;
+  &lt;div class=&quot;partG logo cursor-pointer&quot; [routerLink]=&quot;['/']&quot;&gt;
+    &lt;div&gt;
+      &lt;div class=&quot;filet&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;projetclub&quot;&gt;
+        &lt;div class=&quot;log&quot;&gt;&lt;/div&gt;
+        &lt;div&gt;Projet &lt;span&gt;Club&lt;/span&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;partD&quot; *ngIf=&quot;currentUser&quot;&gt;
+    &lt;div class=&quot;saison&quot; *ngIf=&quot;storageService.showSaisonBox$ | async&quot;&gt;
+      &lt;label&gt;Saison&lt;/label&gt;
+      &lt;select (change)=&quot;saisonChanged($event)&quot; [(ngModel)]=&quot;selectedSaisonSaNo&quot;&gt;
+        &lt;option
+          *ngFor=&quot;let saison of currentUser.saisons&quot;
+          [value]=&quot;saison?.sa_no&quot;
+          [selected]=&quot;saison?.sa_no === selectedSaisonSaNo&quot;
+        &gt;
+          {{saison?.cs_lib}}
+        &lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;user&quot;&gt;
+      &lt;img
+        class=&quot;logo-club&quot;
+        [src]=&quot;logoUrl&quot;
+        (error)=&quot;logoClubErrorHandler($event)&quot;
+        alt=&quot;Logo Club&quot;
+      /&gt;
+      &lt;div&gt;
+        &lt;span class=&quot;name&quot;&gt;{{currentUser.nom}}&lt;/span&gt;
+        &lt;span class=&quot;club&quot;
+          &gt;{{currentUser.cl_cod}} - {{currentUser.club_nom}}&lt;/span
+        &gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+
+&lt;!-- The header component always appears on top of every page
+  (it won't be destroyed when navigating from page to page (page refresh does not count!)) so does the toast.
+  Therefore, do not use this toast anywhere else,
+  if does, a dubplication of toast will be created on top of each other! --&gt;
+&lt;p-toast styleClass=&quot;custom-toast&quot; position=&quot;bottom-right&quot;&gt;&lt;/p-toast&gt;
+</code></pre>
 
                     </main>
 

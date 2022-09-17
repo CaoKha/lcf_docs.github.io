@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="dcn/dcn-accueil.html">DCN-ACCUEIL</a></li><li class="chapter-item "><a href="dcn/dcn-parameters.html">DCN-PARAMETERS</a></li><li class="chapter-item "><a href="dcn/dcn-dossier.html">DCN-DOSSIER</a></li></ol></li><li class="chapter-item expanded "><a href="lcf-club.html" class="active">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="club/club-accueil.html">CLUB-ACCUEIL</a></li><li class="chapter-item "><a href="club/club-candidature.html">CLUB-CANDIDATURE</a></li><li class="chapter-item "><a href="club/club-dossier.html">CLUB-DOSSIER</a></li></ol></li><li class="chapter-item "><a href="shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="shared/header.html">HEADER</a></li><li class="chapter-item "><a href="shared/sidenav.html">SIDENAV</a></li><li class="chapter-item "><a href="shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="dcn/dcn-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="dcn/dcn-parameters.html">PARAMETERS</a></li><li class="chapter-item "><a href="dcn/dcn-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item expanded "><a href="lcf-club.html" class="active">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="club/club-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="club/club-candidature.html">CANDIDATURE</a></li><li class="chapter-item "><a href="club/club-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="shared/header.html">HEADER</a></li><li class="chapter-item "><a href="shared/sidenav.html">SIDENAV</a></li><li class="chapter-item "><a href="shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -141,14 +141,13 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="lcf-club"><a class="header" href="#lcf-club">LCF-CLUB</a></h1>
-<h3 id="description"><a class="header" href="#description">Description:</a></h3>
-<p>LCF app is now connected as <code>CLUB</code>. In <code>DEV</code> or <code>PROD</code> environment you will need a <code>FOOTCLUBS_CONTEXTE</code> cookie in your browser in order to get an access to the next page. This cookie is set automatically after a successfully authentication to <a href="https://footclubspp.fff.fr/"><code>FOOTCLUB</code></a> app. After passing this guard, there are 3 pages can be accessed freely:</p>
+<h2 id="description"><a class="header" href="#description">Description:</a></h2>
+<p>LCF app is now connected as <code>CLUB</code>. In <code>DEV</code> or <code>PROD</code> environment you will need a <code>FOOTCLUBS_CONTEXTE</code> cookie in your browser in order to get an access to the next page. This cookie is set automatically after a successfully authentication to <a href="https://footclubspp.fff.fr/"><code>FOOTCLUB</code></a> app. After passing this guard, we will be redirected to <a href="./club/club-accueil.html">CLUB-ACCUEIL</a>. There are also 2 other pages can be accessed freely from here:</p>
 <ul>
-<li><a href="./club-accueil.html">CLUB-ACCUEIL</a></li>
-<li><a href="./club-parameters.html">CLUB-CANDIDATURE</a></li>
-<li><a href="./club-dossier.html">CLUB-DOSSIER</a></li>
+<li><a href="./club/club-candidature.html">CLUB-CANDIDATURE</a></li>
+<li><a href="./club/club-dossier.html">CLUB-DOSSIER</a></li>
 </ul>
-<h3 id="files"><a class="header" href="#files">Files:</a></h3>
+<h2 id="files"><a class="header" href="#files">Files:</a></h2>
 <pre><code class="language-ignore">club
 |__components
 |  |__club-accueil
@@ -160,7 +159,7 @@
 |__club.component.scss
 |__club.module.ts
 </code></pre>
-<h3 id="routing"><a class="header" href="#routing">Routing:</a></h3>
+<h2 id="routing"><a class="header" href="#routing">Routing:</a></h2>
 <p><code>club-routing.module.ts</code>:</p>
 <pre><code class="language-ts">const routes: Routes = [
   {
@@ -187,8 +186,23 @@
   },
 ];
 </code></pre>
-<h3 id="functionalities"><a class="header" href="#functionalities">Functionalities:</a></h3>
-<h4 id="html"><a class="header" href="#html">HTML:</a></h4>
+<h2 id="functionalities"><a class="header" href="#functionalities">Functionalities:</a></h2>
+<h3 id="general"><a class="header" href="#general">General:</a></h3>
+<p><code>club.component.ts</code>:</p>
+<pre><code class="language-ts">ngOnInit(): void {
+  // redirect to page of the current season
+  if (this.router.url === '/club')
+    this.router.navigate([String(this.storageService.selectedSaisonSaNo),'lcf'],
+                          {relativeTo: this.activatedRoute});
+}
+</code></pre>
+<p>This component is just a parent component who contains 3 others child components:</p>
+<ul>
+<li><a href="./shared/header.html">header</a></li>
+<li><a href="./shared/sidenav.html">sidenav</a></li>
+<li><a href="./club/club-accueil.html">club-accueil</a> or <a href="./club/club-candidature.html">club-candidature</a> or <a href="./club/club-dossier.html">club-dossier</a></li>
+</ul>
+<h3 id="html"><a class="header" href="#html">HTML:</a></h3>
 <pre><code class="language-html">&lt;lcf-header&gt;&lt;/lcf-header&gt;
 
 &lt;lcf-side-nav&gt;
@@ -196,21 +210,6 @@
 &lt;/lcf-side-nav&gt;
 </code></pre>
 <p>Plug in <a href="./shared/header.html">HEADER</a> component and <a href="./shared/sidenav.html">SIDENAV</a> component.</p>
-<h4 id="general"><a class="header" href="#general">General:</a></h4>
-<p><code>club.component.ts</code>:</p>
-<pre><code class="language-ts">ngOnInit(): void {
-    // redirect to page of the current season
-    if (this.router.url === '/club')
-      this.router.navigate([String(this.storageService.getSelectedSaisonSaNo),'lcf'],
-                            {relativeTo: this.activatedRoute});
-}
-</code></pre>
-<p>this component is just a parent component who contains 3 others child components:</p>
-<ul>
-<li><a href="./shared/header.html">header</a></li>
-<li><a href="./shared/sidenav.html">sidenav</a></li>
-<li><a href="./club/club-accueil.html">club-accueil</a> or <a href="./club/club-candidature.html">club-candidature</a> or <a href="./club/club-dossier.html">club-dossier</a></li>
-</ul>
 
                     </main>
 

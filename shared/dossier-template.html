@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="../lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dcn/dcn-accueil.html">DCN-ACCUEIL</a></li><li class="chapter-item "><a href="../dcn/dcn-parameters.html">DCN-PARAMETERS</a></li><li class="chapter-item "><a href="../dcn/dcn-dossier.html">DCN-DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../club/club-accueil.html">CLUB-ACCUEIL</a></li><li class="chapter-item "><a href="../club/club-candidature.html">CLUB-CANDIDATURE</a></li><li class="chapter-item "><a href="../club/club-dossier.html">CLUB-DOSSIER</a></li></ol></li><li class="chapter-item expanded "><a href="../shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../shared/dossier-template.html" class="active">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="../shared/header.html">HEADER</a></li><li class="chapter-item "><a href="../shared/sidenav.html">SIDENAV</a></li><li class="chapter-item "><a href="../shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="../shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="../shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="../shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="../lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dcn/dcn-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../dcn/dcn-parameters.html">PARAMETERS</a></li><li class="chapter-item "><a href="../dcn/dcn-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../club/club-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../club/club-candidature.html">CANDIDATURE</a></li><li class="chapter-item "><a href="../club/club-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item expanded "><a href="../shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../shared/dossier-template.html" class="active">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="../shared/header.html">HEADER</a></li><li class="chapter-item "><a href="../shared/sidenav.html">SIDENAV</a></li><li class="chapter-item "><a href="../shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="../shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="../shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="../shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -141,6 +141,440 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="dossier-template"><a class="header" href="#dossier-template">DOSSIER-TEMPLATE</a></h1>
+<p>The template (parent component) for both <a href="../dcn/dcn-dossier.html">DCN-DOSSIER</a> and <a href="../club/club-dossier.html">CLUB-DOSSIER</a>.</p>
+<h2 id="description"><a class="header" href="#description">Description:</a></h2>
+<p>This component stores all functionalities that will later be used by <a href="../dcn/dcn-dossier.html">DCN-DOSSIER</a> component and <a href="../club/club-dossier.html">CLUB-DOSSIER</a> component. These functionalities can be easily overriden if <a href="../dcn/dcn-dossier.html">DCN-DOSSIER</a> or <a href="../club/club-dossier.html">CLUB-DOSSIER</a> has different implementations from the original implementation.</p>
+<h2 id="files"><a class="header" href="#files">Files:</a></h2>
+<pre><code class="language-ignore">dossier-template.component.ts
+</code></pre>
+<h2 id="functionalities"><a class="header" href="#functionalities">Functionalities:</a></h2>
+<h3 id="general"><a class="header" href="#general">General:</a></h3>
+<pre><code class="language-ts">ngOnInit(): void {}
+</code></pre>
+<p>This is only a template that will later be used/overriden by <a href="../dcn/dcn-dossier.html">DCN-DOSSIER</a> component and <a href="../club/club-dossier.html">CLUB-DOSSIER</a> component. There will be no html or scss render by this component.</p>
+<h3 id="specific"><a class="header" href="#specific">Specific:</a></h3>
+<h4 id="initcriteresformandcriteresarrays"><a class="header" href="#initcriteresformandcriteresarrays">initCriteresFormAndCriteresArrays</a></h4>
+<pre><code class="language-ts">initCriteresFormAndCriteresArrays(criteres: Critere[]) {
+  for (let critere of criteres) {
+    this.initCriteresForm(this.dossierForm, critere);
+    switch (critere.id_ref_thematique_fk) {
+      case 1:
+        this.incon_struct_org.push(critere);
+        break;
+      case 2:
+        if (critere.id_ref_type_critere_fk === 1)
+          this.incon_insta_sport.push(critere);
+        else if (critere.id_ref_type_critere_fk === 2)
+          this.cumul_insta_sport.push(critere);
+        break;
+      case 3:
+        if (critere.id_ref_type_critere_fk === 1)
+          this.incon_trans_finan.push(critere);
+        else if (critere.id_ref_type_critere_fk === 2)
+          this.cumul_trans_finan.push(critere);
+        break;
+      case 4:
+        this.cumul_struct_equip.push(critere);
+        break;
+      case 5:
+        this.cumul_proj_sport.push(critere);
+        break;
+    }
+  }
+  // side effect: store all arrays in bigArray, later be used in html template
+  this.critereBigArray = [
+    [this.incon_struct_org, this.incon_insta_sport, this.incon_trans_finan],
+    [
+      this.cumul_insta_sport,
+      this.cumul_struct_equip,
+      this.cumul_trans_finan,
+      this.cumul_proj_sport,
+    ],
+  ];
+}
+</code></pre>
+<p>The objective of this function is to initiate the <a href="#initcriteresform"><code>criteresForm</code></a> of <code>dossierForm</code> and build a <code>critereBigArray</code> structure that match the dossier form in the UI. The <code>dossierForm</code> has the following structure:</p>
+<ul>
+<li>Criteres Incontournables (<code>id_ref_type_critere_fk === 1</code>):
+<ul>
+<li>Structuration et organisation du club</li>
+<li>Installations Sportives</li>
+<li>Transparence financière</li>
+</ul>
+</li>
+<li>Criteres Cumulables (<code>id_ref_type_critere_fk === 2</code>):
+<ul>
+<li>Installations Sportives</li>
+<li>Structuration des équipes et encadrement sportif</li>
+<li>Transparence financière</li>
+<li>Projet Sportif Jeunes</li>
+</ul>
+</li>
+</ul>
+<h4 id="updateterrainsrattachesarray"><a class="header" href="#updateterrainsrattachesarray">updateTerrainsRattachesArray</a></h4>
+<pre><code class="language-ts">/**
+   * Remove terrains with `te_nom` == `STADE EN SUPRESSION` and construct
+   * `title` field in order to display it in select box
+   */
+updateTerrainsRattachesArray() {
+  this.terrains = [];
+  for (let terrain of this.storageService.getTerrains) {
+    if (terrain.te_nom !== 'STADE EN SUPPRESSION')
+      this.terrains.push({
+        nni: terrain.nni,
+        classement_eclairage: terrain.classement_eclairage,
+        classement_installation: terrain.classement_installation,
+        title:
+          String(terrain.nni) +
+          ' - ' +
+          terrain.te_loca +
+          ' - ' +
+          terrain.te_nom,
+      });
+  }
+}
+</code></pre>
+<p>This function is used to build an array that contains all the <code>filtered</code> terrains attached to the club. It is used in the select dropdown box in the <code>html</code>. The filtered array is a list of terrains that has <code>te_nom</code> different from <code>STADE EN SUPPRESSION</code>. Also note that, the list of terrains in <code>storage</code> has already been sorted by <code>nni</code> in the backend so we don't need to sort them in the frontend.</p>
+<h4 id="initcriteresform"><a class="header" href="#initcriteresform">initCriteresForm</a></h4>
+<pre><code class="language-ts">private initCriteresForm(dossierForm: FormGroup, critere: Critere) {
+  switch (critere.id_ref_type_critere_fk) {
+    case 1: // incontournables
+      switch (critere.id_ref_thematique_fk) {
+        case 1: // struct_org
+          this.buildField('incon_struct_org', dossierForm, critere);
+          break;
+        case 2: // installation sportive
+          this.buildField('incon_insta_sport', dossierForm, critere);
+          break;
+        case 3: // transparence financiere
+          this.buildField('incon_trans_finan', dossierForm, critere);
+          break;
+      }
+      break;
+    case 2: // cumulables
+      switch (critere.id_ref_thematique_fk) {
+        // case 1: // struct_org
+        //   this.buildField('cumul_struct_org', dossierForm, critere);
+        //   break;
+        case 2: // installation sportive
+          this.buildField('cumul_insta_sport', dossierForm, critere);
+          break;
+        case 3: // transparence financiere
+          this.buildField('cumul_trans_finan', dossierForm, critere);
+          break;
+        case 4:
+          this.buildField('cumul_struct_equip', dossierForm, critere);
+          break;
+        case 5:
+          this.buildField('cumul_proj_sport', dossierForm, critere);
+          break;
+      }
+      break;
+  }
+}
+
+private buildField(
+  field_name: string,
+  dossierForm: FormGroup,
+  critere: Critere
+) {
+  switch (critere.code) {
+    case 'TERRAIN':
+      this.addTerrain(dossierForm, field_name, critere);
+      break;
+    case 'RB':
+      this.addRadio(dossierForm, field_name, critere);
+      break;
+    case 'RB3':
+      this.addRadioThree(dossierForm, field_name, critere);
+      break;
+    case 'PJ':
+      this.addFile(dossierForm, field_name, critere);
+      break;
+    case 'WBS':
+      this.addRadio(dossierForm, field_name, critere);
+      break;
+  }
+}
+
+private addTerrain(
+  dossierForm: FormGroup,
+  form_field: string,
+  critere: Critere
+) {
+  let fieldGroup = dossierForm.get(form_field) as FormGroup;
+
+  fieldGroup.addControl(
+    String(critere.id),
+    this.fb.group({
+      search: [''],
+      rattache: [critere.valeur],
+      terrain: [
+        critere.nni
+          ? {
+              classement_eclairage: critere.classement_eclairage,
+              classement_installation: critere.classement_installation,
+              nni: critere.nni,
+            }
+          : null,
+      ],
+      libelle: [critere.libelle],
+      id: [critere.id],
+      type: [critere.code],
+      eligibilite: [critere.eligibilite],
+      ref_eligibilite: [critere.eligibilite],
+      nb_points_calcule: [critere.nb_points_calcule],
+      nb_points_max: [critere.nb_points_max],
+      nb_points_min: [critere.nb_points_min],
+      code: [critere.id_ref_thematique_fk],
+      modification_manuelle: [critere.modification_manuelle],
+    })
+  );
+}
+
+private addRadio(
+  dossierForm: FormGroup,
+  form_field: string,
+  critere: Critere
+) {
+  let fieldGroup = dossierForm.get(form_field) as FormGroup;
+  fieldGroup.addControl(
+    String(critere.id),
+    this.fb.group({
+      valeur: [critere.valeur],
+      libelle: [critere.libelle],
+      id: [critere.id],
+      type: [critere.code],
+      eligibilite: [critere.eligibilite],
+      ref_eligibilite: [critere.eligibilite],
+      nb_points_calcule: [critere.nb_points_calcule],
+      nb_points_max: [critere.nb_points_max],
+      nb_points_min: [critere.nb_points_min],
+      code: [critere.id_ref_thematique_fk],
+    })
+  );
+}
+
+private addRadioThree(
+  dossierForm: FormGroup,
+  form_field: string,
+  critere: Critere
+) {
+  let fieldGroup = dossierForm.get(form_field) as FormGroup;
+  fieldGroup.addControl(
+    String(critere.id),
+    this.fb.group({
+      valeur: [critere.valeur],
+      libelle: [critere.libelle],
+      id: [critere.id],
+      type: [critere.code],
+      eligibilite: [critere.eligibilite],
+      ref_eligibilite: [critere.eligibilite],
+      nb_points_calcule: [critere.nb_points_calcule],
+      nb_points_max: [critere.nb_points_max],
+      nb_points_min: [critere.nb_points_min],
+      radio_label: [critere.radio_label],
+      code: [critere.id_ref_thematique_fk],
+    })
+  );
+}
+
+private addFile(
+  dossierForm: FormGroup,
+  form_field: string,
+  critere: Critere
+) {
+  let fieldGroup = dossierForm.get(form_field) as FormGroup;
+  fieldGroup.addControl(
+    String(critere.id),
+    this.fb.group({
+      statut_general: [critere.statut_manager_general],
+      file: [
+        null,
+        !critere.eligibilite || critere.eligibilite === 4
+          ? Validators.required
+          : null,
+      ],
+      azure_name: [critere.azure_name],
+      file_name: [critere.file_name],
+      new_file_name: [null],
+      ref_file_name: [critere.file_name],
+      libelle: [critere.libelle],
+      id: [critere.id],
+      type: [critere.code],
+      eligibilite: [critere.eligibilite],
+      ref_eligibilite: [critere.eligibilite], // previous status stored in database
+      motif_pj: [critere.motif_pj],
+      ref_motif_pj: [critere.motif_pj], // previous motif stored in database
+      code: [critere.id_ref_thematique_fk],
+    })
+  );
+}
+</code></pre>
+<p>Above are <code>critreresForm</code> building functions.
+It will be used together with <a href="#initinfogenerale">initInfoGenerale</a> to create a <code>dossierForm</code>.</p>
+<h4 id="initinfogenerale"><a class="header" href="#initinfogenerale">initInfoGenerale</a></h4>
+<pre><code class="language-ts">private initInfoGenerale() {
+  let info_general = this.dossierForm.get('info_general') as FormGroup;
+  info_general.patchValue({
+    nom: this.dossier.referent_nom,
+    prenom: this.dossier.referent_prenom,
+    email: this.dossier.referent_mail,
+    tel: this.dossier.referent_telephone,
+    autorisation: this.dossier.autorisation_adhesion,
+  });
+}
+</code></pre>
+<p>This function initiate the <code>Information Generale</code> field of <code>dossierForm</code>. It will later be used together with <a href="#initcriteresform">initCriteresForm</a> to create a <code>dossierForm</code></p>
+<h4 id="resetallcriterearrays"><a class="header" href="#resetallcriterearrays">resetAllCritereArrays</a></h4>
+<pre><code class="language-ts">/**
+ * In order to avoid the bug where child component rerenders 2 times,
+ * we reset all arrays before pushing new criteres to those arrays
+ */
+resetAllCritereArrays() {
+  this.incon_struct_org = [];
+  this.incon_insta_sport = [];
+  this.incon_trans_finan = [];
+  this.cumul_insta_sport = [];
+  this.cumul_trans_finan = [];
+  this.cumul_struct_equip = [];
+  this.cumul_proj_sport = [];
+}
+</code></pre>
+<p>This function resets all critere arrays. It is needed to overcome a known bug in Angular: <a href="https://github.com/angular/angular/issues/28330">https://github.com/angular/angular/issues/28330</a></p>
+<h4 id="isempty"><a class="header" href="#isempty">isEmpty</a></h4>
+<pre><code class="language-ts">/**
+ * Check if object is an empty array or an empty json
+ */
+isEmpty(object: any) {
+  if (object) return Object.keys(object).length === 0;
+  else return true;
+}
+</code></pre>
+<p>This is just a helper function which helps to detect whether an object is empty or not.</p>
+<h4 id="backupdossier"><a class="header" href="#backupdossier">backupDossier</a></h4>
+<pre><code class="language-ts">/**
+ * Request `dossier` from backend.
+ * In case not found, navigate to page `404`
+ */
+backupDossier() {
+  const sa_no = this.storageService.selectedSaisonSaNo;
+  const cl_cod = this.storageService.cl_cod;
+  const compet_id = this.storageService.competId;
+  this.subs.sink = this.dossierService
+    .requestDossier(sa_no, cl_cod, compet_id)
+    .pipe(takeUntil(this.storageService.globalUnsubscribe))
+    .subscribe({
+      next: (dossier: Dossier) =&gt; {
+        console.log('backupDossier: ', dossier);
+        this.dossier = dossier;
+        this.storageService.selectedDossier = dossier;
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+        this.router.navigate(['/', this.storageService.connectId, '404']);
+      },
+    });
+}
+</code></pre>
+<p>This function is called if and only if user refresh the dossier page. When the page is refreshed, <code>LCF</code> will reset its internal memory which leads to no <code>dossier</code> state in <code>storage</code>. Therefore, we have to get another <code>dossier</code> from backend and reput it into the frontend <code>storage</code>.</p>
+<h4 id="validerdecision"><a class="header" href="#validerdecision">validerDecision</a></h4>
+<pre><code class="language-ts">validerDossier() {
+  let isValid = this.isDossierFormValid(this.dossierForm);
+  if (this.dossier.id &amp;&amp; isValid) {
+    this.sendDossierToBackend(
+      true,
+      this.storageService.connectId,
+      'Validation réussi'
+    );
+  } else {
+    if (!this.dossier.id) {
+      console.error('dossier.id is undefined or null');
+      console.info('dossier info:', this.dossier);
+    } else if (!isValid) {
+      console.error('The dossierForm is invalid!');
+      console.info('dossierForm info:', this.dossierForm);
+    }
+  }
+}
+</code></pre>
+<p>This function is called after user click on <code>VALIDER</code> button on the <code>dossier</code> page. It will check if <code>dossierForm</code> is valid then send the <code>dossierForm</code> to backend.</p>
+<h4 id="savedossier"><a class="header" href="#savedossier">saveDossier</a></h4>
+<pre><code class="language-ts">/**
+ * save `dossier` without checking if form is valid
+ * still checking if info_general is valid though
+ */
+saveDossier() {
+  let info_general = this.dossierForm.get('info_general') as FormGroup;
+  let is_info_general_valid = this.isInfoGeneralValid(info_general);
+  if (this.dossier.id &amp;&amp; is_info_general_valid) {
+    this.sendDossierToBackend(
+      false,
+      this.storageService.connectId,
+      'Enregistrement réussi'
+    );
+  } else {
+    if (!this.dossier.id) {
+      console.error('dossier.id is undefined or null');
+      console.info('dossier info:', this.dossier);
+    } else if (!is_info_general_valid) {
+      console.error('The info_general is invalid!');
+      console.info(
+        'dossierForm info:',
+        this.dossierForm.controls['info_general']
+      );
+    }
+  }
+}
+</code></pre>
+<p>This function is called after user click on <code>ENREGISTRER</code> button on the <code>dossier</code> page. It will check only if <code>Information Generale</code> field is valid then send the <code>dossierForm</code> to backend.</p>
+<h3 id="html"><a class="header" href="#html">HTML:</a></h3>
+<pre><code class="language-html">&lt;header&gt;
+  &lt;div class=&quot;partG logo cursor-pointer&quot; [routerLink]=&quot;['/']&quot;&gt;
+    &lt;div&gt;
+      &lt;div class=&quot;filet&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;projetclub&quot;&gt;
+        &lt;div class=&quot;log&quot;&gt;&lt;/div&gt;
+        &lt;div&gt;Projet &lt;span&gt;Club&lt;/span&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;partD&quot; *ngIf=&quot;currentUser&quot;&gt;
+    &lt;div class=&quot;saison&quot; *ngIf=&quot;storageService.showSaisonBox$ | async&quot;&gt;
+      &lt;label&gt;Saison&lt;/label&gt;
+      &lt;select (change)=&quot;saisonChanged($event)&quot; [(ngModel)]=&quot;selectedSaisonSaNo&quot;&gt;
+        &lt;option
+          *ngFor=&quot;let saison of currentUser.saisons&quot;
+          [value]=&quot;saison?.sa_no&quot;
+          [selected]=&quot;saison?.sa_no === selectedSaisonSaNo&quot;
+        &gt;
+          {{saison?.cs_lib}}
+        &lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;user&quot;&gt;
+      &lt;img
+        class=&quot;logo-club&quot;
+        [src]=&quot;logoUrl&quot;
+        (error)=&quot;logoClubErrorHandler($event)&quot;
+        alt=&quot;Logo Club&quot;
+      /&gt;
+      &lt;div&gt;
+        &lt;span class=&quot;name&quot;&gt;{{currentUser.nom}}&lt;/span&gt;
+        &lt;span class=&quot;club&quot;
+          &gt;{{currentUser.cl_cod}} - {{currentUser.club_nom}}&lt;/span
+        &gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+
+&lt;!-- The header component always appears on top of every page
+  (it won't be destroyed when navigating from page to page (page refresh does not count!)) so does the toast.
+  Therefore, do not use this toast anywhere else,
+  if does, a dubplication of toast will be created on top of each other! --&gt;
+&lt;p-toast styleClass=&quot;custom-toast&quot; position=&quot;bottom-right&quot;&gt;&lt;/p-toast&gt;
+</code></pre>
 
                     </main>
 
