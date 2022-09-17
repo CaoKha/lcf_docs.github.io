@@ -1,17 +1,17 @@
 # DCN-PARAMETERS
 
-The dcn homepage of the LCF application.
+The dcn parameters page of the LCF application.
 
 ## Description:
 
-The dcn homepage consist of a filter system and a table which displays all dossiers within a selected season.
+The dcn parameters page has a table which contains parameters used to calculate a financial aid. 
 
 ## Files:
 
 ```ignore
-dcn-accueil.component.html
-dcn-accueil.component.scss
-dcn-accueil.component.ts
+dcn-parameters.component.html
+dcn-parameters.component.scss
+dcn-parameters.component.ts
 ```
 
 ## Functionalities:

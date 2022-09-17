@@ -4,7 +4,7 @@ The dcn homepage of the LCF application.
 
 ## Description:
 
-The dcn homepage consist of a filter system and a table which displays all dossiers within a selected season.
+The dcn homepage consists of a filter system and a table which displays all dossiers within a selected season.
 
 ## Files:
 
