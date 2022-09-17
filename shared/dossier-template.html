@@ -478,7 +478,7 @@ backupDossier() {
 }
 </code></pre>
 <p>This function is called if and only if user refresh the dossier page. When the page is refreshed, <code>LCF</code> will reset its internal memory which leads to no <code>dossier</code> state in <code>storage</code>. Therefore, we have to get another <code>dossier</code> from backend and reput it into the frontend <code>storage</code>.</p>
-<h4 id="validerdecision"><a class="header" href="#validerdecision">validerDecision</a></h4>
+<h4 id="validerdossier"><a class="header" href="#validerdossier">validerDossier</a></h4>
 <pre><code class="language-ts">validerDossier() {
   let isValid = this.isDossierFormValid(this.dossierForm);
   if (this.dossier.id &amp;&amp; isValid) {
