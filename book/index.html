@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="lcf-accueil.html" class="active">ACCUEIL</a></li><li class="chapter-item "><a href="lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="dcn/dcn-accueil.html">DCN-ACCUEIL</a></li><li class="chapter-item "><a href="dcn/dcn-parameters.html">DCN-PARAMETERS</a></li><li class="chapter-item "><a href="dcn/dcn-dossier.html">DCN-DOSSIER</a></li></ol></li><li class="chapter-item "><a href="lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="club/club-accueil.html">CLUB-ACCUEIL</a></li><li class="chapter-item "><a href="club/club-candidature.html">CLUB-CANDIDATURE</a></li><li class="chapter-item "><a href="club/club-dossier.html">CLUB-DOSSIER</a></li></ol></li><li class="chapter-item "><a href="shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="shared/header.html">HEADER</a></li><li class="chapter-item "><a href="shared/sidenav.html">SIDENAV</a></li><li class="chapter-item "><a href="shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="lcf-accueil.html" class="active">ACCUEIL</a></li><li class="chapter-item "><a href="lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="dcn/dcn-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="dcn/dcn-parameters.html">PARAMETERS</a></li><li class="chapter-item "><a href="dcn/dcn-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="club/club-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="club/club-candidature.html">CANDIDATURE</a></li><li class="chapter-item "><a href="club/club-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="shared/header.html">HEADER</a></li><li class="chapter-item "><a href="shared/side-nav.html">SIDE-NAV</a></li><li class="chapter-item "><a href="shared/page-not-found.html">PAGE-NOT-FOUND</a></li><li class="chapter-item "><a href="shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -141,7 +141,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="lcf-accueil"><a class="header" href="#lcf-accueil">LCF-ACCUEIL</a></h1>
-<h3 id="description"><a class="header" href="#description">Description:</a></h3>
+<h2 id="description"><a class="header" href="#description">Description:</a></h2>
 <p>LCF homepage only appears in <code>development</code> environment.
 You can either connect to <code>LCF</code> as a <code>CLUB</code> or <code>DCN</code> by clicking on the corresponding route.
 It is currently a blank page with 2 clickable links:</p>
@@ -149,14 +149,14 @@ It is currently a blank page with 2 clickable links:</p>
 <li><a href="./lcf-club.html">CLUB</a></li>
 <li><a href="./lcf-dcn.html">DCN</a></li>
 </ul>
-<h3 id="files"><a class="header" href="#files">Files:</a></h3>
+<h2 id="files"><a class="header" href="#files">Files:</a></h2>
 <pre><code class="language-ignore">lcf-routing.module.ts
 lcf.component.ts
 lcf.component.html
 lcf.component.scss
 lcf.module.ts
 </code></pre>
-<h3 id="routing"><a class="header" href="#routing">Routing:</a></h3>
+<h2 id="routing"><a class="header" href="#routing">Routing:</a></h2>
 <p><code>lcf-routing.module.ts</code>:</p>
 <pre><code class="language-ts">const routes: Routes = [
   {
@@ -175,9 +175,9 @@ lcf.module.ts
   },
 ];
 </code></pre>
-<p>The DCN module and CLUB module are lazy loaded when we try to access to <a href="./lcf-dcn.html">DCN</a> or <a href="./lcf-club.html">CLUB</a> page</p>
-<p>Note, we are implementing redirection mechanism so we set <code>useHash</code> to <code>true</code>.<br>
-<code>app-routing.module.ts</code>:</p>
+<p>The DCN module and CLUB module are lazy loaded when we try to access to <a href="./lcf-dcn.html">DCN</a> or <a href="./lcf-club.html">CLUB</a> page.
+Note, we are implementing redirection mechanism so we set <code>useHash</code> to <code>true</code>.</p>
+<p><code>app-routing.module.ts</code>:</p>
 <pre><code class="language-ts">@NgModule({
   imports: [
     RouterModule.forRoot(routes, {useHash: true}),
@@ -187,19 +187,19 @@ lcf.module.ts
 </code></pre>
 <p>Sometimes, the server does not support <code>HTML5 pushstate</code> required by <code>PathLocationStrategy</code> of <code>Angular</code>.
 In order to make redirection mechanism work, it is easier to use <code>HashLocationStrategy</code>.
-Each time we reload the page, the server will redirect to the current path found in the URL rather than redirect us to the homepage.<br>
-With this feature added, user can go directly to the dossier page by typing the dossier path in the URL. This feature is useful when user try to bookmark a dossier page, the next time they open that bookmark, <code>LCF</code> app will go directly to the dossier without passing through the homepage.</p>
-<h3 id="functionalities"><a class="header" href="#functionalities">Functionalities:</a></h3>
-<p><code>lcf.component.ts</code>:</p>
-<h4 id="general"><a class="header" href="#general">General:</a></h4>
+Each time we refresh the page, the server will redirect to the current path found in the URL rather than redirect us to the homepage.<br>
+With this feature added, user can go directly to the dossier page by typing the dossier path in the URL. This feature is useful when user try to bookmark a dossier page, the next time they open that bookmark, <code>LCF</code> app will go directly to the dossier without passing through the homepage.
+However, note that there is a <a href="https://github.com/angular/angular/issues/28330">bug</a> which duplicates a child component while we are using this redirection mechanism.</p>
+<h2 id="functionalities"><a class="header" href="#functionalities">Functionalities:</a></h2>
+<h3 id="general"><a class="header" href="#general">General:</a></h3>
 <pre><code class="language-ts">ngOnInit(): void {
-    this.storageService.setUser = {};
-    this.storageService.setClCod = 0;
-    this.storageService.setTerrains = [];
-    this.storageService.setDossiers = [];
-    this.storageService.setSelectedDossier = {};
-    this.storageService.setSelectedSaisonSaNo = 0;
-  }
+  this.storageService.user = {};
+  this.storageService.cl_cod = 0;
+  this.storageService.terrains = [];
+  this.storageService.dossiers = [];
+  this.storageService.selectedDossier = {};
+  this.storageService.selectedSaisonSaNo = 0;
+}
 </code></pre>
 <p>The page is rendered by the component <code>lcf.component.ts</code> and its html <code>lcf.component.html</code>.
 On initialization, we just reset all internal global states to their initial values.

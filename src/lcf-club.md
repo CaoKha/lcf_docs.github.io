@@ -1,14 +1,13 @@
 # LCF-CLUB
 
-### Description:
+## Description:
 
-LCF app is now connected as `CLUB`. In `DEV` or `PROD` environment you will need a `FOOTCLUBS_CONTEXTE` cookie in your browser in order to get an access to the next page. This cookie is set automatically after a successfully authentication to [`FOOTCLUB`](https://footclubspp.fff.fr/) app. After passing this guard, there are 3 pages can be accessed freely:
+LCF app is now connected as `CLUB`. In `DEV` or `PROD` environment you will need a `FOOTCLUBS_CONTEXTE` cookie in your browser in order to get an access to the next page. This cookie is set automatically after a successfully authentication to [`FOOTCLUB`](https://footclubspp.fff.fr/) app. After passing this guard, we will be redirected to [CLUB-ACCUEIL](./club/club-accueil.md). There are also 2 other pages can be accessed freely from here:
 
-- [CLUB-ACCUEIL](./club-accueil.md)
-- [CLUB-CANDIDATURE](./club-parameters.md)
-- [CLUB-DOSSIER](./club-dossier.md)
+- [CLUB-CANDIDATURE](./club/club-candidature.md)
+- [CLUB-DOSSIER](./club/club-dossier.md)
 
-### Files:
+## Files:
 
 ```ignore
 club
@@ -23,7 +22,7 @@ club
 |__club.module.ts
 ```
 
-### Routing:
+## Routing:
 
 `club-routing.module.ts`:
 
@@ -54,28 +53,28 @@ const routes: Routes = [
 ];
 ```
 
-### Functionalities:
+## Functionalities:
 
-#### General:
+### General:
 
 `club.component.ts`:
 
 ```ts
 ngOnInit(): void {
-    // redirect to page of the current season
-    if (this.router.url === '/club')
-      this.router.navigate([String(this.storageService.getSelectedSaisonSaNo),'lcf'],
-                            {relativeTo: this.activatedRoute});
+  // redirect to page of the current season
+  if (this.router.url === '/club')
+    this.router.navigate([String(this.storageService.selectedSaisonSaNo),'lcf'],
+                          {relativeTo: this.activatedRoute});
 }
 ```
 
-this component is just a parent component who contains 3 others child components:
+This component is just a parent component who contains 3 others child components:
 
 - [header](./shared/header.md)
 - [sidenav](./shared/sidenav.md)
 - [club-accueil](./club/club-accueil.md) or [club-candidature](./club/club-candidature.md) or [club-dossier](./club/club-dossier.md)
 
-#### HTML:
+### HTML:
 
 ```html
 <lcf-header></lcf-header>

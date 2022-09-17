@@ -1,12 +1,12 @@
-# SIDENAV
+# SIDE-NAV
 
 The side navigation bar of the app.
 
-### Description:
+## Description:
 
 This sidenav always appears on the left of the application. There are two versions of the sidenav, one for [CLUB](../lcf-club.md) and one for [DCN](../lcf-dcn.md)
 
-### Files:
+## Files:
 
 ```ignore
 side-nav.component.html
@@ -14,13 +14,13 @@ side-nav.component.scss
 side-nav.component.ts
 ```
 
-### Functionalities:
+## Functionalities:
 
-#### General:
+### General:
 
 ```ts
 ngOnInit(): void {
-    if (this.storageService.getConnectId === 'dcn') {
+    if (this.storageService.connectId === 'dcn') {
       this.showClubSideNavBar = false;
     } else {
       this.showClubSideNavBar = true;
@@ -36,28 +36,28 @@ ngOnInit(): void {
 
 Depending on who connected to the application ([CLUB](../lcf-club.md) or [DCN](../lcf-dcn.md)), show the corresponding `side-nav` version
 
-#### Specific:
+### Specific:
 
 ```ts
 clickFirstEl() {
-    this.storageService.setFirstMenuItemActivated = true;
-    this.storageService.setSecondMenuItemActivated = false;
+    this.storageService.firstMenuItemActivated = true;
+    this.storageService.secondMenuItemActivated = false;
 }
 
 clickSecondEl() {
-    this.storageService.setFirstMenuItemActivated = false;
-    this.storageService.setSecondMenuItemActivated = true;
+    this.storageService.firstMenuItemActivated = false;
+    this.storageService.secondMenuItemActivated = true;
 }
 
 resetAllEl() {
-    this.storageService.setFirstMenuItemActivated = false;
-    this.storageService.setSecondMenuItemActivated = false;
+    this.storageService.firstMenuItemActivated = false;
+    this.storageService.secondMenuItemActivated = false;
 }
 ```
 
 Highlight an item in `side-nav` upon clicking on it.
 
-#### HTML:
+### HTML:
 
 ```html
 <div class="container h100">
@@ -70,7 +70,7 @@ Highlight an item in `side-nav` upon clicking on it.
         <ul class="nav">
           <li class="nav-accueil">
             <a
-              [ngClass]="{'active': storageService.getFirstMenuItemActivated$ | async}"
+              [ngClass]="{'active': storageService.firstMenuItemActivated$ | async}"
               [routerLink]="['/club', selectedSaisonSaNo]"
               (click)="clickFirstEl()"
               >Accueil</a
@@ -78,7 +78,7 @@ Highlight an item in `side-nav` upon clicking on it.
           </li>
           <li class="nav-licence">
             <a
-              [ngClass]="{'active': storageService.getSecondMenuItemActivated$ | async}"
+              [ngClass]="{'active': storageService.secondMenuItemActivated$ | async}"
               [routerLink]="['/club', selectedSaisonSaNo,'lcf']"
               (click)="clickSecondEl()"
               >Licence « Club Fédéral »</a
@@ -100,7 +100,7 @@ Highlight an item in `side-nav` upon clicking on it.
         <ul class="nav">
           <li class="nav-search">
             <a
-              [ngClass]="{'active': storageService.getFirstMenuItemActivated$ | async}"
+              [ngClass]="{'active': storageService.firstMenuItemActivated$ | async}"
               [routerLink]="['/dcn',selectedSaisonSaNo,'lcf']"
               (click)="clickFirstEl()"
               >Recherche / Liste</a
@@ -108,7 +108,7 @@ Highlight an item in `side-nav` upon clicking on it.
           </li>
           <li class="nav-settings">
             <a
-              [ngClass]="{'active': storageService.getSecondMenuItemActivated$ | async}"
+              [ngClass]="{'active': storageService.secondMenuItemActivated$ | async}"
               [routerLink]="['/dcn',selectedSaisonSaNo,'lcf','params']"
               (click)="clickSecondEl()"
               >Paramètres</a

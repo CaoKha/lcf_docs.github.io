@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="dcn/dcn-accueil.html">DCN-ACCUEIL</a></li><li class="chapter-item "><a href="dcn/dcn-parameters.html">DCN-PARAMETERS</a></li><li class="chapter-item "><a href="dcn/dcn-dossier.html">DCN-DOSSIER</a></li></ol></li><li class="chapter-item "><a href="lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="club/club-accueil.html">CLUB-ACCUEIL</a></li><li class="chapter-item "><a href="club/club-candidature.html">CLUB-CANDIDATURE</a></li><li class="chapter-item "><a href="club/club-dossier.html">CLUB-DOSSIER</a></li></ol></li><li class="chapter-item expanded "><a href="shared.html" class="active">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="shared/header.html">HEADER</a></li><li class="chapter-item "><a href="shared/sidenav.html">SIDENAV</a></li><li class="chapter-item "><a href="shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="dcn/dcn-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="dcn/dcn-parameters.html">PARAMETERS</a></li><li class="chapter-item "><a href="dcn/dcn-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="club/club-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="club/club-candidature.html">CANDIDATURE</a></li><li class="chapter-item "><a href="club/club-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item expanded "><a href="shared.html" class="active">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="shared/header.html">HEADER</a></li><li class="chapter-item "><a href="shared/side-nav.html">SIDE-NAV</a></li><li class="chapter-item "><a href="shared/page-not-found.html">PAGE-NOT-FOUND</a></li><li class="chapter-item "><a href="shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -141,28 +141,55 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="shared"><a class="header" href="#shared">SHARED</a></h1>
-<h3 id="description"><a class="header" href="#description">Description:</a></h3>
+<h2 id="description"><a class="header" href="#description">Description:</a></h2>
 <p>Shared folder is where all common and reusable components are stored.</p>
 <ul>
 <li><a href="./shared/dossier-template.html">DOSSIER-TEMPLATE</a></li>
 <li><a href="./shared/header.html">HEADER</a></li>
 <li><a href="./shared/sidenav.html">SIDENAV</a></li>
+<li><a href="./shared/page-not-found.html">PAGE-NOT-FOUND</a></li>
 <li><a href="./shared/lcf-file.html">LCF-FILE</a></li>
 <li><a href="./shared/lcf-terrain.html">LCF-TERRAIN</a></li>
 <li><a href="./shared/lcf-radio.html">LCF-RADIO</a></li>
 <li><a href="./shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li>
 </ul>
-<h3 id="files"><a class="header" href="#files">Files:</a></h3>
+<h2 id="files"><a class="header" href="#files">Files:</a></h2>
 <pre><code class="language-ignore">shared
-|__components
-|  |__club-accueil
-|  |__club-candidature
-|  |__club-dossier
-|__club-routing.module.ts
-|__club.component.ts 
-|__club.component.html
-|__club.component.scss
-|__club.module.ts
+|__dossier-template
+|  |__dossier-template.component.html
+|  |__dossier-template.component.ts
+|__header
+|  |__header.component.html
+|  |__header.component.scss
+|  |__header.component.ts
+|__side-nav
+|  |__side-nav.component.html
+|  |__side-nav.component.scss 
+|  |__side-nav.component.ts 
+|__page-not-found
+|  |__page-not-found.component.html
+|  |__page-not-found.component.scss
+|  |__page-not-found.component.ts
+|__lcf-file
+|  |__lcf-file.component.html
+|  |__lcf-file.component.scss
+|  |__lcf-file.component.ts
+|__lcf-radio
+|  |__lcf-radio.component.html
+|  |__lcf-radio.component.scss
+|  |__lcf-radio.component.ts
+|__lcf-radio-three
+|  |__lcf-radio-three.component.html
+|  |__lcf-radio-three.component.scss
+|  |__lcf-radio-three.component.ts
+|__lcf-terrain
+|  |__lcf-terrain.component.html
+|  |__lcf-terrain.component.scss
+|  |__lcf-terrain.component.ts
+|__lcf-wbs
+|  |__lcf-wbs.component.html
+|  |__lcf-wbs.component.scss
+|  |__lcf-wbs.component.ts
 </code></pre>
 
                     </main>

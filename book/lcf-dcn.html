@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item expanded "><a href="lcf-dcn.html" class="active">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="dcn/dcn-accueil.html">DCN-ACCUEIL</a></li><li class="chapter-item "><a href="dcn/dcn-parameters.html">DCN-PARAMETERS</a></li><li class="chapter-item "><a href="dcn/dcn-dossier.html">DCN-DOSSIER</a></li></ol></li><li class="chapter-item "><a href="lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="club/club-accueil.html">CLUB-ACCUEIL</a></li><li class="chapter-item "><a href="club/club-candidature.html">CLUB-CANDIDATURE</a></li><li class="chapter-item "><a href="club/club-dossier.html">CLUB-DOSSIER</a></li></ol></li><li class="chapter-item "><a href="shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="shared/header.html">HEADER</a></li><li class="chapter-item "><a href="shared/sidenav.html">SIDENAV</a></li><li class="chapter-item "><a href="shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item expanded "><a href="lcf-dcn.html" class="active">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="dcn/dcn-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="dcn/dcn-parameters.html">PARAMETERS</a></li><li class="chapter-item "><a href="dcn/dcn-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="club/club-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="club/club-candidature.html">CANDIDATURE</a></li><li class="chapter-item "><a href="club/club-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="shared/header.html">HEADER</a></li><li class="chapter-item "><a href="shared/side-nav.html">SIDE-NAV</a></li><li class="chapter-item "><a href="shared/page-not-found.html">PAGE-NOT-FOUND</a></li><li class="chapter-item "><a href="shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -141,15 +141,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="lcf-dcn"><a class="header" href="#lcf-dcn">LCF-DCN</a></h1>
-<h3 id="description"><a class="header" href="#description">Description:</a></h3>
+<h2 id="description"><a class="header" href="#description">Description:</a></h2>
 <p>LCF app is now connected as <code>DCN</code>. In <code>DEV</code> or <code>PROD</code> environment you will need a <code>PORTAILBLEU</code> cookie in your browser
-in order to get an access to the next page. This cookie is set automatically after a successfully authentication to <a href="https://portailbleuq.fff.fr/"><code>PORTAIL_BLEU</code></a> app. After passing this guard, there are 3 pages can be accessed freely:</p>
+in order to get an access to the next page. This cookie is set automatically after a successfully authentication to <a href="https://portailbleuq.fff.fr/"><code>PORTAIL_BLEU</code></a> app. After passing this guard, we will be redirect to <a href="./dcn/dcn-accueil.html">DCN-ACCUEIL</a>. There are also 2 other pages can be accessed freely from here:</p>
 <ul>
-<li><a href="./dcn-accueil.html">DCN-ACCUEIL</a></li>
-<li><a href="./dcn-parameters.html">DCN-PARAMETERS</a></li>
-<li><a href="./dcn-dossier.html">DCN-DOSSIER</a></li>
+<li><a href="./dcn/dcn-parameters.html">DCN-PARAMETERS</a></li>
+<li><a href="./dcn//dcn-dossier.html">DCN-DOSSIER</a></li>
 </ul>
-<h3 id="files"><a class="header" href="#files">Files:</a></h3>
+<h2 id="files"><a class="header" href="#files">Files:</a></h2>
 <pre><code class="language-ignore">dcn
 |__components
 |  |__dcn-accueil
@@ -161,7 +160,7 @@ in order to get an access to the next page. This cookie is set automatically aft
 |__dcn.component.scss
 |__dcn.module.ts
 </code></pre>
-<h3 id="routing"><a class="header" href="#routing">Routing:</a></h3>
+<h2 id="routing"><a class="header" href="#routing">Routing:</a></h2>
 <p><code>dcn-routing.module.ts</code>:</p>
 <pre><code class="language-ts">const routes: Routes = [
   {
@@ -197,14 +196,14 @@ in order to get an access to the next page. This cookie is set automatically aft
   },
 ];
 </code></pre>
-<h3 id="functionalities"><a class="header" href="#functionalities">Functionalities:</a></h3>
-<h4 id="general"><a class="header" href="#general">General:</a></h4>
+<h2 id="functionalities"><a class="header" href="#functionalities">Functionalities:</a></h2>
+<h3 id="general"><a class="header" href="#general">General:</a></h3>
 <p><code>dcn.component.ts</code>:</p>
 <pre><code class="language-ts">ngOnInit(): void {
-    // redirect to page of the current season
-    if (this.router.url === '/dcn')
-      this.router.navigate([String(this.storageService.getSelectedSaisonSaNo),'lcf'],
-                            {relativeTo: this.activatedRoute});
+  // redirect to page of the current season
+  if (this.router.url === '/dcn')
+    this.router.navigate([String(this.storageService.selectedSaisonSaNo),'lcf'],
+                          {relativeTo: this.activatedRoute});
 }
 </code></pre>
 <p>this component is just a parent component who contains 3 others child components:</p>
@@ -213,7 +212,7 @@ in order to get an access to the next page. This cookie is set automatically aft
 <li><a href="./shared/sidenav.html">sidenav</a></li>
 <li><a href="./dcn/dcn-accueil.html">dcn-accueil</a> or <a href="./dcn/dcn-parameters.html">dcn-parameters</a> or <a href="./dcn/dcn-dossier.html">dcn-dossier</a></li>
 </ul>
-<h4 id="html"><a class="header" href="#html">HTML:</a></h4>
+<h3 id="html"><a class="header" href="#html">HTML:</a></h3>
 <pre><code class="language-html">&lt;lcf-header&gt;&lt;/lcf-header&gt;
 
 &lt;lcf-side-nav&gt;

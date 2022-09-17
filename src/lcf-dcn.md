@@ -1,15 +1,14 @@
 # LCF-DCN
 
-### Description:
+## Description:
 
 LCF app is now connected as `DCN`. In `DEV` or `PROD` environment you will need a `PORTAILBLEU` cookie in your browser
-in order to get an access to the next page. This cookie is set automatically after a successfully authentication to [`PORTAIL_BLEU`](https://portailbleuq.fff.fr/) app. After passing this guard, there are 3 pages can be accessed freely:
+in order to get an access to the next page. This cookie is set automatically after a successfully authentication to [`PORTAIL_BLEU`](https://portailbleuq.fff.fr/) app. After passing this guard, we will be redirect to [DCN-ACCUEIL](./dcn/dcn-accueil.md). There are also 2 other pages can be accessed freely from here:
 
-- [DCN-ACCUEIL](./dcn-accueil.md)
-- [DCN-PARAMETERS](./dcn-parameters.md)
-- [DCN-DOSSIER](./dcn-dossier.md)
+- [DCN-PARAMETERS](./dcn/dcn-parameters.md)
+- [DCN-DOSSIER](./dcn//dcn-dossier.md)
 
-### Files:
+## Files:
 
 ```ignore
 dcn
@@ -24,7 +23,7 @@ dcn
 |__dcn.module.ts
 ```
 
-### Routing:
+## Routing:
 
 `dcn-routing.module.ts`:
 
@@ -64,18 +63,18 @@ const routes: Routes = [
 ];
 ```
 
-### Functionalities:
+## Functionalities:
 
-#### General:
+### General:
 
 `dcn.component.ts`:
 
 ```ts
 ngOnInit(): void {
-    // redirect to page of the current season
-    if (this.router.url === '/dcn')
-      this.router.navigate([String(this.storageService.getSelectedSaisonSaNo),'lcf'],
-                            {relativeTo: this.activatedRoute});
+  // redirect to page of the current season
+  if (this.router.url === '/dcn')
+    this.router.navigate([String(this.storageService.selectedSaisonSaNo),'lcf'],
+                          {relativeTo: this.activatedRoute});
 }
 ```
 
@@ -85,7 +84,7 @@ this component is just a parent component who contains 3 others child components
 - [sidenav](./shared/sidenav.md)
 - [dcn-accueil](./dcn/dcn-accueil.md) or [dcn-parameters](./dcn/dcn-parameters.md) or [dcn-dossier](./dcn/dcn-dossier.md)
 
-#### HTML:
+### HTML:
 
 ```html
 <lcf-header></lcf-header>

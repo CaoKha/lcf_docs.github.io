@@ -4,7 +4,7 @@ The header of the app.
 
 ## Description:
 
-This header always appears on top of the application. There is a season selection dropdown box on the right of the header.
+This header always appears on top of the application. There is a dropdown box on the right for choosing seasons.
 
 ## Files:
 
@@ -15,7 +15,6 @@ header.component.ts
 ```
 
 ## Functionalities:
-
 ### General:
 
 ```ts
@@ -29,11 +28,9 @@ ngOnInit(): void {
 
 Upon initialization, this header will spawn 2 observables that listen to value changes of `season`.
 When a selected `season` changes, it invokes a call to backend and retrieves `dossiers` and `parameters` within the `season`.
-Also, if connected `user` has a `cl_cod`, we'll update the club logo at the top right of the header.
+Also if connected `user` has a `cl_cod`, we update the club logo on the header.
 
 ### Specific:
-
-#### spawnSaNoObservable
 
 ```ts
 private spawnSaNoObservable() {
@@ -47,9 +44,7 @@ private spawnSaNoObservable() {
 ```
 
 Spawn an observable that listen to value changes of `season`.
-Upon receive a new one which is different from the old one (`distincUntilChanged()`), assign the new value to variable `this.selectedSaisonSaNo`
-
-#### subscribeDossiersFromSaNo
+Upon receive a new one which is different from the old one (`distincUntilChanged()`), assign the new value to variable `selectedSaisonSaNo`
 
 ```ts
 private subscribeDossiersFromSaNo(saNo$: Observable<number>) {
@@ -82,9 +77,7 @@ private subscribeDossiersFromSaNo(saNo$: Observable<number>) {
 }
 ```
 
-Subscribe to the `season` observable. Upon a `season` changes, invoke a call to backend, retrieve and set the new `dossiers` of that `season` to the `storage`.
-
-#### subscribeParametersFromSaNo
+Suscribe to the `season` observable, upon a `season` changes, invoke a call to backend, retrieve and set the new `dossiers` of that `season` to the `storage`.
 
 ```ts
 private subscribeParametersFromSaNo(saNo$: Observable<number>) {
@@ -106,9 +99,7 @@ private subscribeParametersFromSaNo(saNo$: Observable<number>) {
 }
 ```
 
-Suscribe to the `season` observable. Upon a `season` changes, invoke a call to backend, retrieve and set the new `parameters` of that `season` to the `storage`.
-
-#### saisonChanged
+Suscribe to the `season` observable, upon a `season` changes, invoke a call to backend, retrieve and set the new `parameters` of that `season` to the `storage`.
 
 ```ts
 saisonChanged($event: any) {
@@ -122,8 +113,6 @@ saisonChanged($event: any) {
 
 Upon selecting another `season` in dropdown box, correcting the `season` string in url by using `regex` pattern matching.
 
-#### changeRouteToSelectedSaisonSaNo
-
 ```ts
 private changeRouteToSelectedSaisonSaNo(sa_no: number): void {
   const newUrl = this.router.url.replace(/\d+/, String(sa_no));
@@ -131,7 +120,7 @@ private changeRouteToSelectedSaisonSaNo(sa_no: number): void {
 }
 ```
 
-Do `regex` pattern matching which finds the first number in the string, replace the `season` string then redirect to that new path.
+Do `regex` pattern matching, replace the `season` string then redirect to that new path.
 
 ### HTML:
 
