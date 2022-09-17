@@ -141,6 +141,382 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="dcn-accueil"><a class="header" href="#dcn-accueil">DCN-ACCUEIL</a></h1>
+<p>The dcn homepage of the LCF application.</p>
+<h2 id="description"><a class="header" href="#description">Description:</a></h2>
+<p>The dcn homepage consist of a filter system and a table which displays all dossiers within a selected season.</p>
+<h2 id="files"><a class="header" href="#files">Files:</a></h2>
+<pre><code class="language-ignore">dcn-accueil.component.html
+dcn-accueil.component.scss
+dcn-accueil.component.ts
+</code></pre>
+<h2 id="functionalities"><a class="header" href="#functionalities">Functionalities:</a></h2>
+<h3 id="general"><a class="header" href="#general">General:</a></h3>
+<pre><code class="language-ts">ngOnInit(): void {
+  this.checkSaNoFromUrl();
+  const filtres: FiltresList = this.storageService.filtres;
+  this.competitions = filtres.competitions;
+  this.incontournables = filtres.incontournables;
+  this.statuts = filtres.statuts;
+  this.belfas = filtres.belfas;
+  this.subs.sink = this.storageService.selectedSaisonSaNo$
+    .pipe(
+      takeUntil(this.storageService.globalUnsubscribe),
+      switchMap((sa_no: number) =&gt; {
+        return this.dossierService.getFilteredDossiers(
+          sa_no,
+          this.filtreForm
+        );
+      })
+    )
+    .subscribe((result: any) =&gt; {
+      this.dcnTable = result;
+    });
+}
+</code></pre>
+<p>WIP</p>
+<h3 id="specific"><a class="header" href="#specific">Specific:</a></h3>
+<h4 id="checksanofromurl"><a class="header" href="#checksanofromurl">checkSaNoFromUrl</a></h4>
+<pre><code class="language-ts">/**
+ * Check `sa_no` in `url` is in range of `user.saisons.sa_no`.
+ * If true, set `selectedSaison` in `Store` to `sa_no`.
+ * If false, navigate to page 404
+ */
+private checkSaNoFromUrl(): void {
+    const saisonSaNoFromUrl = Number(this.route.snapshot.paramMap.get('sa_no'));
+    this.user = this.storageService.user;
+    if (this.storageService.checkSaisonInRange(this.user, saisonSaNoFromUrl)) {
+        this.storageService.selectedSaisonSaNo = saisonSaNoFromUrl;
+    } else {
+        this.router.navigate(['/', this.storageService.connectId, '404']);
+    }
+}
+</code></pre>
+<p>This function checks <code>sa_no</code> in <code>url</code> is in range of <code>user.saisons.sa_no</code>.</p>
+<ul>
+<li>If true, set <code>selectedSaison</code> in <code>Store</code> to <code>sa_no</code></li>
+<li>If false, navigate to page 404</li>
+</ul>
+<h4 id="onrecherche"><a class="header" href="#onrecherche">onRecherche</a></h4>
+<pre><code class="language-ts">onRecherche() {
+  this.subs.sink = this.dossierService
+    .getFilteredDossiers(
+      this.storageService.selectedSaisonSaNo,
+      this.filtreForm
+    )
+    .subscribe((result: any) =&gt; {
+      this.dcnTable = result;
+      console.log('onRecherche, dcnTable: ', result);
+    });
+}
+</code></pre>
+<p>This function request a filtered list of club dossiers within the selected <code>season</code> from backend and store them in <code>dcntable</code> variable.</p>
+<h4 id="onreset"><a class="header" href="#onreset">onReset</a></h4>
+<pre><code class="language-ts">onReset() {
+  this.filtreForm.reset();
+}
+</code></pre>
+<p>This function resets the filter.</p>
+<h4 id="gotodossier"><a class="header" href="#gotodossier">goToDossier</a></h4>
+<pre><code class="language-ts">goToDossier(compet_id: number, cl_cod: number) {
+  // reset menuItem highlight
+  this.storageService.firstMenuItemActivated = false;
+  this.storageService.secondMenuItemActivated = false;
+
+  this.storageService.cl_cod = cl_cod;
+  this.subs.sink = this.dossierService
+    .requestDossier(
+      this.storageService.selectedSaisonSaNo,
+      cl_cod,
+      compet_id
+    )
+    .pipe(
+      combineLatestWith(
+        this.dossierService.requestTerrainsAttachesAuxClubs(cl_cod)
+      )
+    )
+    .subscribe(([dossier, terrains]: [any, any]) =&gt; {
+      console.log('storage.terrains:', terrains);
+      console.log('storage.dossier: ',dossier);
+      this.storageService.selectedDossier = dossier;
+      this.storageService.terrains = terrains;
+      this.router.navigate([
+        `/dcn/${
+          this.storageService.selectedSaisonSaNo
+        }/lcf/${cl_cod}/${UtilsService.getCompetitionByCode(compet_id)}`,
+      ]);
+    });
+}
+</code></pre>
+<p>Upon click on a club <code>dossier</code> among list of club <code>dossiers</code>, we will be redirect to the <a href="dcn-dossier.html">DCN-DOSSIER</a> page. Before directing to the page, we request from backend all <code>terrains</code> attached to that selected club along with all information about that <code>dossier</code>.</p>
+<h4 id="isrefus"><a class="header" href="#isrefus">isRefus</a></h4>
+<pre><code class="language-ts">isRefus(belfa: string) {
+  if (belfa.indexOf('Refus') !== -1) {
+    return true;
+  } else return false;
+}
+</code></pre>
+<p>This function returns <code>true</code> if it found <code>Refus</code> string in the <code>belfa</code> variable. This will later be used as a condition to or not to display motif popup when hovering above the <code>belfa status</code>.</p>
+<h4 id="exportexcel-saveasexcelfile"><a class="header" href="#exportexcel-saveasexcelfile">exportExcel, saveAsExcelFile</a></h4>
+<pre><code class="language-ts">exportExcel() {
+  const modifiedTable = this.renameKeyInDcnTable(this.dcnTable);
+
+  import('xlsx').then((xlsx) =&gt; {
+    const worksheet = xlsx.utils.json_to_sheet(modifiedTable);
+    const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = xlsx.write(workbook, {
+      bookType: 'xlsx',
+      type: 'array',
+    });
+    this.saveAsExcelFile(excelBuffer, 'resultats');
+  });
+}
+
+saveAsExcelFile(buffer: any, fileName: string): void {
+  let EXCEL_TYPE =
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+  let EXCEL_EXTENSION = '.xlsx';
+  const data: Blob = new Blob([buffer], {
+    type: EXCEL_TYPE,
+  });
+  saveAs(
+    data,
+    fileName +
+      '-' +
+      new Date().toDateString().replace(/ /g, '') +
+      EXCEL_EXTENSION
+  );
+}
+</code></pre>
+<p>These function are used for export the <code>dcnTable</code> as an <code>Excel</code> format file.</p>
+<h4 id="renamekeyindcntable"><a class="header" href="#renamekeyindcntable">renameKeyInDcnTable</a></h4>
+<pre><code class="language-ts">/**
+ * return a `COPY` of `dcnTable` with modified headers
+ */
+renameKeyInDcnTable(dcnTable: any[]) {
+  return dcnTable
+    .slice()
+    .map(({ compet_id, ...theRest }) =&gt; theRest)
+    .map((el) =&gt; ({
+      Saison: el.sa_no,
+      Compétition: el.competition,
+      Club: el.club,
+      Incontournables: el.incontournables,
+      Cumulables: el.cumulables,
+      Statut: el.statut,
+      'Décision BELFA': el.decision_belfa,
+    }));
+}
+</code></pre>
+<p>This function return a copy of <code>dcnTable</code> with modified readable string headers.</p>
+<h4 id="ngondestroy"><a class="header" href="#ngondestroy">ngOnDestroy</a></h4>
+<pre><code class="language-ts">ngOnDestroy(): void {
+    this.subs.unsubscribe();
+    // workaround bug: https://github.com/angular/angular/issues/28330
+    this.storageService.globalUnsubscribe.next();
+    this.storageService.globalUnsubscribe.complete();
+}
+</code></pre>
+<p>Upon being destroyed, unsubscribe from every dangling observables.</p>
+<h3 id="html"><a class="header" href="#html">HTML:</a></h3>
+<pre><code class="language-html">&lt;div class=&quot;content-pages spe&quot;&gt;
+  &lt;h1&gt;Recherche / Liste&lt;/h1&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;div class=&quot;form-content&quot;&gt;
+      &lt;div class=&quot;ref filtre columns&quot; [formGroup]=&quot;filtreForm&quot;&gt;
+        &lt;div class=&quot;ref-item&quot;&gt;
+          &lt;label&gt;Compétition&lt;/label&gt;
+          &lt;p-multiSelect
+            formControlName=&quot;competitions&quot;
+            [options]=&quot;competitions&quot;
+            defaultLabel=&quot;Sélectionner la compétition&quot;
+            display=&quot;chip&quot;
+            optionLabel=&quot;libelle&quot;
+            optionValue=&quot;code&quot;
+          &gt;
+          &lt;/p-multiSelect&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;ref-item&quot;&gt;
+          &lt;label&gt;Club&lt;/label&gt;
+          &lt;input
+            class=&quot;club-name&quot;
+            type=&quot;text&quot;
+            formControlName=&quot;club&quot;
+            placeholder=&quot;Saisissez le nom du club&quot;
+          /&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;ref-item&quot;&gt;
+          &lt;label&gt;Incontournables&lt;/label&gt;
+          &lt;p-multiSelect
+            formControlName=&quot;incontournables&quot;
+            [options]=&quot;incontournables&quot;
+            defaultLabel=&quot;Sélectionner l'éligibilité&quot;
+            display=&quot;chip&quot;
+            optionLabel=&quot;libelle&quot;
+            optionValue=&quot;id&quot;
+          &gt;
+          &lt;/p-multiSelect&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;ref-item cumul&quot;&gt;
+          &lt;label&gt;Cumulables&lt;/label&gt;
+          &lt;p-dropdown
+            [options]=&quot;cumulables&quot;
+            formControlName=&quot;cumulables&quot;
+            optionValue=&quot;code&quot;
+            optionLabel=&quot;libelle&quot;
+            placeholder=&quot;Sélectionner le nombre de points&quot;
+          &gt;
+          &lt;/p-dropdown&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;ref-item&quot;&gt;
+          &lt;label&gt;Statut&lt;/label&gt;
+          &lt;p-multiSelect
+            formControlName=&quot;statuts&quot;
+            [options]=&quot;statuts&quot;
+            defaultLabel=&quot;Sélectionner le statut du dossier&quot;
+            display=&quot;chip&quot;
+            optionLabel=&quot;libelle&quot;
+            optionValue=&quot;id&quot;
+          &gt;
+          &lt;/p-multiSelect&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;ref-item&quot;&gt;
+          &lt;label&gt;Décision BELFA&lt;/label&gt;
+          &lt;p-multiSelect
+            formControlName=&quot;belfas&quot;
+            [options]=&quot;belfas&quot;
+            defaultLabel=&quot;Sélectionner la décision BELFA&quot;
+            display=&quot;chip&quot;
+            optionLabel=&quot;libelle&quot;
+            optionValue=&quot;id&quot;
+          &gt;
+          &lt;/p-multiSelect&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;buttons&quot;&gt;
+    &lt;button
+      class=&quot;annuler&quot;
+      (click)=&quot; onReset();&quot;
+      style=&quot;margin-right: 20px; height: 3.6rem&quot;
+    &gt;
+      &lt;span&gt;&lt;/span&gt;Réinitialiser
+    &lt;/button&gt;
+    &lt;button class=&quot;rechercher&quot; (click)=&quot; onRecherche();&quot;&gt;
+      &lt;span class=&quot;recherche-icon&quot;&gt;&lt;/span&gt;Rechercher
+    &lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;content margTop30&quot;&gt;
+    &lt;div class=&quot;result&quot;&gt;
+      &lt;h3&gt;&lt;span&gt;&lt;/span&gt;RÉSULTATS&lt;/h3&gt;
+      &lt;button class=&quot;download&quot; (click)=&quot;downloadXLS.click()&quot;&gt;
+        &lt;span&gt;&lt;/span&gt;Télécharger
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;flex&quot; style=&quot;justify-content:end; &quot;&gt;
+      &lt;button
+        type=&quot;button&quot;
+        pButton
+        pRipple
+        icon=&quot;pi pi-file-excel&quot;
+        (click)=&quot;exportExcel()&quot;
+        #downloadXLS
+        class=&quot;p-button-success mr-2&quot;
+        pTooltip=&quot;XLS&quot;
+        tooltipPosition=&quot;bottom&quot;
+        style=&quot;display: none&quot;
+      &gt;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;p-table
+      class=&quot;dcn-table&quot;
+      [value]=&quot;dcnTable&quot;
+      [paginator]=&quot;true&quot;
+      [rows]=&quot;10&quot;
+      [showCurrentPageReport]=&quot;false&quot;
+      currentPageReportTemplate=&quot;{currentPage}&quot;
+      responsiveLayout=&quot;scroll&quot;
+      [rowsPerPageOptions]=&quot;[10,20,30]&quot;
+      [showJumpToPageDropdown]=&quot;true&quot;
+      [showPageLinks]=&quot;false&quot;
+    &gt;
+      &lt;ng-template pTemplate=&quot;header&quot;&gt;
+        &lt;tr style=&quot;font-size: 1.4rem;&quot;&gt;
+          &lt;th pSortableColumn=&quot;competition&quot;&gt;
+            Compétition&lt;p-sortIcon field=&quot;competition&quot;&gt;&lt;/p-sortIcon&gt;
+          &lt;/th&gt;
+          &lt;th pSortableColumn=&quot;club&quot;&gt;
+            Club&lt;p-sortIcon field=&quot;club&quot;&gt;&lt;/p-sortIcon&gt;
+          &lt;/th&gt;
+          &lt;th class=&quot;incon-col&quot; pSortableColumn=&quot;incontournables&quot;&gt;
+            Incontournables&lt;p-sortIcon field=&quot;incontournables&quot;&gt; &lt;/p-sortIcon&gt;
+          &lt;/th&gt;
+          &lt;th class=&quot;cumul-col&quot; pSortableColumn=&quot;cumulables&quot;&gt;
+            Cumulables&lt;p-sortIcon field=&quot;cumulables&quot;&gt;&lt;/p-sortIcon&gt;
+          &lt;/th&gt;
+          &lt;th pSortableColumn=&quot;statut&quot;&gt;
+            Statut&lt;p-sortIcon field=&quot;statut&quot;&gt;&lt;/p-sortIcon&gt;
+          &lt;/th&gt;
+          &lt;th class=&quot;belfa-col&quot; pSortableColumn=&quot;decision_belfa&quot;&gt;
+            Décision BELFA&lt;p-sortIcon field=&quot;decision_belfa&quot;&gt;&lt;/p-sortIcon&gt;
+          &lt;/th&gt;
+          &lt;th&gt;&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/ng-template&gt;
+      &lt;ng-template pTemplate=&quot;body&quot; let-dossier&gt;
+        &lt;tr style=&quot;font-size: 1.4rem&quot;&gt;
+          &lt;td style=&quot;color: #01407D&quot;&gt;{{dossier.competition ?? '-'}}&lt;/td&gt;
+          &lt;td style=&quot;color: #01407D&quot;&gt;
+            &lt;span pTooltip=&quot;Equipe: nom de l'equipe&quot;
+              &gt;{{dossier.club ?? '-'}}&lt;/span
+            &gt;
+          &lt;/td&gt;
+          &lt;td class=&quot;incon-col&quot; customStyle [libelle]=&quot;dossier.incontournables&quot;&gt;
+            {{dossier.incontournables ?? '-'}}
+          &lt;/td&gt;
+          &lt;td class=&quot;cumul-col&quot; style=&quot;color: #01407D&quot;&gt;
+            {{dossier.cumulables ?? '-'}}
+          &lt;/td&gt;
+          &lt;td customStyle [libelle]=&quot;dossier.statut&quot;&gt;
+            {{dossier.statut ?? '-'}}
+          &lt;/td&gt;
+          &lt;td class=&quot;belfa-col&quot; *ngIf=&quot;isRefus(dossier.decision_belfa)&quot;&gt;
+            &lt;span
+              customStyle
+              [libelle]=&quot;dossier.decision_belfa&quot;
+              pTooltip=&quot;Motif: {{dossier.motif_dossier}}&quot;
+              &gt;{{dossier.decision_belfa ?? '-'}}
+            &lt;/span&gt;
+          &lt;/td&gt;
+          &lt;td
+            class=&quot;belfa-col&quot;
+            *ngIf=&quot;!isRefus(dossier.decision_belfa)&quot;
+            customStyle
+            [libelle]=&quot;dossier.decision_belfa&quot;
+          &gt;
+            {{dossier.decision_belfa | customString }}
+          &lt;/td&gt;
+          &lt;td class=&quot;edit&quot; style=&quot;cursor: pointer;&quot;&gt;
+            &lt;img
+              src=&quot;../../../../../assets/img/pix-edit.png&quot;
+              width=&quot;20px&quot;
+              height=&quot;20px&quot;
+              alt=&quot;Edition&quot;
+              (click)=&quot;goToDossier(dossier.compet_id, dossier.cl_cod)&quot;
+            /&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/ng-template&gt;
+      &lt;ng-template pTemplate=&quot;paginatorleft&quot; let-state&gt;
+        {{state.totalRecords &gt; 0 ? state.first + 1 : state.first}} à
+        {{(state.first + state.rows &lt;= state.totalRecords) ? (state.first +
+        state.rows) : state.totalRecords}} / {{state.totalRecords}} élément(s)
+      &lt;/ng-template&gt;
+    &lt;/p-table&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 
                     </main>
 
