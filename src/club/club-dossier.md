@@ -4,7 +4,7 @@ The club dossier page of the LCF application. It is a child component of [DOSSIE
 
 ## Description:
 
-The club dossier displays a `dossierForm` for user to fill. The `dossierForm` will later be pass to the [DCN](../lcf-dcn.md) side for decision.
+The club dossier displays a `dossierForm` for user to fill. The `dossierForm` will later be pass to the [DCN-DOSSIER](../dcn/dcn-dossier.md) side for decision.
 
 ## Files:
 
