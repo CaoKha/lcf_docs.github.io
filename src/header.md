@@ -1,6 +1,6 @@
 # HEADER
 
-The header of the app.
+The header of the LCF application.
 
 ## Description:
 

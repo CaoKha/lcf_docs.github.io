@@ -476,7 +476,7 @@ sendDossierToBackend(
 }
 ```
 
-This function is used to send a `dossierForm` with some other important variables (.e.g `points calculation`) to backend. It's also allow us to customize the toastr `success_message` which appears after the `dossierForm` has been successfully sent.
+This function is used to send a `dossierForm` with some other important variables (.e.g `points calculation`) to backend and then retrieve a new `dossier` + `dossiers` from backend and put it into `storage`. It also allows us to customize the toastr `success_message` which appears after the `dossierForm` has been successfully sent.
 The `isDossierValid` parameter is just there to differentiate situations where user clicked on `ENREGISTRER` button (dossier not valid but it's ok to be sent) or `VALIDER` button.
 
 |                | VALIDER | ENREGISTRER |
@@ -499,7 +499,7 @@ isDossierFormValid(dossierForm: FormGroup): boolean {
 }
 ```
 
-This function return wheter or not a dossier is `valid`.
+This function return whether or not a dossier is `valid`.
 
 #### isInfoGeneralValid
 

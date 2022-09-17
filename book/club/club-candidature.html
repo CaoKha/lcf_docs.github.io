@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="../lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dcn/dcn-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../dcn/dcn-parameters.html">PARAMETERS</a></li><li class="chapter-item "><a href="../dcn/dcn-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item expanded "><a href="../lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../club/club-accueil.html">ACCUEIL</a></li><li class="chapter-item expanded "><a href="../club/club-candidature.html" class="active">CANDIDATURE</a></li><li class="chapter-item "><a href="../club/club-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="../shared/header.html">HEADER</a></li><li class="chapter-item "><a href="../shared/side-nav.html">SIDE-NAV</a></li><li class="chapter-item "><a href="../shared/page-not-found.html">PAGE-NOT-FOUND</a></li><li class="chapter-item "><a href="../shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="../shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="../shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="../shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="../lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item expanded "><a href="../lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../club/club-accueil.html">ACCUEIL</a></li><li class="chapter-item expanded "><a href="../club/club-candidature.html" class="active">CANDIDATURE</a></li><li class="chapter-item "><a href="../club/club-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dcn/dcn-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../dcn/dcn-parameters.html">PARAMETERS</a></li><li class="chapter-item "><a href="../dcn/dcn-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="../shared/header.html">HEADER</a></li><li class="chapter-item "><a href="../shared/side-nav.html">SIDE-NAV</a></li><li class="chapter-item "><a href="../shared/page-not-found.html">PAGE-NOT-FOUND</a></li><li class="chapter-item "><a href="../shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="../shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="../shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="../shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -141,6 +141,270 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="club-candidature"><a class="header" href="#club-candidature">CLUB-CANDIDATURE</a></h1>
+<p>The club candidature page of the LCF application.</p>
+<h2 id="description"><a class="header" href="#description">Description:</a></h2>
+<p>The club candidature displays all the competitions within the selected season of a club. Note, there is also a display rule to follow which is: There can only be one or less competition of type <code>NATIONAL</code>.</p>
+<p>The priority is <code>NATIONAL 1</code> &gt; <code>NATIONAL 2</code> &gt; <code>NATIONAL 3</code>.</p>
+<h2 id="files"><a class="header" href="#files">Files:</a></h2>
+<pre><code class="language-ignore">club-candidature.component.html
+club-candidature.component.scss
+club-candidature.component.ts
+</code></pre>
+<h2 id="functionalities"><a class="header" href="#functionalities">Functionalities:</a></h2>
+<h3 id="general"><a class="header" href="#general">General:</a></h3>
+<pre><code class="language-ts">ngOnInit() {
+  this.checkSaNoFromUrl();
+  const selectedSaNo = this.storageService.selectedSaisonSaNo;
+  if (this.storageService.dossiers?.[0].sa_no !== selectedSaNo) {
+    this.backupDossiers(selectedSaNo);
+  }
+  this.spawnDossiersObservableThenFilterDossiers();
+  this.title.setTitle(
+    UtilsService.createTitle('Votre dossier de candidature')
+  );
+}
+</code></pre>
+<p>When we open this page, it will check the <code>season</code> string in the <code>url</code> is indeed in range of <code>seasons</code> defined in <code>user.saisons</code> (<a href="#checksanofromurl">checkSaNoFromUrl</a>). Then it stores the <code>season</code> value in <code>storage</code> . Else, redirect to <a href="../shared/page-not-found.html">PAGE-NOT-FOUND</a> if the <code>season</code> is out of range.</p>
+<p>Secondly, if the <code>dossiers</code> season is different from the <code>season</code> found in the <code>url</code>. Request another <code>dossiers</code> from backend which have the matching <code>season</code>.</p>
+<p>Thirdly, apply the display rule for every <code>dossiers</code> received from the backend.</p>
+<h3 id="specific"><a class="header" href="#specific">Specific:</a></h3>
+<h4 id="checksanofromurl"><a class="header" href="#checksanofromurl">checkSaNoFromUrl</a></h4>
+<pre><code class="language-ts">/**
+ * Check `sa_no` in `url` is in range of `user.saisons.sa_no`.
+ * If true, set `selectedSaison` in `Store` to `sa_no`.
+ * If false, navigate to page 404
+ */
+private checkSaNoFromUrl(): void {
+    const saisonSaNoFromUrl = Number(this.route.snapshot.paramMap.get('sa_no'));
+    this.user = this.storageService.user;
+    if (this.storageService.checkSaisonInRange(this.user, saisonSaNoFromUrl)) {
+        this.storageService.selectedSaisonSaNo = saisonSaNoFromUrl;
+    } else {
+        this.router.navigate(['/', this.storageService.connectId, '404']);
+    }
+}
+</code></pre>
+<p>This function checks <code>sa_no</code> in <code>url</code> is in range of <code>user.saisons.sa_no</code>.</p>
+<ul>
+<li>If true, set <code>selectedSaison</code> in <code>Store</code> to <code>sa_no</code></li>
+<li>If false, navigate to page 404</li>
+</ul>
+<h4 id="backupdossiers"><a class="header" href="#backupdossiers">backupDossiers</a></h4>
+<pre><code class="language-ts">/**
+ * Request `dossiers` from backend
+ */
+private backupDossiers(sa_no: number) {
+  if (this.storageService.user.cl_cod) {
+    this.subs.sink = this.dossierService
+      .requestDossiers(sa_no, this.storageService.user.cl_cod)
+      .pipe(takeUntil(this.storageService.globalUnsubscribe))
+      .subscribe((dossiers: any) =&gt; {
+        this.storageService.dossiers = dossiers;
+      });
+  }
+}
+</code></pre>
+<p>This function request a <code>dossiers</code> within selected <code>season</code> from backend in demand.</p>
+<h4 id="downloadfile"><a class="header" href="#downloadfile">downloadFile</a></h4>
+<pre><code class="language-ts">async downloadFile() {
+  const file = {
+    nature: 'reglement',
+    categorie: 'documentation',
+  };
+  this.subs.sink = this.dossierService
+    .requestDownloadFile(file.categorie, file.nature)
+    .subscribe({
+      next: (result: any) =&gt; {
+        UtilsService.open_file(result);
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>This function is used for download the file from <code>AzureStorage</code> attached on the page. We marked it <code>async</code> to indicate that it uses a <code>fetch</code> API (which is asynchronous) inside the <a href="">open_file</a> function.</p>
+<h4 id="ngondestroy"><a class="header" href="#ngondestroy">ngOnDestroy</a></h4>
+<pre><code class="language-ts">ngOnDestroy(): void {
+    this.sub.unsubscribe();
+    // workaround bug: https://github.com/angular/angular/issues/28330
+    this.storageService.globalUnsubscribe.next();
+    this.storageService.globalUnsubscribe.complete();
+}
+</code></pre>
+<p>Upon being destroyed, unsubscribe <code>selectedSaisonSaNo$</code> stream and every dangling observables.</p>
+<h3 id="html"><a class="header" href="#html">HTML:</a></h3>
+<pre><code class="language-html">&lt;div class=&quot;content-pages&quot;&gt;
+  &lt;div class=&quot;entete&quot;&gt;
+    &lt;h2&gt;Licence « Club Fédéral »&lt;/h2&gt;
+    &lt;h1&gt;{{storageService.cl_cod}} - {{storageService.user.club_nom}}&lt;/h1&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;h3&gt;&lt;span&gt;&lt;/span&gt;Processus&lt;/h3&gt;
+    &lt;p&gt;
+      Les clubs amateurs des championnats de D1 FEMININE, NATIONAL, NATIONAL 2,
+      NATIONAL 3 et D1 FUTSAL (ci-après dénommés « candidats ») peuvent postuler
+      à la délivrance de la Licence « Club Fédéral » en faisant acte de
+      candidature. La délivrance de la Licence « Club Fédéral » est décidée en
+      cours de saison par le Bureau Exécutif de la LFA. Les clubs à statut
+      professionnel, évoluant en D1 FEMININE, NATIONAL, NATIONAL 2, NATIONAL 3
+      et D1 FUTSAL, y compris les équipes réserves, ne peuvent candidater au
+      dispositif.
+      &lt;br /&gt;&lt;br /&gt;
+      La délivrance de la Licence est réalisée en Saison N sur la base des
+      critères du niveau de compétition de la même saison N pour les clubs visés
+      ci-dessus. La délivrance de la Licence Club Fédéral déclenche le versement
+      d’une aide financière dont le montant est défini par le Comité Exécutif de
+      la FFF (COMEX), sur proposition du Bureau Exécutif de la LFA (BELFA).
+      &lt;br /&gt;&lt;br /&gt;
+      La participation d'un club à l’un des cinq championnats susvisés n’est pas
+      conditionnée par la délivrance de la Licence « Club Fédéral ». Il en est
+      de même pour les modalités d’accession et relégation dans ces
+      championnats.
+      &lt;br /&gt;&lt;br /&gt;
+      La procédure à suivre pour la délivrance de la Licence Club Fédéral, ainsi
+      que les critères devant être remplis par le club, sont définis dans le
+      règlement disponible
+      &lt;a download=&quot;Règlement&quot; (click)=&quot;downloadFile()&quot; class=&quot;cursor-pointer&quot;
+        &gt;ici&lt;/a
+      &gt;.
+    &lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;content margTop30&quot;&gt;
+    &lt;h3&gt;&lt;span&gt;&lt;/span&gt;Dossiers de candidatures&lt;/h3&gt;
+    &lt;p class=&quot;int&quot;&gt;
+      &lt;strong&gt;Sélectionner le dossier auquel vous souhaitez accéder :&lt;/strong&gt;
+    &lt;/p&gt;
+
+    &lt;div
+      class=&quot;content-dossiers&quot;
+      *ngIf=&quot;filteredDossiers$ | async; let dossiers&quot;
+    &gt;
+      &lt;div class=&quot;dossiers&quot; *ngFor=&quot;let dossier of dossiers&quot;&gt;
+        &lt;a href=&quot;#&quot; (click)=&quot;goToDossier($event, dossier)&quot;&gt;
+          &lt;div
+            class=&quot;blc1&quot;
+            [ngClass]=&quot;{'national': dossier.id_ref_competitions_fk ? dossier.id_ref_competitions_fk &lt;= 3 : false,
+          'feminine':  dossier.id_ref_competitions_fk === 4,
+          'futsal': dossier.id_ref_competitions_fk === 5}&quot;
+          &gt;
+            &lt;span class=&quot;bold black&quot;
+              &gt;{{dossier.competitions_libelle?.toUpperCase()}}&lt;/span
+            &gt;
+            &lt;!--            Todo Equipe--&gt;
+            &lt;span&gt;*Equipe&lt;/span&gt;
+            &lt;span
+              class=&quot;bold red&quot;
+              [ngClass]=&quot;{'red': dossier.id_statuts_dossier_fk === 1,
+            'yellow': dossier.id_statuts_dossier_fk === 2,
+            'green': dossier.id_statuts_dossier_fk === 3}&quot;
+              &gt;{{dossier.status_dossier_libelle | titlecase}}&lt;/span
+            &gt;
+            &lt;span class=&quot;bold&quot;
+              &gt;Date limite : {{dossier.date_limite | date: 'dd/MM/yyyy'}}&lt;/span
+            &gt;
+          &lt;/div&gt;
+        &lt;/a&gt;
+        &lt;div class=&quot;blc2&quot;&gt;
+          &lt;div class=&quot;lab&quot;&gt;
+            &lt;span&gt;Incontournables :&lt;/span&gt;
+            &lt;span&gt;Cumulables :&lt;/span&gt;
+            &lt;span class=&quot;bold&quot;&gt;Éligibilité :&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;rep&quot;&gt;
+            &lt;span customStyle [evaluation]=&quot;dossier.id_ref_statuts_critere_fk&quot;&gt;
+              &lt;!--              TODO add FFF if status = A évaluer --&gt;
+              &lt;!--              TODO, mettre des tirets quand y'a rien --&gt;
+              {{dossier.elligibilite_incontournables_libelle}}&lt;/span
+            &gt;
+            &lt;span
+              *ngIf=&quot;dossier.nb_points_criteres_cumulables&quot;
+              [ngClass]=&quot;{'blue': dossier.nb_points_criteres_cumulables ? dossier.nb_points_criteres_cumulables &lt;=0 : false,
+            'green': dossier.nb_points_criteres_cumulables ? dossier.nb_points_criteres_cumulables &gt; 0 : false}&quot;
+            &gt;
+              {{ dossier.nb_points_criteres_cumulables &lt;= 0 ? '-' :
+              dossier.nb_points_criteres_cumulables + ' points' }}&lt;/span
+            &gt;
+            &lt;span
+              [ngClass]=&quot;{'blue': dossier.id_eligibilite_fk === 3,
+            'red': dossier.id_eligibilite_fk === 4,
+            'green': dossier.id_eligibilite_fk === 2}&quot;
+            &gt;
+              &lt;strong
+                &gt;{{dossier.id_eligibilite_fk ? (dossier.eligibilite_libelle |
+                titlecase) : '-'}}&lt;/strong
+              &gt;{{dossier.id_eligibilite_fk != 2 ? '' : ' - ' +
+              dossier.nb_points_total + ' points'}}
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;blc3&quot;&gt;
+          &lt;div class=&quot;lab&quot;&gt;
+            &lt;span class=&quot;bold&quot;&gt;Décision BELFA :&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;rep&quot;&gt;
+            &lt;a href=&quot;#&quot; (click)=&quot;openModal($event, dossier)&quot;&gt;
+              &lt;span
+                class=&quot;alert&quot;
+                [ngClass]=&quot;{'red': dossier.id_ref_type_decision_belfa_fk === 2,
+            'green': dossier.id_ref_type_decision_belfa_fk === 1,
+            'blue': !dossier.id_ref_type_decision_belfa_fk}&quot;
+              &gt;
+                &lt;strong *ngIf=&quot;dossier.id_ref_type_decision_belfa_fk&quot;
+                  &gt;{{dossier.type_decision_belfa_libelle | titlecase}}
+                &lt;/strong&gt;
+                ({{!dossier.id_ref_type_decision_belfa_fk ? '-' :
+                dossier.belfa_date | date: 'dd/MM/yyyy'}} )
+              &lt;/span&gt;
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;ModalGen&quot; class=&quot;modal&quot; [ngClass]=&quot;{'show': showModal}&quot;&gt;
+  &lt;div class=&quot;modal-background&quot; (click)=&quot;closeModal($event)&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;modal-content&quot;&gt;
+    &lt;span class=&quot;close&quot;
+      &gt;&lt;a href=&quot;#&quot; (click)=&quot;closeModal($event)&quot;&gt;&amp;nbsp;&lt;/a&gt;&lt;/span
+    &gt;
+    &lt;div
+      class=&quot;content&quot;
+      *ngIf=&quot;storageService.selectedDossier$ | async; let selectedDossier&quot;
+    &gt;
+      &lt;h3&gt;&lt;span&gt;&lt;/span&gt;DÉCISION BELFA&lt;/h3&gt;
+      &lt;div class=&quot;ent&quot;&gt;
+        &lt;div&gt;
+          &lt;span class=&quot;bold margBot10&quot;&gt;Date décision&lt;/span&gt;
+          &lt;span class=&quot;blue&quot;
+            &gt;{{selectedDossier.belfa_date | date: 'dd/MM/yyyy'}}&lt;/span
+          &gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;span class=&quot;bold margBot10&quot;&gt;Décision&lt;/span&gt;
+          &lt;span class=&quot;blue&quot;
+            &gt;{{selectedDossier.type_decision_belfa_libelle}}&lt;/span
+          &gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;margTop10&quot;&gt;
+        &lt;span class=&quot;bold margBot10&quot;&gt;Motif&lt;/span&gt;
+        &lt;span class=&quot;blue&quot;
+          &gt;{{selectedDossier.motifs_decision_belfa_libelle}}&lt;/span
+        &gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;margTop10&quot;&gt;
+        &lt;span class=&quot;bold margBot10&quot;&gt;Commentaire&lt;/span&gt;
+        &lt;span class=&quot;blue&quot;&gt;{{selectedDossier.belfa_commentaire}}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 
                     </main>
 
@@ -171,22 +435,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

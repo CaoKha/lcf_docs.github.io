@@ -1,6 +1,6 @@
 # SIDE-NAV
 
-The side navigation bar of the app.
+The side navigation bar of the LCF application.
 
 ## Description:
 

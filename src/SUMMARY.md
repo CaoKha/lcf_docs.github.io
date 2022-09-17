@@ -1,14 +1,14 @@
 # Summary
 
 - [ACCUEIL](./lcf-accueil.md)
-- [DCN](./lcf-dcn.md)
-  - [ACCUEIL](./dcn/dcn-accueil.md)
-  - [PARAMETERS](./dcn/dcn-parameters.md)
-  - [DOSSIER](./dcn/dcn-dossier.md)
 - [CLUB](./lcf-club.md)
   - [ACCUEIL](./club/club-accueil.md)
   - [CANDIDATURE](./club/club-candidature.md)
   - [DOSSIER](./club/club-dossier.md)
+- [DCN](./lcf-dcn.md)
+  - [ACCUEIL](./dcn/dcn-accueil.md)
+  - [PARAMETERS](./dcn/dcn-parameters.md)
+  - [DOSSIER](./dcn/dcn-dossier.md)
 - [SHARED](./shared.md)
   - [DOSSIER-TEMPLATE](./shared/dossier-template.md)
   - [HEADER](./shared/header.md)
