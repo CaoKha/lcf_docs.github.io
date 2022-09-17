@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="../lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dcn/dcn-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../dcn/dcn-parameters.html">PARAMETERS</a></li><li class="chapter-item "><a href="../dcn/dcn-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item expanded "><a href="../lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../club/club-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../club/club-candidature.html">CANDIDATURE</a></li><li class="chapter-item expanded "><a href="../club/club-dossier.html" class="active">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="../shared/header.html">HEADER</a></li><li class="chapter-item "><a href="../shared/side-nav.html">SIDE-NAV</a></li><li class="chapter-item "><a href="../shared/page-not-found.html">PAGE-NOT-FOUND</a></li><li class="chapter-item "><a href="../shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="../shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="../shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="../shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="../lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item expanded "><a href="../lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../club/club-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../club/club-candidature.html">CANDIDATURE</a></li><li class="chapter-item expanded "><a href="../club/club-dossier.html" class="active">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dcn/dcn-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../dcn/dcn-parameters.html">PARAMETERS</a></li><li class="chapter-item "><a href="../dcn/dcn-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="../shared/header.html">HEADER</a></li><li class="chapter-item "><a href="../shared/side-nav.html">SIDE-NAV</a></li><li class="chapter-item "><a href="../shared/page-not-found.html">PAGE-NOT-FOUND</a></li><li class="chapter-item "><a href="../shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="../shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="../shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="../shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -141,6 +141,387 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="club-dossier"><a class="header" href="#club-dossier">CLUB-DOSSIER</a></h1>
+<p>The club dossier page of the LCF application. It is a child component of <a href="../shared/dossier-template.html">DOSSIER-TEMPLATE</a> component.</p>
+<h2 id="description"><a class="header" href="#description">Description:</a></h2>
+<p>The club dossier displays a <code>dossierForm</code> for user to fill. The <code>dossierForm</code> will later be pass to the <a href="../lcf-dcn.html">DCN</a> side for decision.</p>
+<h2 id="files"><a class="header" href="#files">Files:</a></h2>
+<pre><code class="language-ignore">club-dossier.component.html
+club-dossier.component.scss
+club-dossier.component.ts
+</code></pre>
+<h2 id="functionalities"><a class="header" href="#functionalities">Functionalities:</a></h2>
+<h3 id="general"><a class="header" href="#general">General:</a></h3>
+<pre><code class="language-ts">override ngOnInit(): void {
+  this.checkSaNoFromUrl();
+  this.getCompetIdFromUrl();
+  this.storageService.showSaisonBox$.next(false); // hide saisonBox
+  this.updateTerrainsRattachesArray();
+
+  this.dossier = this.storageService.selectedDossier;
+  if (this.isEmpty(this.dossier)) {
+    this.backupDossier();
+  }
+  this.setupDossierContent();
+  this.spawnClubStatusDossierHandler();
+  this.dateLimiteControl();
+}
+</code></pre>
+<p>Overriding <a href="../shared/dossier-template.html#general">ngOnInit</a> of <a href="../shared/dossier-template.html">DOSSIER-TEMPLATE</a>. The definition of some functions can be found here if they aren't included in <a href="../shared/dossier-template.html">DOSSIER-TEMPLATE</a> page.</p>
+<h3 id="specific"><a class="header" href="#specific">Specific:</a></h3>
+<h4 id="disabledossierformexceptrefusfile"><a class="header" href="#disabledossierformexceptrefusfile">disableDossierFormExceptRefusFile</a></h4>
+<pre><code class="language-ts">private disableDossierFormExceptRefusFile() {
+  this.disableDossierForm();
+  this.enableRefusFileForm();
+}
+</code></pre>
+<p>This function disables the <code>dossierForm</code> except the <code>fileForm</code> field which has an eligibilite of <code>refus piece</code>.</p>
+<h4 id="enablerefusfileform"><a class="header" href="#enablerefusfileform">enableRefusFileForm</a></h4>
+<pre><code class="language-ts">// WIP - generic, if file exist only in incontounables field can do differently
+private enableRefusFileForm() {
+  for (let formField of UtilsService.fieldArray) {
+    let criteresField = this.dossierForm.get(formField) as FormGroup;
+    Object.keys(criteresField.controls).forEach((id: string) =&gt; {
+      if (
+        criteresField.get([id, 'type'])?.value === 'PJ' &amp;&amp;
+        criteresField.get([id, 'eligibilite'])?.value === 4
+      ) {
+        criteresField.get(id)?.enable();
+      }
+    });
+  }
+}
+</code></pre>
+<p>This function enables every <code>fileForm</code> field which has an eligibilite of <code>refus piece</code>.</p>
+<h4 id="spawnclubstatusdossierhandler"><a class="header" href="#spawnclubstatusdossierhandler">spawnClubStatusDossierHandler</a></h4>
+<pre><code class="language-ts">private spawnClubStatusDossierHandler() {
+  this.subs.sink = this.storageService.selectedDossier$
+    .pipe(distinctUntilChanged())
+    .subscribe({
+      next: (dossier: Dossier) =&gt; {
+        switch (dossier.id_statuts_dossier_fk) {
+          case DossierStatusEnum.REFUS_PIECE:
+            this.disableDossierFormExceptRefusFile();
+            break;
+          case DossierStatusEnum.CLOS:
+            this.disableDossierForm();
+            break;
+          case DossierStatusEnum.A_EVALUER:
+            this.disableDossierForm();
+            break;
+        }
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>This function spawns a <code>dossier</code> status handler. Depend on the status of the <code>dossier</code>, we disable or enable the corresponding fields.</p>
+<h4 id="datelimitecontrol"><a class="header" href="#datelimitecontrol">dateLimiteControl</a></h4>
+<pre><code class="language-ts">private dateLimiteControl() {
+  this.subs.sink = this.storageService.selectedDossier$
+    .pipe(distinctUntilChanged())
+    .subscribe({
+      next: (dossier: Dossier) =&gt; {
+        let today = new Date();
+        if (dossier.date_limite &amp;&amp; dossier.date_limite &lt; today) {
+          switch (dossier.id_statuts_dossier_fk) {
+            case DossierStatusEnum.NON_DEBUTE:
+              this.disableDossierForm();
+              this.spawnOverdueToastr();
+              this.overdue = true;
+              break;
+            case DossierStatusEnum.EN_COURS:
+              this.disableDossierForm();
+              this.spawnOverdueToastr();
+              this.overdue = true;
+              break;
+            case DossierStatusEnum.A_EVALUER:
+              this.disableDossierForm();
+              this.spawnOverdueToastr();
+              this.overdue = true;
+              break;
+            case DossierStatusEnum.CLOS:
+              this.disableDossierForm();
+              this.spawnOverdueToastr();
+              this.overdue = true;
+              break;
+            case DossierStatusEnum.REFUS_PIECE:
+              this.spawnOverdueToastr();
+              this.overdue = true;
+              break;
+            default:
+              this.overdue = false;
+              break;
+          }
+        }
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>This function checks if the <code>dossier</code> is overdue or not. If so, disable <code>dossierForm</code> and provoke a toastr.</p>
+<h4 id="spawnoverduetoastr"><a class="header" href="#spawnoverduetoastr">spawnOverdueToastr</a></h4>
+<pre><code class="language-ts">private spawnOverdueToastr() {
+  this.messageService.add({
+    severity: 'error',
+    summary: 'Dossier Overdue',
+    detail: 'This dossier is overdue!',
+  });
+}
+</code></pre>
+<p>This function spawns the <code>overdue</code> toastr.</p>
+<h4 id="buttondisplayconditions"><a class="header" href="#buttondisplayconditions">buttonDisplayConditions</a></h4>
+<pre><code class="language-ts">buttonDisplayConditions(dossier: Dossier) {
+  // display when not overdue and not 3: dossier clos, and not 4: dossier a evaluer
+  return !this.overdue &amp;&amp; ![3,4].includes(Number(dossier.id_statuts_dossier_fk));
+}
+</code></pre>
+<p>This function applies rule for displaying all the buttons at the end of the <code>dossierForm</code>.</p>
+<h3 id="html"><a class="header" href="#html">HTML:</a></h3>
+<pre><code class="language-html">&lt;div
+  class=&quot;content-pages&quot;
+  *ngIf=&quot;storageService.selectedDossier$ | async; let dossier&quot;
+&gt;
+  &lt;div class=&quot;entete grid&quot; [ngClass]=&quot;compet_id_icon&quot;&gt;
+    &lt;div class=&quot;mr-5&quot;&gt;
+      &lt;img class=&quot;icon-logo&quot; [src]=&quot;dossier.icon_url&quot; alt=&quot;icon-competition&quot; /&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;h2&gt;Licence « Club Fédéral »&lt;/h2&gt;
+      &lt;h1 *ngIf=&quot;user&quot;&gt;{{user.cl_cod}} - {{user.club_nom}}&lt;/h1&gt;
+      &lt;h4 [ngClass]=&quot;dossier_status_color&quot;&gt;
+        {{dossier.status_dossier_libelle | titlecase}}
+      &lt;/h4&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;h3&gt;&lt;span&gt;&lt;/span&gt;INFORMATIONS GÉNÉRALES&lt;/h3&gt;
+    &lt;div class=&quot;info&quot;&gt;
+      &lt;div&gt;
+        &lt;span class=&quot;bold&quot;&gt;Équipe&lt;/span&gt;
+        &lt;span class=&quot;blue&quot;&gt;So Romorantin 1&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;span class=&quot;bold&quot;&gt;Ligue d’appartenance&lt;/span&gt;
+        &lt;span class=&quot;blue&quot;&gt;2100 - Ligue du Centre Val-de-Loire&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div
+      class=&quot;form-content&quot;
+      [formGroup]=&quot;$any(dossierForm.get('info_general'))&quot;
+    &gt;
+      &lt;h5&gt;Référent club&lt;/h5&gt;
+      &lt;div class=&quot;ref&quot;&gt;
+        &lt;div class=&quot;ref-item&quot;&gt;
+          &lt;label for=&quot;name&quot;&gt;Nom*&lt;/label&gt;
+          &lt;input
+            type=&quot;text&quot;
+            id=&quot;name&quot;
+            placeholder=&quot;Saisissez votre nom&quot;
+            formControlName=&quot;nom&quot;
+          /&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;ref-item&quot;&gt;
+          &lt;label for=&quot;post-name&quot;&gt;Prénom*&lt;/label&gt;
+          &lt;input
+            type=&quot;text&quot;
+            id=&quot;post-name&quot;
+            placeholder=&quot;Saisissez votre prénom&quot;
+            formControlName=&quot;prenom&quot;
+          /&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;email ref-item&quot;&gt;
+          &lt;label for=&quot;email&quot;&gt;Email*&lt;/label&gt;
+          &lt;input
+            type=&quot;text&quot;
+            id=&quot;email&quot;
+            placeholder=&quot;Saisissez votre email&quot;
+            formControlName=&quot;email&quot;
+          /&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;phone ref-item&quot;&gt;
+          &lt;label for=&quot;phone&quot;&gt;Téléphone*&lt;/label&gt;
+          &lt;input
+            type=&quot;text&quot;
+            id=&quot;phone&quot;
+            placeholder=&quot;Saisissez votre téléphone&quot;
+            formControlName=&quot;tel&quot;
+          /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;h5&gt;Autorisations&lt;/h5&gt;
+      &lt;label class=&quot;check&quot;&gt;
+        &lt;span&gt;
+          Le club souhaite obtenir la Licence « Club Fédéral » et confirme ainsi
+          son adhésion au dispositif, que l’ensemble des documents sont exacts,
+          qu’il autorise la FFF à examiner lesdits documents et à procéder, si
+          besoin, à une visite dans les locaux du club.
+        &lt;/span&gt;
+        &lt;input id=&quot;autorite&quot; type=&quot;checkbox&quot; formControlName=&quot;autorisation&quot; /&gt;
+        &lt;span for=&quot;autorite&quot; class=&quot;checkmark&quot;&gt;&lt;/span&gt;
+      &lt;/label&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div
+    *ngFor=&quot;let critere_big_title of ['CRITÈRES INCONTOURNABLES','CRITÈRES CUMULABLES']; let i = index&quot;
+  &gt;
+    &lt;div class=&quot;content margTop30&quot;&gt;
+      &lt;div class=&quot;rub&quot;&gt;
+        &lt;h3&gt;
+          &lt;span&gt;&lt;/span&gt;{{critere_big_title}}&lt;em class=&quot;pts&quot;&gt; (5000 POINTS)&lt;/em&gt;
+        &lt;/h3&gt;
+        &lt;div&gt;
+          &lt;span class=&quot;line&quot;&gt;&lt;/span&gt;
+          &lt;span
+            class=&quot;statut&quot;
+            customStyle
+            [evaluation]=&quot;i === 0 ? (eligibleOfIncon$ | async) : 2 &quot;
+          &gt;
+            {{ i === 0 ? (eligibleOfIncon$ | async | customString:
+            storageService.connectId) : (sumOfCumulable$ | async) + ' points' }}
+          &lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;content-dossier&quot;&gt;
+        &lt;div&gt;
+          &lt;div
+            *ngFor=&quot;let critere_small_title of critereTitleArray[i]; let j = index&quot;
+          &gt;
+            &lt;div class=&quot;grid&quot;&gt;
+              &lt;h5 class=&quot;col-9&quot; [ngClass]=&quot;{nomarg: j === 0}&quot;&gt;
+                {{critere_small_title}}
+              &lt;/h5&gt;
+              &lt;span
+                *ngIf=&quot;j === 0&quot;
+                class=&quot;responsiveHide eval col-3 text-center&quot;
+                &gt;Évaluation&lt;/span
+              &gt;
+            &lt;/div&gt;
+            &lt;div *ngIf=&quot;critereBigArray&quot;&gt;
+              &lt;div
+                *ngFor=&quot;let critere of critereBigArray[i][j]&quot;
+                [ngSwitch]=&quot;critere.code&quot;
+              &gt;
+                &lt;div&gt;
+                  &lt;lcf-file
+                    *ngSwitchCase=&quot;'PJ'&quot;
+                    (uploadFileCarrier)=&quot;uploadFile($event, critereNameArray[i][j], critere.id)&quot;
+                    (downloadFileCarrier)=&quot;downloadFile($event)&quot;
+                    [fileForm]=&quot;$any(dossierForm.get(critereNameArray[i][j] + '.' + critere.id.toString()))&quot;
+                    [overdue]=&quot;overdue&quot;
+                  &gt;
+                  &lt;/lcf-file&gt;
+                  &lt;lcf-terrain
+                    *ngSwitchCase=&quot;'TERRAIN'&quot;
+                    [terrainForm]=&quot;$any(dossierForm.get(critereNameArray[i][j]+ '.' + critere.id.toString())) &quot;
+                    [terrains]=&quot;terrains&quot;
+                  &gt;
+                  &lt;/lcf-terrain&gt;
+                  &lt;lcf-radio
+                    *ngSwitchCase=&quot;'RB'&quot;
+                    [radioForm]=&quot;$any(dossierForm.get(critereNameArray[i][j]+ '.' + critere.id.toString()))&quot;
+                  &gt;
+                  &lt;/lcf-radio&gt;
+                  &lt;lcf-wbs
+                    *ngSwitchCase=&quot;'WBS'&quot;
+                    [wbsForm]=&quot;$any(dossierForm.get(critereNameArray[i][j]+ '.' + critere.id.toString()))&quot;
+                  &gt;&lt;/lcf-wbs&gt;
+                  &lt;lcf-radio-three
+                    *ngSwitchCase=&quot;'RB3'&quot;
+                    [radioForm]=&quot;$any(dossierForm.get(critereNameArray[i][j]+ '.' + critere.id.toString()))&quot;
+                  &gt;
+                  &lt;/lcf-radio-three&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;hr
+                class=&quot;part&quot;
+                *ngIf=&quot;critere_small_title !== critereTitleArray[i][critereTitleArray[i].length - 1]&quot;
+              /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;content margTop30&quot;&gt;
+    &lt;div class=&quot;rub&quot;&gt;
+      &lt;span class=&quot;arrow&quot;
+        &gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;assets/img/arrow2-down.png&quot; alt=&quot;Fermer&quot; /&gt;&lt;/a
+      &gt;&lt;/span&gt;
+      &lt;h3&gt;&lt;span&gt;&lt;/span&gt;SIMULATION *&lt;/h3&gt;
+      &lt;div class=&quot;spe&quot;&gt;
+        &lt;span class=&quot;line&quot;&gt;&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;content-dossier desk&quot;&gt;
+      &lt;div class=&quot;contG&quot;&gt;
+        &lt;h5 class=&quot;reg nomarg&quot;&gt;Critères Incontournables&lt;/h5&gt;
+        &lt;h5 class=&quot;reg margTop2Rem&quot;&gt;Critères Cumulables&lt;/h5&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;contD crit nobd&quot;&gt;
+        &lt;span
+          class=&quot;statut reg nomarg&quot;
+          customStyle
+          [evaluation]=&quot;eligibleOfIncon$ | async&quot;
+        &gt;
+          {{eligibleOfIncon$ | async | customString: storageService.connectId }}
+          - {{(eligibleOfIncon$ | async) === 2 ? 5000 : 0}} point&lt;/span
+        &gt;
+        &lt;span class=&quot;statut reg green&quot;
+          &gt;{{ sumOfCumulable$ | async}} points&lt;/span
+        &gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;hr class=&quot;part&quot; /&gt;
+    &lt;div class=&quot;content-dossier desk&quot;&gt;
+      &lt;div class=&quot;contG&quot;&gt;
+        &lt;h5 class=&quot;margTop2Rem&quot;&gt;Éligibilité&lt;/h5&gt;
+        &lt;h5 class=&quot;margTop2Rem&quot;&gt;Aide financière&lt;/h5&gt;
+        &lt;em class=&quot;ment&quot;
+          &gt;* La simulation ne présente pas de caractère officiel et reste
+          indicative, dans l’attente de décision définitive du BELFA.&lt;/em
+        &gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;contD crit2 nobd&quot;&gt;
+        &lt;span
+          class=&quot;statut reg&quot;
+          customStyle
+          [evaluation]=&quot;eligibleOfIncon$ | async&quot;
+        &gt;
+          {{eligibleOfIncon$ | async | customString: storageService.connectId }}
+          - {{totalPoints$ | async}} points&lt;/span
+        &gt;
+        &lt;span class=&quot;statut big&quot; *ngIf=&quot;aideFinanciere$ | async; let aideFinan&quot;
+          &gt;{{aideFinan.pourcentage}}% - {{aideFinan.totalAide}}€&lt;/span
+        &gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;buttons&quot; *ngIf=&quot;buttonDisplayConditions(dossier)&quot;&gt;
+    &lt;button class=&quot;valider&quot; (click)=&quot;showForm()&quot;&gt;ShowForm&lt;/button&gt;
+    &lt;button class=&quot;valider&quot; (click)=&quot;isFormValid()&quot;&gt;isFormValid&lt;/button&gt;
+    &lt;button
+      class=&quot;valider&quot;
+      *ngIf=&quot;dossier.id_statuts_dossier_fk !== 4&quot;
+      (click)=&quot;saveDossier()&quot;
+    &gt;
+      Enregistrer
+    &lt;/button&gt;
+    &lt;button class=&quot;valider&quot; (click)=&quot;validerDossier()&quot;&gt;Valider&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 
                     </main>
 
@@ -150,7 +531,7 @@
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../shared.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../lcf-dcn.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -164,7 +545,7 @@
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../shared.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../lcf-dcn.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

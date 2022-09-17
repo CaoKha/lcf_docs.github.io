@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="../lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dcn/dcn-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../dcn/dcn-parameters.html">PARAMETERS</a></li><li class="chapter-item "><a href="../dcn/dcn-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item expanded "><a href="../lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../club/club-accueil.html" class="active">ACCUEIL</a></li><li class="chapter-item "><a href="../club/club-candidature.html">CANDIDATURE</a></li><li class="chapter-item "><a href="../club/club-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="../shared/header.html">HEADER</a></li><li class="chapter-item "><a href="../shared/side-nav.html">SIDE-NAV</a></li><li class="chapter-item "><a href="../shared/page-not-found.html">PAGE-NOT-FOUND</a></li><li class="chapter-item "><a href="../shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="../shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="../shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="../shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="../lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item expanded "><a href="../lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../club/club-accueil.html" class="active">ACCUEIL</a></li><li class="chapter-item "><a href="../club/club-candidature.html">CANDIDATURE</a></li><li class="chapter-item "><a href="../club/club-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dcn/dcn-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../dcn/dcn-parameters.html">PARAMETERS</a></li><li class="chapter-item "><a href="../dcn/dcn-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="../shared/header.html">HEADER</a></li><li class="chapter-item "><a href="../shared/side-nav.html">SIDE-NAV</a></li><li class="chapter-item "><a href="../shared/page-not-found.html">PAGE-NOT-FOUND</a></li><li class="chapter-item "><a href="../shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="../shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="../shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="../shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -141,6 +141,131 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="club-accueil"><a class="header" href="#club-accueil">CLUB-ACCUEIL</a></h1>
+<p>The club homepage of the LCF application.</p>
+<h2 id="description"><a class="header" href="#description">Description:</a></h2>
+<p>The club homepage doesn't have much features. It currently has a simple text wall and a clickable sticker which directs us to <a href="./club-candidature.html">CLUB-CANDIDATURE</a> page</p>
+<h2 id="files"><a class="header" href="#files">Files:</a></h2>
+<pre><code class="language-ignore">club-accueil.component.html
+club-accueil.component.scss
+club-accueil.component.ts
+</code></pre>
+<h2 id="functionalities"><a class="header" href="#functionalities">Functionalities:</a></h2>
+<h3 id="general"><a class="header" href="#general">General:</a></h3>
+<pre><code class="language-ts">ngOnInit() {
+    this.checkSaNoFromUrl();
+    this.title.setTitle(UtilsService.createTitle('Votre Projet Club'));
+
+    this.sub = this.storageService
+    .selectedSaisonSaNo$
+    .pipe(takeUntil(this.storageService.globalUnsubscribe))
+    .subscribe((sa_no: number) =&gt; {
+    this.selectedSaisonSaNo = sa_no;
+    // TODO: do something in this page
+    });
+}
+</code></pre>
+<p>When we open this page, it will check the <code>season</code> string in the <code>url</code> is indeed in range of <code>seasons</code> defined in <code>user.saisons</code> (<a href="#checksanofromurl">checkSaNoFromUrl</a>). Then it stores the <code>season</code> value in <code>storage</code> . Else, redirect to <a href="../shared/page-not-found.html">PAGE-NOT-FOUND</a> if the <code>season</code> is out of range. The <code>selectedSaisonSaNo</code> variable later is used to correctly direct user to the next page upon clicking on the sticker.</p>
+<h3 id="specific"><a class="header" href="#specific">Specific:</a></h3>
+<h4 id="checksanofromurl"><a class="header" href="#checksanofromurl">checkSaNoFromUrl</a></h4>
+<pre><code class="language-ts">/**
+ * Check `sa_no` in `url` is in range of `user.saisons.sa_no`.
+ * If true, set `selectedSaison` in `Store` to `sa_no`.
+ * If false, navigate to page 404
+ */
+private checkSaNoFromUrl(): void {
+    const saisonSaNoFromUrl = Number(this.route.snapshot.paramMap.get('sa_no'));
+    this.user = this.storageService.user;
+    if (this.storageService.checkSaisonInRange(this.user, saisonSaNoFromUrl)) {
+        this.storageService.selectedSaisonSaNo = saisonSaNoFromUrl;
+    } else {
+        this.router.navigate(['/', this.storageService.connectId, '404']);
+    }
+}
+</code></pre>
+<p>This function checks <code>sa_no</code> in <code>url</code> is in range of <code>user.saisons.sa_no</code>.</p>
+<ul>
+<li>If true, set <code>selectedSaison</code> in <code>Store</code> to <code>sa_no</code></li>
+<li>If false, navigate to page 404</li>
+</ul>
+<h4 id="clickcandidature"><a class="header" href="#clickcandidature">clickCandidature</a></h4>
+<pre><code class="language-ts">clickCandidature(): void {
+    this.storageService.firstMenuItemActivated = false;
+    this.storageService.secondMenuItemActivated = true;
+  }
+</code></pre>
+<p>This function allows the second menu-item to be highlighted and dehighlight the first one.</p>
+<h4 id="ngondestroy"><a class="header" href="#ngondestroy">ngOnDestroy</a></h4>
+<pre><code class="language-ts">ngOnDestroy(): void {
+    this.sub.unsubscribe();
+    // workaround bug: https://github.com/angular/angular/issues/28330
+    this.storageService.globalUnsubscribe.next();
+    this.storageService.globalUnsubscribe.complete();
+}
+</code></pre>
+<p>Upon being destroyed, unsubscribe <code>selectedSaisonSaNo$</code> stream and every dangling observables.</p>
+<h3 id="html"><a class="header" href="#html">HTML:</a></h3>
+<pre><code class="language-html">&lt;div class=&quot;content-home&quot;&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;h1&gt;Votre Projet Club&lt;/h1&gt;
+    &lt;p&gt;
+      Votre club est interessé par une demande d'accompagnement et de
+      structuration de son « Projet Club ». Pour aller plus loin dans cette
+      démarche, vous pouvez remplir votre autodiagnostic au travers des
+      différents Labels proposés par la Fédération Française de Football.
+      &lt;br /&gt;&lt;br /&gt;
+      En entrant dans cette démarche, votre Ligue et ses Districts (élus et
+      Conseillers Techniques) s'engagent à vous rencontrer et vous guident pour
+      développer votre projet club.
+      &lt;br /&gt;&lt;br /&gt;
+      En fonction des vocations de votre club, vous pouvez alors orienter vers
+      un diagnostic du Label qui vous correspond. Bien évidemment, cet
+      autodiagnostic n'est pas réservé aux clubs qui souhaitent obtenir un
+      label. Il est à votre disposition pour faire le point sur votre
+      structuration et débuter une démarche d'accompagnement avec votre
+      territoire.
+      &lt;br /&gt;&lt;br /&gt;
+      Pour les clubs nationaux amateurs, il est également possible de faire une
+      demande d'obtention de la Licence « Club Fédéral ».
+    &lt;/p&gt;
+    &lt;hr /&gt;
+    &lt;div class=&quot;vignettes&quot;&gt;
+      &lt;!--      TODO labels quand on aura un retour sur cette spec--&gt;
+      &lt;!--      &lt;div class=&quot;label&quot;&gt;--&gt;
+      &lt;!--        &lt;a href=&quot;#&quot;&gt;--&gt;
+      &lt;!--          &lt;div&gt;--&gt;
+      &lt;!--            &lt;span class=&quot;tit&quot;&gt;LABEL JEUNES FFF&lt;/span&gt;--&gt;
+      &lt;!--            &lt;span class=&quot;sponsor&quot;&gt;CRÉDIT AGRICOLE&lt;/span&gt;--&gt;
+      &lt;!--          &lt;/div&gt;--&gt;
+      &lt;!--        &lt;/a&gt;--&gt;
+      &lt;!--        &lt;a href=&quot;#&quot;&gt;--&gt;
+      &lt;!--          &lt;div&gt;--&gt;
+      &lt;!--            &lt;span class=&quot;tit&quot;&gt;LABEL JEUNES FFF&lt;/span&gt;--&gt;
+      &lt;!--            &lt;span class=&quot;sponsor&quot;&gt;CRÉDIT AGRICOLE&lt;/span&gt;--&gt;
+      &lt;!--            &lt;span class=&quot;cat&quot;&gt;FÉMININE&lt;/span&gt;--&gt;
+      &lt;!--          &lt;/div&gt;--&gt;
+      &lt;!--        &lt;/a&gt;--&gt;
+      &lt;!--        &lt;a href=&quot;#&quot;&gt;--&gt;
+      &lt;!--          &lt;div&gt;--&gt;
+      &lt;!--            &lt;span class=&quot;tit&quot;&gt;LABEL JEUNES FFF&lt;/span&gt;--&gt;
+      &lt;!--            &lt;span class=&quot;sponsor&quot;&gt;CRÉDIT AGRICOLE&lt;/span&gt;--&gt;
+      &lt;!--            &lt;span class=&quot;cat&quot;&gt;FUTSAL&lt;/span&gt;--&gt;
+      &lt;!--          &lt;/div&gt;--&gt;
+      &lt;!--        &lt;/a&gt;--&gt;
+      &lt;!--      &lt;/div&gt;--&gt;
+      &lt;div class=&quot;label&quot;&gt;
+        &lt;a
+          [routerLink]=&quot;[selectedSaisonSaNo ? '/club/' + selectedSaisonSaNo + '/lcf' : '/club/']&quot;
+          (click)=&quot;clickCandidature()&quot;
+        &gt;
+          &lt;div&gt;
+            &lt;span class=&quot;tit&quot;&gt;LICENCE « CLUB FÉDÉRAL »&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 
                     </main>
 
