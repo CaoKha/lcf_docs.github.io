@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>SIDENAV - The lcf_ui documentations</title>
+        <title>SIDE-NAV - The lcf_ui documentations</title>
 
 
         <!-- Custom HTML head -->
@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="../lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dcn/dcn-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../dcn/dcn-parameters.html">PARAMETERS</a></li><li class="chapter-item "><a href="../dcn/dcn-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../club/club-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../club/club-candidature.html">CANDIDATURE</a></li><li class="chapter-item "><a href="../club/club-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item expanded "><a href="../shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="../shared/header.html">HEADER</a></li><li class="chapter-item expanded "><a href="../shared/sidenav.html" class="active">SIDENAV</a></li><li class="chapter-item "><a href="../shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="../shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="../shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="../shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="../lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dcn/dcn-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../dcn/dcn-parameters.html">PARAMETERS</a></li><li class="chapter-item "><a href="../dcn/dcn-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../club/club-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../club/club-candidature.html">CANDIDATURE</a></li><li class="chapter-item "><a href="../club/club-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item expanded "><a href="../shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="../shared/header.html">HEADER</a></li><li class="chapter-item expanded "><a href="../shared/side-nav.html" class="active">SIDE-NAV</a></li><li class="chapter-item "><a href="../shared/page-not-found.html">PAGE-NOT-FOUND</a></li><li class="chapter-item "><a href="../shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="../shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="../shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="../shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -140,7 +140,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="sidenav"><a class="header" href="#sidenav">SIDENAV</a></h1>
+                        <h1 id="side-nav"><a class="header" href="#side-nav">SIDE-NAV</a></h1>
 <p>The side navigation bar of the app.</p>
 <h2 id="description"><a class="header" href="#description">Description:</a></h2>
 <p>This sidenav always appears on the left of the application. There are two versions of the sidenav, one for <a href="../lcf-club.html">CLUB</a> and one for <a href="../lcf-dcn.html">DCN</a></p>
@@ -254,7 +254,7 @@ resetAllEl() {
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../shared/lcf-file.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../shared/page-not-found.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -268,13 +268,29 @@ resetAllEl() {
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../shared/lcf-file.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../shared/page-not-found.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

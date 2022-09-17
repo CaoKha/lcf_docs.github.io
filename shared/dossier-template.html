@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="../lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dcn/dcn-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../dcn/dcn-parameters.html">PARAMETERS</a></li><li class="chapter-item "><a href="../dcn/dcn-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../club/club-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../club/club-candidature.html">CANDIDATURE</a></li><li class="chapter-item "><a href="../club/club-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item expanded "><a href="../shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../shared/dossier-template.html" class="active">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="../shared/header.html">HEADER</a></li><li class="chapter-item "><a href="../shared/sidenav.html">SIDENAV</a></li><li class="chapter-item "><a href="../shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="../shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="../shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="../shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="../lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dcn/dcn-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../dcn/dcn-parameters.html">PARAMETERS</a></li><li class="chapter-item "><a href="../dcn/dcn-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="../lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../club/club-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="../club/club-candidature.html">CANDIDATURE</a></li><li class="chapter-item "><a href="../club/club-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item expanded "><a href="../shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../shared/dossier-template.html" class="active">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="../shared/header.html">HEADER</a></li><li class="chapter-item "><a href="../shared/side-nav.html">SIDE-NAV</a></li><li class="chapter-item "><a href="../shared/page-not-found.html">PAGE-NOT-FOUND</a></li><li class="chapter-item "><a href="../shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="../shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="../shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="../shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -143,7 +143,7 @@
                         <h1 id="dossier-template"><a class="header" href="#dossier-template">DOSSIER-TEMPLATE</a></h1>
 <p>The template (parent component) for both <a href="../dcn/dcn-dossier.html">DCN-DOSSIER</a> and <a href="../club/club-dossier.html">CLUB-DOSSIER</a>.</p>
 <h2 id="description"><a class="header" href="#description">Description:</a></h2>
-<p>This component stores all functionalities that will later be used by <a href="../dcn/dcn-dossier.html">DCN-DOSSIER</a> component and <a href="../club/club-dossier.html">CLUB-DOSSIER</a> component. These functionalities can be easily overriden if <a href="../dcn/dcn-dossier.html">DCN-DOSSIER</a> or <a href="../club/club-dossier.html">CLUB-DOSSIER</a> has different implementations from the original implementation.</p>
+<p>This component stores all core functionalities that will later be used by <a href="../dcn/dcn-dossier.html">DCN-DOSSIER</a> component and <a href="../club/club-dossier.html">CLUB-DOSSIER</a> component. These functionalities can be easily overriden if <a href="../dcn/dcn-dossier.html">DCN-DOSSIER</a> or <a href="../club/club-dossier.html">CLUB-DOSSIER</a> has different implementations from the original implementation.</p>
 <h2 id="files"><a class="header" href="#files">Files:</a></h2>
 <pre><code class="language-ignore">dossier-template.component.ts
 </code></pre>
@@ -411,8 +411,7 @@ private addFile(
   );
 }
 </code></pre>
-<p>Above are <code>critreresForm</code> building functions.
-It will be used together with <a href="#initinfogenerale">initInfoGenerale</a> to create a <code>dossierForm</code>.</p>
+<p>Above are <code>critreresForm</code> dynamic building functions. Depending on the <code>critere.type</code> (PJ, TERRAIN, RB, RB3 or WBS), we'll generate the corresponding form control. It will be used together with <a href="#initinfogenerale">initInfoGenerale</a> to create a <code>dossierForm</code>.</p>
 <h4 id="initinfogenerale"><a class="header" href="#initinfogenerale">initInfoGenerale</a></h4>
 <pre><code class="language-ts">private initInfoGenerale() {
   let info_general = this.dossierForm.get('info_general') as FormGroup;
@@ -528,53 +527,500 @@ saveDossier() {
 }
 </code></pre>
 <p>This function is called after user click on <code>ENREGISTRER</code> button on the <code>dossier</code> page. It will check only if <code>Information Generale</code> field is valid then send the <code>dossierForm</code> to backend.</p>
-<h3 id="html"><a class="header" href="#html">HTML:</a></h3>
-<pre><code class="language-html">&lt;header&gt;
-  &lt;div class=&quot;partG logo cursor-pointer&quot; [routerLink]=&quot;['/']&quot;&gt;
-    &lt;div&gt;
-      &lt;div class=&quot;filet&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;projetclub&quot;&gt;
-        &lt;div class=&quot;log&quot;&gt;&lt;/div&gt;
-        &lt;div&gt;Projet &lt;span&gt;Club&lt;/span&gt;&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;partD&quot; *ngIf=&quot;currentUser&quot;&gt;
-    &lt;div class=&quot;saison&quot; *ngIf=&quot;storageService.showSaisonBox$ | async&quot;&gt;
-      &lt;label&gt;Saison&lt;/label&gt;
-      &lt;select (change)=&quot;saisonChanged($event)&quot; [(ngModel)]=&quot;selectedSaisonSaNo&quot;&gt;
-        &lt;option
-          *ngFor=&quot;let saison of currentUser.saisons&quot;
-          [value]=&quot;saison?.sa_no&quot;
-          [selected]=&quot;saison?.sa_no === selectedSaisonSaNo&quot;
-        &gt;
-          {{saison?.cs_lib}}
-        &lt;/option&gt;
-      &lt;/select&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;user&quot;&gt;
-      &lt;img
-        class=&quot;logo-club&quot;
-        [src]=&quot;logoUrl&quot;
-        (error)=&quot;logoClubErrorHandler($event)&quot;
-        alt=&quot;Logo Club&quot;
-      /&gt;
-      &lt;div&gt;
-        &lt;span class=&quot;name&quot;&gt;{{currentUser.nom}}&lt;/span&gt;
-        &lt;span class=&quot;club&quot;
-          &gt;{{currentUser.cl_cod}} - {{currentUser.club_nom}}&lt;/span
-        &gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/header&gt;
-
-&lt;!-- The header component always appears on top of every page
-  (it won't be destroyed when navigating from page to page (page refresh does not count!)) so does the toast.
-  Therefore, do not use this toast anywhere else,
-  if does, a dubplication of toast will be created on top of each other! --&gt;
-&lt;p-toast styleClass=&quot;custom-toast&quot; position=&quot;bottom-right&quot;&gt;&lt;/p-toast&gt;
+<h4 id="senddossiertobackend"><a class="header" href="#senddossiertobackend">sendDossierToBackend</a></h4>
+<pre><code class="language-ts">sendDossierToBackend(
+  isDossierValid: boolean,
+  connectId: string,
+  success_message: string
+) {
+  this.subs.sink = this.dossierService
+    .sendDossier(
+      Number(this.dossier.id),
+      Number(this.dossier.id_statuts_dossier_fk),
+      this.dossierForm,
+      isDossierValid,
+      connectId,
+      this.eligibleOfIncon$.value,
+      this.sumOfCumulable$.value,
+      this.totalPoints$.value,
+      this.aideFinanciere$.value
+    )
+    .pipe(
+      switchMap((result: any) =&gt; {
+        console.log('backendResponse:', result);
+        const dossier$ = this.dossierService.requestDossier(
+          this.storageService.selectedSaisonSaNo,
+          this.storageService.cl_cod,
+          this.storageService.competId
+        );
+        const dossiers$ = this.dossierService.requestDossiers(
+          this.storageService.selectedSaisonSaNo,
+          this.storageService.cl_cod
+        );
+        return combineLatest([dossiers$, dossier$]);
+      })
+    )
+    .subscribe(([dossiers, dossier]) =&gt; {
+      console.log('storage.dossiers:', dossiers);
+      console.log('storage.selectedDossier:', dossier);
+      this.storageService.selectedDossier = dossier;
+      this.storageService.dossiers = dossiers;
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Succès',
+        detail: success_message,
+      });
+    });
+}
 </code></pre>
+<p>This function is used to send a <code>dossierForm</code> with some other important variables (.e.g <code>points calculation</code>) to backend. It's also allow us to customize the toastr <code>success_message</code> which appears after the <code>dossierForm</code> has been successfully sent.
+The <code>isDossierValid</code> parameter is just there to differentiate situations where user clicked on <code>ENREGISTRER</code> button (dossier not valid but it's ok to be sent) or <code>VALIDER</code> button.</p>
+<div class="table-wrapper"><table><thead><tr><th></th><th>VALIDER</th><th>ENREGISTRER</th></tr></thead><tbody>
+<tr><td>isDossierValid</td><td>true</td><td>false</td></tr>
+</tbody></table>
+</div>
+<h4 id="isdossierformvalid"><a class="header" href="#isdossierformvalid">isDossierFormValid</a></h4>
+<pre><code class="language-ts">isDossierFormValid(dossierForm: FormGroup): boolean {
+  let info_general = dossierForm.get('info_general') as FormGroup;
+  let validToken1 = this.isInfoGeneralValid(info_general);
+  let validToken2: boolean = true;
+  for (let formField of UtilsService.fieldArray) {
+    let criteresField = dossierForm.get(formField) as FormGroup;
+    validToken2 =
+      this.isCritereValid(criteresField, formField) &amp;&amp; validToken2;
+  }
+  return validToken1 &amp;&amp; validToken2;
+}
+</code></pre>
+<p>This function return wheter or not a dossier is <code>valid</code>.</p>
+<h4 id="isinfogeneralvalid"><a class="header" href="#isinfogeneralvalid">isInfoGeneralValid</a></h4>
+<pre><code class="language-ts">private isInfoGeneralValid(info_general: FormGroup): boolean {
+  let validToken: boolean = true;
+  // check validity of nom and prenom
+
+  for (let field of ['nom', 'prenom']) {
+    if (
+      !info_general.controls[field].valid &amp;&amp;
+      info_general.controls[field].enabled
+    ) {
+      this.messageService.add({
+        severity: 'error',
+        summary: UtilsService.toReadableString(field) + ' Incomplet',
+        detail: 'Veuillez saisir le ' + field + ' du référent du dossier',
+        // sticky: true,
+      });
+      validToken = false;
+    }
+  }
+
+  // check validity of email
+  if (
+    !info_general.controls['email'].valid &amp;&amp;
+    info_general.controls['email'].enabled
+  ) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Email Invalide',
+      detail: 'Mail du référent invalide',
+      // sticky: true,
+    });
+    validToken = false;
+  }
+
+  // check validity of telephone
+  if (
+    !info_general.controls['tel'].valid &amp;&amp;
+    info_general.controls['tel'].enabled
+  ) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Telephone Invalide',
+      detail:
+        'Numéro de téléphone invalide. Caractères autorisés: chiffres, +, -, (), espaces',
+      // sticky: true,
+    });
+    validToken = false;
+  }
+
+  // check validity of autorisation
+  if (
+    !info_general.controls['autorisation'].valid &amp;&amp;
+    info_general.controls['autorisation'].enabled
+  ) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Autorisations Incomplet',
+      detail:
+        &quot;Veuillez accepter les mentions d'autorisation FFF en haut de la page&quot;,
+      // sticky: true,
+    });
+    validToken = false;
+  }
+
+  return validToken;
+}
+</code></pre>
+<p>This function returns whether or not the <code>Information Generale</code> field is valid. It will later be used in <a href="#isdossierformvalid">isDossierFormValid</a> function. Note that, a <code>disabled</code> field will be considered as <code>valid</code> too.</p>
+<h4 id="iscriterevalid"><a class="header" href="#iscriterevalid">isCritereValid</a></h4>
+<pre><code class="language-ts">private isCritereValid(criteresField: FormGroup, formField: string): boolean {
+  let validToken = true;
+  Object.keys(criteresField.controls).forEach((id: string, index: number) =&gt; {
+    let position = index + 1;
+    switch (criteresField.get([id, 'type'])?.value) {
+      case 'PJ':
+        if (
+          !criteresField.get([id, 'file'])?.valid &amp;&amp;
+          criteresField.get([id, 'file'])?.enabled
+        ) {
+          this.messageService.add({
+            severity: 'error',
+            summary:
+              UtilsService.toReadableString(formField) +
+              ': Critère ' +
+              position +
+              ' Incomplet',
+            detail: 'Veuillez insérer une pièce jointe',
+            // sticky: true,
+          });
+          validToken = false;
+        }
+        break;
+
+      case 'TERRAIN':
+        if (
+          !criteresField.get([id, 'terrain'])?.valid &amp;&amp;
+          criteresField.get([id, 'terrain'])?.enabled
+        ) {
+          this.messageService.add({
+            severity: 'error',
+            summary:
+              UtilsService.toReadableString(formField) +
+              ': Critère ' +
+              position +
+              ' Incomplet',
+            detail:
+              'Vous devez sélectionner une installation dans la liste déroulante, ou cliquer sur &quot;Pas d\'installation&quot;',
+            // sticky: true,
+          });
+          validToken = false;
+        }
+        break;
+
+      case 'RB':
+        if (
+          !criteresField.get([id, 'valeur'])?.valid &amp;&amp;
+          criteresField.get([id, 'valeur'])?.enabled
+        ) {
+          this.messageService.add({
+            severity: 'error',
+            summary:
+              UtilsService.toReadableString(formField) +
+              ': Critère ' +
+              position +
+              ' Incomplet',
+            detail: 'Vous devez donner une réponse (Oui ou Non)',
+            // sticky: true,
+          });
+          validToken = false;
+        }
+        break;
+
+      case 'RB3':
+        if (
+          !criteresField.get([id, 'valeur'])?.valid &amp;&amp;
+          criteresField.get([id, 'valeur'])?.enabled
+        ) {
+          this.messageService.add({
+            severity: 'error',
+            summary:
+              UtilsService.toReadableString(formField) +
+              ': Critère ' +
+              position +
+              ' Incomplet',
+            detail: 'Vous devez donner une réponse (Oui ou Non)',
+            // sticky: true,
+          });
+          validToken = false;
+        }
+        break;
+
+      case 'WBS':
+        //TODO
+        break;
+    }
+  });
+  return validToken;
+}
+</code></pre>
+<p>This function returns whether or not a <code>Critere</code> field is valid. It will later be used in <a href="#isdossierformvalid">isDossierFormValid</a> function. Note that, a <code>disabled</code> field will be considered as <code>valid</code> too. If a <code>critere</code> is not valid, we provide an error message indicates which and where the invalid event occurs. Putting the <code>formField</code> into function <a href="">toReadableString</a> will result in a more comprehensive critere location message.</p>
+<h4 id="setcompetidicon"><a class="header" href="#setcompetidicon">setCompetIdIcon</a></h4>
+<pre><code class="language-ts">// set up classes with conditions later be used by ngClass in the html template
+setCompetIdIcon() {
+  this.compet_id_icon = {
+    national: Number(this.dossier.id_ref_competitions_fk) &gt;= 1,
+    feminin: this.dossier.id_ref_competitions_fk === 4,
+    futsal: this.dossier.id_ref_competitions_fk === 5,
+  };
+}
+</code></pre>
+<p>This function sets up a ngClass for competition icon later be used in the html template.</p>
+<h4 id="setdossierstatuscolor"><a class="header" href="#setdossierstatuscolor">setDossierStatusColor</a></h4>
+<pre><code class="language-ts">// set up classes with conditions later be used by ngClass in the html template
+setDossierStatusColor() {
+  this.dossier_status_color = {
+    red: this.dossier.id_statuts_dossier_fk === 1,
+    yellow: this.dossier.id_statuts_dossier_fk === 2,
+    green: this.dossier.id_statuts_dossier_fk === 3,
+  };
+}
+</code></pre>
+<p>This function sets up a ngClass for dossier statut color later be used in the html template.</p>
+<h4 id="checksanofromurl"><a class="header" href="#checksanofromurl">checkSaNoFromUrl</a></h4>
+<pre><code class="language-ts">/**
+ * Check `sa_no` from `url` is in range of `user.saisons.sa_no`.
+ * If true, set `selectedSaison` in `Store` to `sa_no`.
+ * If false, navigate to page 404
+ */
+checkSaNoFromUrl(): void {
+  const saisonSaNoFromUrl = Number(this.route.snapshot.paramMap.get('sa_no'));
+  this.user = this.storageService.user;
+  if (this.storageService.checkSaisonInRange(this.user, saisonSaNoFromUrl)) {
+    this.storageService.selectedSaisonSaNo = saisonSaNoFromUrl;
+  } else {
+    this.router.navigate(['/', this.storageService.connectId, '404']);
+  }
+}
+</code></pre>
+<p>This function check <code>sa_no</code> from <code>url</code> to see if it is in range of <code>user.saisons.sa_no</code>.</p>
+<ul>
+<li>If true, set <code>selectedSaison</code> in <code>storage</code> to <code>sa_no</code></li>
+<li>If false, navigate to page 404</li>
+</ul>
+<h4 id="getcompetidfromurl"><a class="header" href="#getcompetidfromurl">getCompetIdFromUrl</a></h4>
+<pre><code class="language-ts">getCompetIdFromUrl() {
+  const competition = this.route.snapshot.paramMap.get('competition');
+  if (competition) {
+    this.storageService.competId = Number(
+      UtilsService.getCodeByCompetition(competition)
+    );
+  }
+}
+</code></pre>
+<p>This function get the <code>competition</code> string in <code>url</code>, convert it to a number then store it in <code>storage</code>.</p>
+<h4 id="uploadfile"><a class="header" href="#uploadfile">uploadFile</a></h4>
+<pre><code class="language-ts">uploadFile(file: any, field_name: string, critere_id: number) {
+  let fileForm = this.dossierForm.get([
+    field_name, // form field which has critere.code == 'PJ' .i.e 'incon_struct_org'
+    String(critere_id),
+  ]);
+  if (file) {
+    const reader: FileReader = new FileReader();
+    reader.readAsDataURL(file); // read as base64
+    reader.onload = () =&gt; {
+      const { categorie, nature } = UtilsService.getCategorieNatureById(
+        fileForm?.value.id
+      );
+      const fileToUpload = {
+        file_name: file.name,
+        content: String(reader.result).split(',')[1], // strip the first part before the comma
+        content_type: file.type,
+        categorie: categorie,
+        nature: nature,
+      };
+      // upload a file with content
+      fileForm?.patchValue({
+        file: fileToUpload,
+        eligibilite: 1, // set status to en attente FFF after uploading a file
+        motif_pj: '', // reset motif_pj to ''
+      });
+    };
+  }
+  // upload nothing (file == null)
+  else {
+    fileForm?.patchValue({
+      file: null,
+      // if file uploading is null, restore eligibilite to the eligibilite value in backend
+      eligibilite: fileForm.value.ref_eligibilite,
+    });
+  }
+}
+</code></pre>
+<p>This function parses the uploaded <code>file</code> as <code>base64</code> format and update its <code>fileForm</code> value. If the user remove the <code>file</code>, the <code>eligibilite</code> of the <code>fileForm</code> will be reset to its <code>ref_eligibilite</code> (considered as a <code>const</code> in frontend) which is the original value gotten from backend.</p>
+<p>For example, in the case of <code>REFUS_PIECE</code>, the current eligibilite is <code>refus piece</code>, the user (<code>club</code>) will upload another file to the frontend, the eligibilite will pass to <code>en attent FFF</code>. To undo the change, user will remove the file by clicking on <code>Cancel</code> after the file upload window pop up. The eligibilite will now return to its original value which is <code>refus piece</code>.</p>
+<h4 id="downloadfile"><a class="header" href="#downloadfile">downloadFile</a></h4>
+<pre><code class="language-ts">/**
+ * WIP - can be improved by linking to storage on Azure Stack Edge
+ * https://cdn-transverse.azureedge.net
+ */
+async downloadFile(file: any) {
+  this.subs.sink = this.dossierService
+    .requestDownloadFile(
+      file.categorie,
+      file.nature,
+      file.azure_name ? file.azure_name : null
+    )
+    .subscribe({
+      next: (result: any) =&gt; {
+        UtilsService.open_file(result);
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>This function is used to open a new tab that allows user to view the <code>PDF</code> file which is stored in <code>AzureStorage</code>. User can later decide whether or not to download the file.</p>
+<h4 id="spawndossierobservableandinitdossierformassideeffects"><a class="header" href="#spawndossierobservableandinitdossierformassideeffects">spawnDossierObservableAndInitDossierFormAsSideEffects</a></h4>
+<pre><code class="language-ts">/**
+ * Create a `dossier$` stream. After subscribing to this stream,
+ * a `dossierForm` building + some setup processes will be initialized as side effects
+ */
+private spawnDossierObservableAndInitDossierFormAsSideEffects() {
+  return this.storageService.selectedDossier$.pipe(
+    // side effects if subscribe to this stream
+    tap((dossier: Dossier) =&gt; {
+      if (dossier.criteres) {
+        this.dossier = dossier;
+        this.resetAllCritereArrays();
+        // init dossierForm
+        this.initInfoGenerale();
+        this.initCriteresFormAndCriteresArrays(dossier.criteres);
+        // setting ngClass object in html
+        this.setCompetIdIcon();
+        this.setDossierStatusColor();
+        // init eligibleOfIncon$
+        this.eligibleOfIncon$.next(
+          this.dossierService.getInconEligibilite(this.dossierForm)
+        );
+        // init sumOfCumulable$
+        this.sumOfCumulable$.next(
+          this.dossierService.getSumOfCumulPoints(this.dossierForm)
+        );
+        // init totalPoints$
+        this.totalPoints$.next(
+          this.dossierService.getPointFromEligibilite(
+            this.eligibleOfIncon$.value
+          ) + this.sumOfCumulable$.value
+        );
+        // init aideFinanciere$
+        this.aideFinanciere$.next(
+          this.dossierService.calculAideFinan(
+            this.storageService.competId,
+            this.eligibleOfIncon$.value,
+            this.totalPoints$.value
+          )
+        );
+      }
+    }),
+    takeUntil(this.storageService.globalUnsubscribe)
+  );
+}
+</code></pre>
+<p>This function will create a <code>dossier$</code> stream. After subscribing to this stream, a <code>dossierForm</code> building + some setup processes will be initialized as side effects</p>
+<h4 id="subscribeeligiblefromdossier"><a class="header" href="#subscribeeligiblefromdossier">subscribeEligibleFromDossier</a></h4>
+<pre><code class="language-ts">/** Subscribe to `dossier$`, switch the stream to `Incontournables` Observable,
+ * calculate the `eligibilite` in `Incontournables`, also update `totalPoints` and `aideFinanciere`
+ */
+private subscribeEligibleFromDossier(dossier$: Observable&lt;Dossier&gt;) {
+  return dossier$
+    .pipe(
+      switchMap(() =&gt; {
+        return this.dossierService.eligibleChangeObserver(this.dossierForm);
+      })
+    )
+    .subscribe({
+      next: () =&gt; {
+        this.eligibleOfIncon$.next(
+          this.dossierService.getInconEligibilite(this.dossierForm)
+        );
+        this.totalPoints$.next(
+          this.dossierService.getPointFromEligibilite(
+            this.eligibleOfIncon$.value
+          ) + this.sumOfCumulable$.value
+        );
+        this.aideFinanciere$.next(
+          this.dossierService.calculAideFinan(
+            this.storageService.competId,
+            this.eligibleOfIncon$.value,
+            this.totalPoints$.value
+          )
+        );
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>This function subscribe to <code>dossier$</code> stream, then switch the stream to <code>Incontournables</code> observable, calculate the <code>eligibilite</code> in <code>Criteres Incontournables</code> field, it also updates <code>totalPoints</code> and <code>aideFinanciere</code>. This function will later be used in <a href="#setupdossiercontent">setupDossierContent</a> function.</p>
+<h4 id="subscribecumulablefromdossier"><a class="header" href="#subscribecumulablefromdossier">subscribeCumulableFromDossier</a></h4>
+<pre><code class="language-ts">/** Subscribe to `dossier$`, switch the stream to `Cummulables` Observable,
+ * calculate the `points` in `Cumulables`, also update `totalPoints` and `aideFinanciere`
+ */
+private subscribeCumulableFromDossier(dossier$: Observable&lt;Dossier&gt;) {
+  return dossier$
+    .pipe(
+      switchMap(() =&gt; {
+        return this.dossierService.pointsChangeObserver(this.dossierForm);
+      })
+    )
+    .subscribe({
+      next: () =&gt; {
+        this.sumOfCumulable$.next(
+          this.dossierService.getSumOfCumulPoints(this.dossierForm)
+        );
+        this.totalPoints$.next(
+          this.dossierService.getPointFromEligibilite(
+            this.eligibleOfIncon$.value
+          ) + this.sumOfCumulable$.value
+        );
+        this.aideFinanciere$.next(
+          this.dossierService.calculAideFinan(
+            this.storageService.competId,
+            this.eligibleOfIncon$.value,
+            this.totalPoints$.value
+          )
+        );
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>This function subscribes to <code>dossier$</code> stream, then switch the stream to <code>Cummulables</code> observable, calculate the <code>points</code> in <code>Criteres Cumulables</code> field, it also updates <code>totalPoints</code> and <code>aideFinanciere</code>. This function will later be used in <a href="#setupdossiercontent">setupDossierContent</a> function.</p>
+<h4 id="setupdossiercontent"><a class="header" href="#setupdossiercontent">setupDossierContent</a></h4>
+<pre><code class="language-ts">/**
+ * Spawn `dossier$` and init `dossierForm` in its side effects.
+ * Immediately subscribe to `eligibilite$` and `cumulables$` piped from `dossier$`
+ * in order to calculate `incontournables` eligibilite, `cumulables` points and `totalPoints`
+ */
+setupDossierContent() {
+  this.subs.sink = this.subscribeEligibleFromDossier(
+    this.spawnDossierObservableAndInitDossierFormAsSideEffects()
+  );
+  this.subs.sink = this.subscribeCumulableFromDossier(
+    this.spawnDossierObservableAndInitDossierFormAsSideEffects()
+  );
+}
+</code></pre>
+<p>This function will spawn a <code>dossier$</code> stream and init <code>dossierForm</code> in its side effects. Immediately after that, we switch the stream to <code>eligibilite$</code> stream and <code>cumulables$</code> stream in order to calculate <code>Criteres Incontournables</code> eligibilite, <code>Criteres Cumulables</code> points and <code>totalPoints</code>.</p>
+<h4 id="ngafterviewchecked"><a class="header" href="#ngafterviewchecked">ngAfterViewChecked</a></h4>
+<pre><code class="language-ts">ngAfterViewChecked(): void {
+    this.cdRef.detectChanges();
+  }
+</code></pre>
+<p>Because there are some proccesses such as setting competition icon, dossier statut color, etc... are initiated after the view is checked (because a <code>dossier</code> in <code>dossier$</code> stream could be updated at anytime after the view was checked, a http request could take a while to get the response). Therefore, we have to implement another change detection after the view is checked. Our application is just a small one so it does not impact much on the performance nor user experience.</p>
+<h4 id="ngondestroy"><a class="header" href="#ngondestroy">ngOnDestroy</a></h4>
+<pre><code class="language-ts">ngOnDestroy(): void {
+  // unhide saisonBox
+  this.storageService.showSaisonBox$.next(true);
+  this.subs.unsubscribe();
+  this.storageService.globalUnsubscribe.next();
+  this.storageService.globalUnsubscribe.complete();
+}
+</code></pre>
+<p>Upon destroying this component, we unhide the season selection dropdown box. We also terminate all the <code>dangling</code> observables (this is important, we did it to overcome the <code>child component duplication</code> bug)</p>
 
                     </main>
 
@@ -605,6 +1051,22 @@ saveDossier() {
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 
