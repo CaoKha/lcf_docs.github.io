@@ -141,6 +141,241 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="dcn-parameters"><a class="header" href="#dcn-parameters">DCN-PARAMETERS</a></h1>
+<p>The dcn homepage of the LCF application.</p>
+<h2 id="description"><a class="header" href="#description">Description:</a></h2>
+<p>The dcn homepage consist of a filter system and a table which displays all dossiers within a selected season.</p>
+<h2 id="files"><a class="header" href="#files">Files:</a></h2>
+<pre><code class="language-ignore">dcn-accueil.component.html
+dcn-accueil.component.scss
+dcn-accueil.component.ts
+</code></pre>
+<h2 id="functionalities"><a class="header" href="#functionalities">Functionalities:</a></h2>
+<h3 id="general"><a class="header" href="#general">General:</a></h3>
+<pre><code class="language-ts">ngOnInit(): void {
+    this.checkSaNoFromUrl();
+    this.initTable();
+  }
+</code></pre>
+<p>This component <a href="#checksanofromurl">checkSaNoFromUrl</a> and init a <code>parameters</code> table within selected <code>season</code>.</p>
+<h3 id="specific"><a class="header" href="#specific">Specific:</a></h3>
+<h4 id="checksanofromurl"><a class="header" href="#checksanofromurl">checkSaNoFromUrl</a></h4>
+<pre><code class="language-ts">/**
+ * Check `sa_no` in `url` is in range of `user.saisons.sa_no`.
+ * If true, set `selectedSaison` in `Store` to `sa_no`.
+ * If false, navigate to page 404
+ */
+private checkSaNoFromUrl(): void {
+    const saisonSaNoFromUrl = Number(this.route.snapshot.paramMap.get('sa_no'));
+    this.user = this.storageService.user;
+    if (this.storageService.checkSaisonInRange(this.user, saisonSaNoFromUrl)) {
+        this.storageService.selectedSaisonSaNo = saisonSaNoFromUrl;
+    } else {
+        this.router.navigate(['/', this.storageService.connectId, '404']);
+    }
+}
+</code></pre>
+<p>This function checks <code>sa_no</code> in <code>url</code> is in range of <code>user.saisons.sa_no</code>.</p>
+<ul>
+<li>If true, set <code>selectedSaison</code> in <code>Store</code> to <code>sa_no</code></li>
+<li>If false, navigate to page 404</li>
+</ul>
+<h4 id="inittable"><a class="header" href="#inittable">initTable</a></h4>
+<pre><code class="language-ts">private initTable() {
+  this.cols = [
+    {
+      data: 'libelle',
+      title: 'Compétition',
+      editable: false,
+      class: '',
+      icon: '',
+    },
+    {
+      data: 'date',
+      title: 'Date limite candidature',
+      editable: true,
+      type: 'date',
+      class: 'date',
+      icon: '',
+    },
+    {
+      data: 'aide_financiere',
+      title: 'Aide financière',
+      editable: true,
+      type: 'number',
+      class: 'aide',
+      icon: '€',
+    },
+    {
+      data: 'pourcentage_incontournables',
+      title: 'Incontournables',
+      editable: true,
+      type: 'number',
+      class: '',
+      icon: '%',
+    },
+    {
+      data: 'pourcentage_cumulables_1',
+      title: 'Cumulables (&gt; 5 001 pts)',
+      editable: true,
+      type: 'number',
+      class: '',
+      icon: '%',
+    },
+    {
+      data: 'pourcentage_cumulables_2',
+      title: 'Cumulables (&gt;= 7 500 pts)',
+      editable: true,
+      type: 'number',
+      class: '',
+      icon: '%',
+    },
+  ];
+}
+</code></pre>
+<p>This function init a <code>parameters</code> table structure</p>
+<h4 id="saveparameters"><a class="header" href="#saveparameters">saveParameters</a></h4>
+<pre><code class="language-ts">saveParameters(parameters: any[]) {
+  if (this.verifPourcentage(parameters)) {
+    this.convertParamStringToNumber(parameters);
+    console.table(parameters);
+
+    this.subs.sink = this.parametersService
+      .patchParameters(this.storageService.selectedSaisonSaNo, parameters)
+      .subscribe({
+        next: (result: any) =&gt; {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: result.message,
+          });
+          this.storageService.parameters = parameters;
+        },
+        error: (err: any) =&gt; {
+          console.error(err);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err,
+          });
+        },
+      });
+  }
+}
+</code></pre>
+<p>This function save <code>parameters</code> to backend.</p>
+<h4 id="verifpourcentage"><a class="header" href="#verifpourcentage">verifPourcentage</a></h4>
+<pre><code class="language-ts">private verifPourcentage(parameters: any[]) {
+  let percentageError = [];
+  parameters.forEach((param) =&gt; {
+    if (
+      parseInt(param.pourcentage_cumulables_1) +
+        parseInt(param.pourcentage_cumulables_2) +
+        parseInt(param.pourcentage_incontournables) &gt;
+      100
+    ) {
+      // @ts-ignore
+      percentageError.push(param['libelle']);
+    }
+  });
+  if (percentageError.length &gt; 0) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Somme des pourcentages invalide ',
+    });
+  }
+  return percentageError.length &lt;= 0;
+}
+</code></pre>
+<p>This function applies rule to <code>parameters</code> table. If the rule isn't satisfied, we can't <a href="#saveparameters">saveParameters</a>.</p>
+<h4 id="convertparamstringtonumber"><a class="header" href="#convertparamstringtonumber">convertParamStringToNumber</a></h4>
+<pre><code class="language-ts">/**
+ * ngModel return a string even if the `type` directive of input = `number`.
+ * For that reseason, we have to convert them to number manually
+ */
+private convertParamStringToNumber(parameters: any[]) {
+  parameters.forEach((param: any) =&gt; {
+    param.aide_financiere = parseInt(param.aide_financiere);
+    param.pourcentage_cumulables_1 = parseInt(param.pourcentage_cumulables_1);
+    param.pourcentage_cumulables_2 = parseInt(param.pourcentage_cumulables_2);
+    param.pourcentage_incontournables = parseInt(
+      param.pourcentage_incontournables
+    );
+  });
+}
+</code></pre>
+<p>This function converts some strings in <code>parameters</code> table to <code>Integer</code>.</p>
+<h4 id="gotoaccueil"><a class="header" href="#gotoaccueil">goToAccueil</a></h4>
+<pre><code class="language-ts">goToAccueil() {
+  this.router.navigate([
+    '/dcn',
+    this.storageService.selectedSaisonSaNo,
+    'lcf',
+  ]);
+}
+</code></pre>
+<p>These function allows us to go back to <a href="dcn-accueil.html">DCN-ACCUEIL</a> page.</p>
+<h4 id="ngondestroy"><a class="header" href="#ngondestroy">ngOnDestroy</a></h4>
+<pre><code class="language-ts">ngOnDestroy(): void {
+    this.subs.unsubscribe();
+    // workaround bug: https://github.com/angular/angular/issues/28330
+    this.storageService.globalUnsubscribe.next();
+    this.storageService.globalUnsubscribe.complete();
+}
+</code></pre>
+<p>Upon being destroyed, unsubscribe from every dangling observables.</p>
+<h3 id="html"><a class="header" href="#html">HTML:</a></h3>
+<pre><code class="language-html">&lt;div
+  class=&quot;content-pages spe&quot;
+  *ngIf=&quot;storageService.parameters$ | async; let parameters&quot;
+&gt;
+  &lt;h1&gt;Paramètres&lt;/h1&gt;
+
+  &lt;div class=&quot;content margTop30&quot; *ngIf=&quot;parameters.length &gt; 0&quot;&gt;
+    &lt;div class=&quot;result&quot;&gt;
+      &lt;h3&gt;&lt;span&gt;&lt;/span&gt;Paramètres&lt;/h3&gt;
+    &lt;/div&gt;
+    &lt;p-table
+      [columns]=&quot;cols&quot;
+      [value]=&quot;parameters&quot;
+      [responsive]=&quot;true&quot;
+      styleClass=&quot;param-table&quot;
+    &gt;
+      &lt;ng-template pTemplate=&quot;header&quot; let-columns&gt;
+        &lt;tr&gt;
+          &lt;th *ngFor=&quot;let col of columns&quot;&gt;{{col.title}}&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/ng-template&gt;
+      &lt;ng-template pTemplate=&quot;body&quot; let-rowData let-columns=&quot;columns&quot;&gt;
+        &lt;tr id=&quot;{{rowData.id}}&quot;&gt;
+          &lt;td *ngFor=&quot;let col of columns&quot;&gt;
+            &lt;span *ngIf=&quot;col.editable&quot;&gt;
+              &lt;input
+                type=&quot;{{ col.type }}&quot;
+                [(ngModel)]=&quot;rowData[col.data]&quot;
+                class=&quot;{{ col.class }}&quot;
+                [min]=&quot;0&quot;
+              /&gt;
+              {{ col.icon }}
+            &lt;/span&gt;
+            &lt;span *ngIf=&quot;!col.editable&quot;&gt; {{rowData[col.data]}} &lt;/span&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/ng-template&gt;
+    &lt;/p-table&gt;
+  &lt;/div&gt;
+  &lt;div *ngIf=&quot;parameters.length === 0&quot;&gt;
+    &lt;h3&gt;No parameters found&lt;/h3&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;buttons&quot;&gt;
+    &lt;button class=&quot;annuler&quot; (click)=&quot;goToAccueil()&quot;&gt;Annuler&lt;/button&gt;
+    &lt;button type=&quot;submit&quot; class=&quot;valider&quot; (click)=&quot;saveParameters(parameters)&quot;&gt;
+      Valider
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 
                     </main>
 

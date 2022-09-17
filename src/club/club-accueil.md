@@ -113,29 +113,6 @@ Upon being destroyed, unsubscribe `selectedSaisonSaNo$` stream and every danglin
     </p>
     <hr />
     <div class="vignettes">
-      <!--      TODO labels quand on aura un retour sur cette spec-->
-      <!--      <div class="label">-->
-      <!--        <a href="#">-->
-      <!--          <div>-->
-      <!--            <span class="tit">LABEL JEUNES FFF</span>-->
-      <!--            <span class="sponsor">CRÉDIT AGRICOLE</span>-->
-      <!--          </div>-->
-      <!--        </a>-->
-      <!--        <a href="#">-->
-      <!--          <div>-->
-      <!--            <span class="tit">LABEL JEUNES FFF</span>-->
-      <!--            <span class="sponsor">CRÉDIT AGRICOLE</span>-->
-      <!--            <span class="cat">FÉMININE</span>-->
-      <!--          </div>-->
-      <!--        </a>-->
-      <!--        <a href="#">-->
-      <!--          <div>-->
-      <!--            <span class="tit">LABEL JEUNES FFF</span>-->
-      <!--            <span class="sponsor">CRÉDIT AGRICOLE</span>-->
-      <!--            <span class="cat">FUTSAL</span>-->
-      <!--          </div>-->
-      <!--        </a>-->
-      <!--      </div>-->
       <div class="label">
         <a
           [routerLink]="[selectedSaisonSaNo ? '/club/' + selectedSaisonSaNo + '/lcf' : '/club/']"
