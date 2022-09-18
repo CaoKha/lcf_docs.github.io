@@ -1,0 +1,3587 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>The lcf_ui documentations</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="The developer documentations for Licence Club Federale application">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/css/additional.css">
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "ayu" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item "><a href="lcf-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="lcf-club.html">CLUB</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="club/club-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="club/club-candidature.html">CANDIDATURE</a></li><li class="chapter-item "><a href="club/club-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="lcf-dcn.html">DCN</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="dcn/dcn-accueil.html">ACCUEIL</a></li><li class="chapter-item "><a href="dcn/dcn-parameters.html">PARAMETERS</a></li><li class="chapter-item "><a href="dcn/dcn-dossier.html">DOSSIER</a></li></ol></li><li class="chapter-item "><a href="shared.html">SHARED</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="shared/dossier-template.html">DOSSIER-TEMPLATE</a></li><li class="chapter-item "><a href="shared/header.html">HEADER</a></li><li class="chapter-item "><a href="shared/side-nav.html">SIDE-NAV</a></li><li class="chapter-item "><a href="shared/page-not-found.html">PAGE-NOT-FOUND</a></li><li class="chapter-item "><a href="shared/lcf-file.html">LCF-FILE</a></li><li class="chapter-item "><a href="shared/lcf-terrain.html">LCF-TERRAIN</a></li><li class="chapter-item "><a href="shared/lcf-radio.html">LCF-RADIO</a></li><li class="chapter-item "><a href="shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The lcf_ui documentations</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="lcf-accueil"><a class="header" href="#lcf-accueil">LCF-ACCUEIL</a></h1>
+<h2 id="description"><a class="header" href="#description">Description:</a></h2>
+<p>LCF homepage only appears in <code>development</code> environment.
+You can either connect to <code>LCF</code> as a <code>CLUB</code> or <code>DCN</code> by clicking on the corresponding route.
+It is currently a blank page with 2 clickable links:</p>
+<ul>
+<li><a href="./lcf-club.html">CLUB</a></li>
+<li><a href="./lcf-dcn.html">DCN</a></li>
+</ul>
+<h2 id="files"><a class="header" href="#files">Files:</a></h2>
+<pre><code class="language-ignore">lcf-routing.module.ts
+lcf.component.ts
+lcf.component.html
+lcf.component.scss
+lcf.module.ts
+</code></pre>
+<h2 id="routing"><a class="header" href="#routing">Routing:</a></h2>
+<p><code>lcf-routing.module.ts</code>:</p>
+<pre><code class="language-ts">const routes: Routes = [
+  {
+    path: &quot;&quot;,
+    component: LcfComponent,
+  },
+  {
+    path: &quot;dcn&quot;,
+    loadChildren: () =&gt; import(`./dcn/dcn.module`).then((m) =&gt; m.DcnModule),
+    resolve: { dcn: DcnResolver },
+  },
+  {
+    path: &quot;club&quot;,
+    loadChildren: () =&gt; import(&quot;./club/club.module&quot;).then((m) =&gt; m.ClubModule),
+    resolve: { club: ClubResolver },
+  },
+];
+</code></pre>
+<p>The DCN module and CLUB module are lazy loaded when we try to access to <a href="./lcf-dcn.html">DCN</a> or <a href="./lcf-club.html">CLUB</a> page.
+Note, we are implementing redirection mechanism so we set <code>useHash</code> to <code>true</code>.</p>
+<p><code>app-routing.module.ts</code>:</p>
+<pre><code class="language-ts">@NgModule({
+  imports: [
+    RouterModule.forRoot(routes, {useHash: true}),
+  ],
+  exports: [RouterModule],
+})
+</code></pre>
+<p>Sometimes, the server does not support <code>HTML5 pushstate</code> required by <code>PathLocationStrategy</code> of <code>Angular</code>.
+In order to make redirection mechanism work, it is easier to use <code>HashLocationStrategy</code>.
+Each time we refresh the page, the server will redirect to the current path found in the URL rather than redirect us to the homepage.<br>
+With this feature added, user can go directly to the dossier page by typing the dossier path in the URL. This feature is useful when user try to bookmark a dossier page, the next time they open that bookmark, <code>LCF</code> app will go directly to the dossier without passing through the homepage.
+However, note that there is a <a href="https://github.com/angular/angular/issues/28330">bug</a> which duplicates a child component while we are using this redirection mechanism.</p>
+<h2 id="functionalities"><a class="header" href="#functionalities">Functionalities:</a></h2>
+<h3 id="general"><a class="header" href="#general">General:</a></h3>
+<pre><code class="language-ts">ngOnInit(): void {
+  this.storageService.user = {};
+  this.storageService.cl_cod = 0;
+  this.storageService.terrains = [];
+  this.storageService.dossiers = [];
+  this.storageService.selectedDossier = {};
+  this.storageService.selectedSaisonSaNo = 0;
+}
+</code></pre>
+<p>The page is rendered by the component <code>lcf.component.ts</code> and its html <code>lcf.component.html</code>.
+On initialization, we just reset all internal global states to their initial values.
+All the internal global states are store at <code>storage.service.ts</code> inside folder <code>/services</code>.
+This functionality is only used in <code>development</code> environment.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="lcf-club"><a class="header" href="#lcf-club">LCF-CLUB</a></h1>
+<h2 id="description-1"><a class="header" href="#description-1">Description:</a></h2>
+<p>LCF app is now connected as <code>CLUB</code>. In <code>DEV</code> or <code>PROD</code> environment you will need a <code>FOOTCLUBS_CONTEXTE</code> cookie in your browser in order to get an access to the next page. This cookie is set automatically after a successfully authentication to <a href="https://footclubspp.fff.fr/"><code>FOOTCLUB</code></a> app. After passing this guard, we will be redirected to <a href="./club/club-accueil.html">CLUB-ACCUEIL</a>. There are also 2 other pages can be accessed freely from here:</p>
+<ul>
+<li><a href="./club/club-candidature.html">CLUB-CANDIDATURE</a></li>
+<li><a href="./club/club-dossier.html">CLUB-DOSSIER</a></li>
+</ul>
+<h2 id="files-1"><a class="header" href="#files-1">Files:</a></h2>
+<pre><code class="language-ignore">club
+|__components
+|  |__club-accueil
+|  |__club-candidature
+|  |__club-dossier
+|__club-routing.module.ts
+|__club.component.ts
+|__club.component.html
+|__club.component.scss
+|__club.module.ts
+</code></pre>
+<h2 id="routing-1"><a class="header" href="#routing-1">Routing:</a></h2>
+<p><code>club-routing.module.ts</code>:</p>
+<pre><code class="language-ts">const routes: Routes = [
+  {
+    path: &quot;&quot;,
+    component: ClubComponent,
+    children: [
+      {
+        path: &quot;404&quot;,
+        component: PageNotFoundComponent,
+      },
+      {
+        path: &quot;:sa_no&quot;,
+        component: ClubAccueilComponent,
+      },
+      {
+        path: &quot;:sa_no/lcf&quot;,
+        component: ClubCandidatureComponent,
+      },
+      {
+        path: &quot;:sa_no/lcf/:competition&quot;,
+        component: ClubDossierComponent,
+      },
+    ],
+  },
+];
+</code></pre>
+<h2 id="functionalities-1"><a class="header" href="#functionalities-1">Functionalities:</a></h2>
+<h3 id="general-1"><a class="header" href="#general-1">General:</a></h3>
+<p><code>club.component.ts</code>:</p>
+<pre><code class="language-ts">ngOnInit(): void {
+  // redirect to page of the current season
+  if (this.router.url === '/club')
+    this.router.navigate([String(this.storageService.selectedSaisonSaNo),'lcf'],
+                          {relativeTo: this.activatedRoute});
+}
+</code></pre>
+<p>This component is just a parent component who contains 3 others child components:</p>
+<ul>
+<li><a href="./shared/header.html">header</a></li>
+<li><a href="./shared/sidenav.html">sidenav</a></li>
+<li><a href="./club/club-accueil.html">club-accueil</a> or <a href="./club/club-candidature.html">club-candidature</a> or <a href="./club/club-dossier.html">club-dossier</a></li>
+</ul>
+<h3 id="html"><a class="header" href="#html">HTML:</a></h3>
+<pre><code class="language-html">&lt;lcf-header&gt;&lt;/lcf-header&gt;
+
+&lt;lcf-side-nav&gt;
+  &lt;router-outlet&gt;&lt;/router-outlet&gt;
+&lt;/lcf-side-nav&gt;
+</code></pre>
+<p>Plug in <a href="./shared/header.html">HEADER</a> component and <a href="./shared/sidenav.html">SIDENAV</a> component.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="club-accueil"><a class="header" href="#club-accueil">CLUB-ACCUEIL</a></h1>
+<p>The club homepage of the LCF application.</p>
+<img src="club/../images/club-accueil.png">
+<h2 id="description-2"><a class="header" href="#description-2">Description:</a></h2>
+<p>The club homepage doesn't have much features. It currently has a simple text wall and a clickable sticker which directs us to <a href="club/./club-candidature.html">CLUB-CANDIDATURE</a> page</p>
+<h2 id="files-2"><a class="header" href="#files-2">Files:</a></h2>
+<pre><code class="language-ignore">club-accueil.component.html
+club-accueil.component.scss
+club-accueil.component.ts
+</code></pre>
+<h2 id="functionalities-2"><a class="header" href="#functionalities-2">Functionalities:</a></h2>
+<h3 id="general-2"><a class="header" href="#general-2">General:</a></h3>
+<pre><code class="language-ts">ngOnInit() {
+    this.checkSaNoFromUrl();
+    this.title.setTitle(UtilsService.createTitle('Votre Projet Club'));
+
+    this.sub = this.storageService
+    .selectedSaisonSaNo$
+    .pipe(takeUntil(this.storageService.globalUnsubscribe))
+    .subscribe((sa_no: number) =&gt; {
+    this.selectedSaisonSaNo = sa_no;
+    // TODO: do something in this page
+    });
+}
+</code></pre>
+<p>When we open this page, it will check the <code>season</code> string in the <code>url</code> is indeed in range of <code>seasons</code> defined in <code>user.saisons</code> (<a href="club/club-accueil.html#checksanofromurl">checkSaNoFromUrl</a>). Then it stores the <code>season</code> value in <code>storage</code> . Else, redirect to <a href="club/../shared/page-not-found.html">PAGE-NOT-FOUND</a> if the <code>season</code> is out of range. The <code>selectedSaisonSaNo</code> variable later is used to correctly direct user to the next page upon clicking on the sticker.</p>
+<h3 id="specific"><a class="header" href="#specific">Specific:</a></h3>
+<h4 id="checksanofromurl"><a class="header" href="#checksanofromurl">checkSaNoFromUrl</a></h4>
+<pre><code class="language-ts">/**
+ * Check `sa_no` in `url` is in range of `user.saisons.sa_no`.
+ * If true, set `selectedSaison` in `Store` to `sa_no`.
+ * If false, navigate to page 404
+ */
+private checkSaNoFromUrl(): void {
+    const saisonSaNoFromUrl = Number(this.route.snapshot.paramMap.get('sa_no'));
+    this.user = this.storageService.user;
+    if (this.storageService.checkSaisonInRange(this.user, saisonSaNoFromUrl)) {
+        this.storageService.selectedSaisonSaNo = saisonSaNoFromUrl;
+    } else {
+        this.router.navigate(['/', this.storageService.connectId, '404']);
+    }
+}
+</code></pre>
+<p>This function checks <code>sa_no</code> in <code>url</code> is in range of <code>user.saisons.sa_no</code>.</p>
+<ul>
+<li>If true, set <code>selectedSaison</code> in <code>Store</code> to <code>sa_no</code></li>
+<li>If false, navigate to page 404</li>
+</ul>
+<h4 id="clickcandidature"><a class="header" href="#clickcandidature">clickCandidature</a></h4>
+<pre><code class="language-ts">clickCandidature(): void {
+    this.storageService.firstMenuItemActivated = false;
+    this.storageService.secondMenuItemActivated = true;
+  }
+</code></pre>
+<p>This function allows the second menu-item to be highlighted and dehighlight the first one.</p>
+<h4 id="ngondestroy"><a class="header" href="#ngondestroy">ngOnDestroy</a></h4>
+<pre><code class="language-ts">ngOnDestroy(): void {
+    this.sub.unsubscribe();
+    // workaround bug: https://github.com/angular/angular/issues/28330
+    this.storageService.globalUnsubscribe.next();
+    this.storageService.globalUnsubscribe.complete();
+}
+</code></pre>
+<p>Upon being destroyed, unsubscribe <code>selectedSaisonSaNo$</code> stream and every dangling observables.</p>
+<h3 id="html-1"><a class="header" href="#html-1">HTML:</a></h3>
+<pre><code class="language-html">&lt;div class=&quot;content-home&quot;&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;h1&gt;Votre Projet Club&lt;/h1&gt;
+    &lt;p&gt;
+      Votre club est interessé par une demande d'accompagnement et de
+      structuration de son « Projet Club ». Pour aller plus loin dans cette
+      démarche, vous pouvez remplir votre autodiagnostic au travers des
+      différents Labels proposés par la Fédération Française de Football.
+      &lt;br /&gt;&lt;br /&gt;
+      En entrant dans cette démarche, votre Ligue et ses Districts (élus et
+      Conseillers Techniques) s'engagent à vous rencontrer et vous guident pour
+      développer votre projet club.
+      &lt;br /&gt;&lt;br /&gt;
+      En fonction des vocations de votre club, vous pouvez alors orienter vers
+      un diagnostic du Label qui vous correspond. Bien évidemment, cet
+      autodiagnostic n'est pas réservé aux clubs qui souhaitent obtenir un
+      label. Il est à votre disposition pour faire le point sur votre
+      structuration et débuter une démarche d'accompagnement avec votre
+      territoire.
+      &lt;br /&gt;&lt;br /&gt;
+      Pour les clubs nationaux amateurs, il est également possible de faire une
+      demande d'obtention de la Licence « Club Fédéral ».
+    &lt;/p&gt;
+    &lt;hr /&gt;
+    &lt;div class=&quot;vignettes&quot;&gt;
+      &lt;div class=&quot;label&quot;&gt;
+        &lt;a
+          [routerLink]=&quot;[selectedSaisonSaNo ? '/club/' + selectedSaisonSaNo + '/lcf' : '/club/']&quot;
+          (click)=&quot;clickCandidature()&quot;
+        &gt;
+          &lt;div&gt;
+            &lt;span class=&quot;tit&quot;&gt;LICENCE « CLUB FÉDÉRAL »&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="club-candidature"><a class="header" href="#club-candidature">CLUB-CANDIDATURE</a></h1>
+<p>The club candidature page of the LCF application.</p>
+<h2 id="description-3"><a class="header" href="#description-3">Description:</a></h2>
+<p>The club candidature displays all the competitions within the selected season of a club. Note, there is also a display rule to follow which is: There can only be one or less competition of type <code>NATIONAL</code>.</p>
+<p>The priority is <code>NATIONAL 1</code> &gt; <code>NATIONAL 2</code> &gt; <code>NATIONAL 3</code>.</p>
+<h2 id="files-3"><a class="header" href="#files-3">Files:</a></h2>
+<pre><code class="language-ignore">club-candidature.component.html
+club-candidature.component.scss
+club-candidature.component.ts
+</code></pre>
+<h2 id="functionalities-3"><a class="header" href="#functionalities-3">Functionalities:</a></h2>
+<h3 id="general-3"><a class="header" href="#general-3">General:</a></h3>
+<pre><code class="language-ts">ngOnInit() {
+  this.checkSaNoFromUrl();
+  const selectedSaNo = this.storageService.selectedSaisonSaNo;
+  if (this.storageService.dossiers?.[0].sa_no !== selectedSaNo) {
+    this.backupDossiers(selectedSaNo);
+  }
+  this.spawnDossiersObservableThenFilterDossiers();
+  this.title.setTitle(
+    UtilsService.createTitle('Votre dossier de candidature')
+  );
+}
+</code></pre>
+<p>When we open this page, it will check the <code>season</code> string in the <code>url</code> is indeed in range of <code>seasons</code> defined in <code>user.saisons</code> (<a href="club/club-candidature.html#checksanofromurl">checkSaNoFromUrl</a>). Then it stores the <code>season</code> value in <code>storage</code> . Else, redirect to <a href="club/../shared/page-not-found.html">PAGE-NOT-FOUND</a> if the <code>season</code> is out of range.</p>
+<p>Secondly, if the <code>dossiers</code> season is different from the <code>season</code> found in the <code>url</code>. Request another <code>dossiers</code> from backend which have the matching <code>season</code>.</p>
+<p>Thirdly, apply the display rule for every <code>dossiers</code> received from the backend.</p>
+<h3 id="specific-1"><a class="header" href="#specific-1">Specific:</a></h3>
+<h4 id="checksanofromurl-1"><a class="header" href="#checksanofromurl-1">checkSaNoFromUrl</a></h4>
+<pre><code class="language-ts">/**
+ * Check `sa_no` in `url` is in range of `user.saisons.sa_no`.
+ * If true, set `selectedSaison` in `Store` to `sa_no`.
+ * If false, navigate to page 404
+ */
+private checkSaNoFromUrl(): void {
+    const saisonSaNoFromUrl = Number(this.route.snapshot.paramMap.get('sa_no'));
+    this.user = this.storageService.user;
+    if (this.storageService.checkSaisonInRange(this.user, saisonSaNoFromUrl)) {
+        this.storageService.selectedSaisonSaNo = saisonSaNoFromUrl;
+    } else {
+        this.router.navigate(['/', this.storageService.connectId, '404']);
+    }
+}
+</code></pre>
+<p>This function checks <code>sa_no</code> in <code>url</code> is in range of <code>user.saisons.sa_no</code>.</p>
+<ul>
+<li>If true, set <code>selectedSaison</code> in <code>Store</code> to <code>sa_no</code></li>
+<li>If false, navigate to page 404</li>
+</ul>
+<h4 id="backupdossiers"><a class="header" href="#backupdossiers">backupDossiers</a></h4>
+<pre><code class="language-ts">/**
+ * Request `dossiers` from backend
+ */
+private backupDossiers(sa_no: number) {
+  if (this.storageService.user.cl_cod) {
+    this.subs.sink = this.dossierService
+      .requestDossiers(sa_no, this.storageService.user.cl_cod)
+      .pipe(takeUntil(this.storageService.globalUnsubscribe))
+      .subscribe((dossiers: any) =&gt; {
+        this.storageService.dossiers = dossiers;
+      });
+  }
+}
+</code></pre>
+<p>This function request a <code>dossiers</code> within selected <code>season</code> from backend in demand.</p>
+<h4 id="downloadfile"><a class="header" href="#downloadfile">downloadFile</a></h4>
+<pre><code class="language-ts">async downloadFile() {
+  const file = {
+    nature: 'reglement',
+    categorie: 'documentation',
+  };
+  this.subs.sink = this.dossierService
+    .requestDownloadFile(file.categorie, file.nature)
+    .subscribe({
+      next: (result: any) =&gt; {
+        UtilsService.open_file(result);
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>This function is used for download the file from <code>AzureStorage</code> attached on the page. We marked it <code>async</code> to indicate that it uses a <code>fetch</code> API (which is asynchronous) inside the <a href="club/">open_file</a> function.</p>
+<h4 id="ngondestroy-1"><a class="header" href="#ngondestroy-1">ngOnDestroy</a></h4>
+<pre><code class="language-ts">ngOnDestroy(): void {
+    this.sub.unsubscribe();
+    // workaround bug: https://github.com/angular/angular/issues/28330
+    this.storageService.globalUnsubscribe.next();
+    this.storageService.globalUnsubscribe.complete();
+}
+</code></pre>
+<p>Upon being destroyed, unsubscribe <code>selectedSaisonSaNo$</code> stream and every dangling observables.</p>
+<h3 id="html-2"><a class="header" href="#html-2">HTML:</a></h3>
+<pre><code class="language-html">&lt;div class=&quot;content-pages&quot;&gt;
+  &lt;div class=&quot;entete&quot;&gt;
+    &lt;h2&gt;Licence « Club Fédéral »&lt;/h2&gt;
+    &lt;h1&gt;{{storageService.cl_cod}} - {{storageService.user.club_nom}}&lt;/h1&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;h3&gt;&lt;span&gt;&lt;/span&gt;Processus&lt;/h3&gt;
+    &lt;p&gt;
+      Les clubs amateurs des championnats de D1 FEMININE, NATIONAL, NATIONAL 2,
+      NATIONAL 3 et D1 FUTSAL (ci-après dénommés « candidats ») peuvent postuler
+      à la délivrance de la Licence « Club Fédéral » en faisant acte de
+      candidature. La délivrance de la Licence « Club Fédéral » est décidée en
+      cours de saison par le Bureau Exécutif de la LFA. Les clubs à statut
+      professionnel, évoluant en D1 FEMININE, NATIONAL, NATIONAL 2, NATIONAL 3
+      et D1 FUTSAL, y compris les équipes réserves, ne peuvent candidater au
+      dispositif.
+      &lt;br /&gt;&lt;br /&gt;
+      La délivrance de la Licence est réalisée en Saison N sur la base des
+      critères du niveau de compétition de la même saison N pour les clubs visés
+      ci-dessus. La délivrance de la Licence Club Fédéral déclenche le versement
+      d’une aide financière dont le montant est défini par le Comité Exécutif de
+      la FFF (COMEX), sur proposition du Bureau Exécutif de la LFA (BELFA).
+      &lt;br /&gt;&lt;br /&gt;
+      La participation d'un club à l’un des cinq championnats susvisés n’est pas
+      conditionnée par la délivrance de la Licence « Club Fédéral ». Il en est
+      de même pour les modalités d’accession et relégation dans ces
+      championnats.
+      &lt;br /&gt;&lt;br /&gt;
+      La procédure à suivre pour la délivrance de la Licence Club Fédéral, ainsi
+      que les critères devant être remplis par le club, sont définis dans le
+      règlement disponible
+      &lt;a download=&quot;Règlement&quot; (click)=&quot;downloadFile()&quot; class=&quot;cursor-pointer&quot;
+        &gt;ici&lt;/a
+      &gt;.
+    &lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;content margTop30&quot;&gt;
+    &lt;h3&gt;&lt;span&gt;&lt;/span&gt;Dossiers de candidatures&lt;/h3&gt;
+    &lt;p class=&quot;int&quot;&gt;
+      &lt;strong&gt;Sélectionner le dossier auquel vous souhaitez accéder :&lt;/strong&gt;
+    &lt;/p&gt;
+
+    &lt;div
+      class=&quot;content-dossiers&quot;
+      *ngIf=&quot;filteredDossiers$ | async; let dossiers&quot;
+    &gt;
+      &lt;div class=&quot;dossiers&quot; *ngFor=&quot;let dossier of dossiers&quot;&gt;
+        &lt;a href=&quot;#&quot; (click)=&quot;goToDossier($event, dossier)&quot;&gt;
+          &lt;div
+            class=&quot;blc1&quot;
+            [ngClass]=&quot;{'national': dossier.id_ref_competitions_fk ? dossier.id_ref_competitions_fk &lt;= 3 : false,
+          'feminine':  dossier.id_ref_competitions_fk === 4,
+          'futsal': dossier.id_ref_competitions_fk === 5}&quot;
+          &gt;
+            &lt;span class=&quot;bold black&quot;
+              &gt;{{dossier.competitions_libelle?.toUpperCase()}}&lt;/span
+            &gt;
+            &lt;!--            Todo Equipe--&gt;
+            &lt;span&gt;*Equipe&lt;/span&gt;
+            &lt;span
+              class=&quot;bold red&quot;
+              [ngClass]=&quot;{'red': dossier.id_statuts_dossier_fk === 1,
+            'yellow': dossier.id_statuts_dossier_fk === 2,
+            'green': dossier.id_statuts_dossier_fk === 3}&quot;
+              &gt;{{dossier.status_dossier_libelle | titlecase}}&lt;/span
+            &gt;
+            &lt;span class=&quot;bold&quot;
+              &gt;Date limite : {{dossier.date_limite | date: 'dd/MM/yyyy'}}&lt;/span
+            &gt;
+          &lt;/div&gt;
+        &lt;/a&gt;
+        &lt;div class=&quot;blc2&quot;&gt;
+          &lt;div class=&quot;lab&quot;&gt;
+            &lt;span&gt;Incontournables :&lt;/span&gt;
+            &lt;span&gt;Cumulables :&lt;/span&gt;
+            &lt;span class=&quot;bold&quot;&gt;Éligibilité :&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;rep&quot;&gt;
+            &lt;span customStyle [evaluation]=&quot;dossier.id_ref_statuts_critere_fk&quot;&gt;
+              &lt;!--              TODO add FFF if status = A évaluer --&gt;
+              &lt;!--              TODO, mettre des tirets quand y'a rien --&gt;
+              {{dossier.elligibilite_incontournables_libelle}}&lt;/span
+            &gt;
+            &lt;span
+              *ngIf=&quot;dossier.nb_points_criteres_cumulables&quot;
+              [ngClass]=&quot;{'blue': dossier.nb_points_criteres_cumulables ? dossier.nb_points_criteres_cumulables &lt;=0 : false,
+            'green': dossier.nb_points_criteres_cumulables ? dossier.nb_points_criteres_cumulables &gt; 0 : false}&quot;
+            &gt;
+              {{ dossier.nb_points_criteres_cumulables &lt;= 0 ? '-' :
+              dossier.nb_points_criteres_cumulables + ' points' }}&lt;/span
+            &gt;
+            &lt;span
+              [ngClass]=&quot;{'blue': dossier.id_eligibilite_fk === 3,
+            'red': dossier.id_eligibilite_fk === 4,
+            'green': dossier.id_eligibilite_fk === 2}&quot;
+            &gt;
+              &lt;strong
+                &gt;{{dossier.id_eligibilite_fk ? (dossier.eligibilite_libelle |
+                titlecase) : '-'}}&lt;/strong
+              &gt;{{dossier.id_eligibilite_fk != 2 ? '' : ' - ' +
+              dossier.nb_points_total + ' points'}}
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;blc3&quot;&gt;
+          &lt;div class=&quot;lab&quot;&gt;
+            &lt;span class=&quot;bold&quot;&gt;Décision BELFA :&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;rep&quot;&gt;
+            &lt;a href=&quot;#&quot; (click)=&quot;openModal($event, dossier)&quot;&gt;
+              &lt;span
+                class=&quot;alert&quot;
+                [ngClass]=&quot;{'red': dossier.id_ref_type_decision_belfa_fk === 2,
+            'green': dossier.id_ref_type_decision_belfa_fk === 1,
+            'blue': !dossier.id_ref_type_decision_belfa_fk}&quot;
+              &gt;
+                &lt;strong *ngIf=&quot;dossier.id_ref_type_decision_belfa_fk&quot;
+                  &gt;{{dossier.type_decision_belfa_libelle | titlecase}}
+                &lt;/strong&gt;
+                ({{!dossier.id_ref_type_decision_belfa_fk ? '-' :
+                dossier.belfa_date | date: 'dd/MM/yyyy'}} )
+              &lt;/span&gt;
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;ModalGen&quot; class=&quot;modal&quot; [ngClass]=&quot;{'show': showModal}&quot;&gt;
+  &lt;div class=&quot;modal-background&quot; (click)=&quot;closeModal($event)&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;modal-content&quot;&gt;
+    &lt;span class=&quot;close&quot;
+      &gt;&lt;a href=&quot;#&quot; (click)=&quot;closeModal($event)&quot;&gt;&amp;nbsp;&lt;/a&gt;&lt;/span
+    &gt;
+    &lt;div
+      class=&quot;content&quot;
+      *ngIf=&quot;storageService.selectedDossier$ | async; let selectedDossier&quot;
+    &gt;
+      &lt;h3&gt;&lt;span&gt;&lt;/span&gt;DÉCISION BELFA&lt;/h3&gt;
+      &lt;div class=&quot;ent&quot;&gt;
+        &lt;div&gt;
+          &lt;span class=&quot;bold margBot10&quot;&gt;Date décision&lt;/span&gt;
+          &lt;span class=&quot;blue&quot;
+            &gt;{{selectedDossier.belfa_date | date: 'dd/MM/yyyy'}}&lt;/span
+          &gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;span class=&quot;bold margBot10&quot;&gt;Décision&lt;/span&gt;
+          &lt;span class=&quot;blue&quot;
+            &gt;{{selectedDossier.type_decision_belfa_libelle}}&lt;/span
+          &gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;margTop10&quot;&gt;
+        &lt;span class=&quot;bold margBot10&quot;&gt;Motif&lt;/span&gt;
+        &lt;span class=&quot;blue&quot;
+          &gt;{{selectedDossier.motifs_decision_belfa_libelle}}&lt;/span
+        &gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;margTop10&quot;&gt;
+        &lt;span class=&quot;bold margBot10&quot;&gt;Commentaire&lt;/span&gt;
+        &lt;span class=&quot;blue&quot;&gt;{{selectedDossier.belfa_commentaire}}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="club-dossier"><a class="header" href="#club-dossier">CLUB-DOSSIER</a></h1>
+<p>The club dossier page of the LCF application. It is a child component of <a href="club/../shared/dossier-template.html">DOSSIER-TEMPLATE</a> component.</p>
+<h2 id="description-4"><a class="header" href="#description-4">Description:</a></h2>
+<p>The club dossier displays a <code>dossierForm</code> for user to fill. The <code>dossierForm</code> will later be pass to the <a href="club/../dcn/dcn-dossier.html">DCN-DOSSIER</a> side for decision.</p>
+<h2 id="files-4"><a class="header" href="#files-4">Files:</a></h2>
+<pre><code class="language-ignore">club-dossier.component.html
+club-dossier.component.scss
+club-dossier.component.ts
+</code></pre>
+<h2 id="functionalities-4"><a class="header" href="#functionalities-4">Functionalities:</a></h2>
+<h3 id="general-4"><a class="header" href="#general-4">General:</a></h3>
+<pre><code class="language-ts">override ngOnInit(): void {
+  this.checkSaNoFromUrl();
+  this.getCompetIdFromUrl();
+  this.storageService.showSaisonBox$.next(false); // hide saisonBox
+  this.updateTerrainsRattachesArray();
+
+  this.dossier = this.storageService.selectedDossier;
+  if (this.isEmpty(this.dossier)) {
+    this.backupDossier();
+  }
+  this.setupDossierContent();
+  this.spawnClubStatusDossierHandler();
+  this.dateLimiteControl();
+}
+</code></pre>
+<p>Overriding <a href="club/../shared/dossier-template.html#general">ngOnInit</a> of <a href="club/../shared/dossier-template.html">DOSSIER-TEMPLATE</a>. The definition of some functions can be found here if they aren't included in <a href="club/../shared/dossier-template.html">DOSSIER-TEMPLATE</a> page.</p>
+<h3 id="specific-2"><a class="header" href="#specific-2">Specific:</a></h3>
+<h4 id="disabledossierformexceptrefusfile"><a class="header" href="#disabledossierformexceptrefusfile">disableDossierFormExceptRefusFile</a></h4>
+<pre><code class="language-ts">private disableDossierFormExceptRefusFile() {
+  this.disableDossierForm();
+  this.enableRefusFileForm();
+}
+</code></pre>
+<p>This function disables the <code>dossierForm</code> except the <code>fileForm</code> field which has an eligibilite of <code>refus piece</code>.</p>
+<h4 id="enablerefusfileform"><a class="header" href="#enablerefusfileform">enableRefusFileForm</a></h4>
+<pre><code class="language-ts">// WIP - generic, if file exist only in incontounables field can do differently
+private enableRefusFileForm() {
+  for (let formField of UtilsService.fieldArray) {
+    let criteresField = this.dossierForm.get(formField) as FormGroup;
+    Object.keys(criteresField.controls).forEach((id: string) =&gt; {
+      if (
+        criteresField.get([id, 'type'])?.value === 'PJ' &amp;&amp;
+        criteresField.get([id, 'eligibilite'])?.value === 4
+      ) {
+        criteresField.get(id)?.enable();
+      }
+    });
+  }
+}
+</code></pre>
+<p>This function enables every <code>fileForm</code> field which has an eligibilite of <code>refus piece</code>.</p>
+<h4 id="spawnclubstatusdossierhandler"><a class="header" href="#spawnclubstatusdossierhandler">spawnClubStatusDossierHandler</a></h4>
+<pre><code class="language-ts">private spawnClubStatusDossierHandler() {
+  this.subs.sink = this.storageService.selectedDossier$
+    .pipe(distinctUntilChanged())
+    .subscribe({
+      next: (dossier: Dossier) =&gt; {
+        switch (dossier.id_statuts_dossier_fk) {
+          case DossierStatusEnum.REFUS_PIECE:
+            this.disableDossierFormExceptRefusFile();
+            break;
+          case DossierStatusEnum.CLOS:
+            this.disableDossierForm();
+            break;
+          case DossierStatusEnum.A_EVALUER:
+            this.disableDossierForm();
+            break;
+        }
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>This function spawns a <code>dossier</code> status handler. Depend on the status of the <code>dossier</code>, we disable or enable the corresponding fields.</p>
+<h4 id="datelimitecontrol"><a class="header" href="#datelimitecontrol">dateLimiteControl</a></h4>
+<pre><code class="language-ts">private dateLimiteControl() {
+  this.subs.sink = this.storageService.selectedDossier$
+    .pipe(distinctUntilChanged())
+    .subscribe({
+      next: (dossier: Dossier) =&gt; {
+        let today = new Date();
+        if (dossier.date_limite &amp;&amp; dossier.date_limite &lt; today) {
+          switch (dossier.id_statuts_dossier_fk) {
+            case DossierStatusEnum.NON_DEBUTE:
+              this.disableDossierForm();
+              this.spawnOverdueToastr();
+              this.overdue = true;
+              break;
+            case DossierStatusEnum.EN_COURS:
+              this.disableDossierForm();
+              this.spawnOverdueToastr();
+              this.overdue = true;
+              break;
+            case DossierStatusEnum.A_EVALUER:
+              this.disableDossierForm();
+              this.spawnOverdueToastr();
+              this.overdue = true;
+              break;
+            case DossierStatusEnum.CLOS:
+              this.disableDossierForm();
+              this.spawnOverdueToastr();
+              this.overdue = true;
+              break;
+            case DossierStatusEnum.REFUS_PIECE:
+              this.spawnOverdueToastr();
+              this.overdue = true;
+              break;
+            default:
+              this.overdue = false;
+              break;
+          }
+        }
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>This function checks if the <code>dossier</code> is overdue or not. If so, disable <code>dossierForm</code> and provoke a toastr.</p>
+<h4 id="spawnoverduetoastr"><a class="header" href="#spawnoverduetoastr">spawnOverdueToastr</a></h4>
+<pre><code class="language-ts">private spawnOverdueToastr() {
+  this.messageService.add({
+    severity: 'error',
+    summary: 'Dossier Overdue',
+    detail: 'This dossier is overdue!',
+  });
+}
+</code></pre>
+<p>This function spawns the <code>overdue</code> toastr.</p>
+<h4 id="buttondisplayconditions"><a class="header" href="#buttondisplayconditions">buttonDisplayConditions</a></h4>
+<pre><code class="language-ts">buttonDisplayConditions(dossier: Dossier) {
+  // display when not overdue and not 3: dossier clos, and not 4: dossier a evaluer
+  return !this.overdue &amp;&amp; ![3,4].includes(Number(dossier.id_statuts_dossier_fk));
+}
+</code></pre>
+<p>This function applies rule for displaying all the buttons at the end of the <code>dossierForm</code>.</p>
+<h3 id="html-3"><a class="header" href="#html-3">HTML:</a></h3>
+<pre><code class="language-html">&lt;div
+  class=&quot;content-pages&quot;
+  *ngIf=&quot;storageService.selectedDossier$ | async; let dossier&quot;
+&gt;
+  &lt;div class=&quot;entete grid&quot; [ngClass]=&quot;compet_id_icon&quot;&gt;
+    &lt;div class=&quot;mr-5&quot;&gt;
+      &lt;img class=&quot;icon-logo&quot; [src]=&quot;dossier.icon_url&quot; alt=&quot;icon-competition&quot; /&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;h2&gt;Licence « Club Fédéral »&lt;/h2&gt;
+      &lt;h1 *ngIf=&quot;user&quot;&gt;{{user.cl_cod}} - {{user.club_nom}}&lt;/h1&gt;
+      &lt;h4 [ngClass]=&quot;dossier_status_color&quot;&gt;
+        {{dossier.status_dossier_libelle | titlecase}}
+      &lt;/h4&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;h3&gt;&lt;span&gt;&lt;/span&gt;INFORMATIONS GÉNÉRALES&lt;/h3&gt;
+    &lt;div class=&quot;info&quot;&gt;
+      &lt;div&gt;
+        &lt;span class=&quot;bold&quot;&gt;Équipe&lt;/span&gt;
+        &lt;span class=&quot;blue&quot;&gt;So Romorantin 1&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;span class=&quot;bold&quot;&gt;Ligue d’appartenance&lt;/span&gt;
+        &lt;span class=&quot;blue&quot;&gt;2100 - Ligue du Centre Val-de-Loire&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div
+      class=&quot;form-content&quot;
+      [formGroup]=&quot;$any(dossierForm.get('info_general'))&quot;
+    &gt;
+      &lt;h5&gt;Référent club&lt;/h5&gt;
+      &lt;div class=&quot;ref&quot;&gt;
+        &lt;div class=&quot;ref-item&quot;&gt;
+          &lt;label for=&quot;name&quot;&gt;Nom*&lt;/label&gt;
+          &lt;input
+            type=&quot;text&quot;
+            id=&quot;name&quot;
+            placeholder=&quot;Saisissez votre nom&quot;
+            formControlName=&quot;nom&quot;
+          /&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;ref-item&quot;&gt;
+          &lt;label for=&quot;post-name&quot;&gt;Prénom*&lt;/label&gt;
+          &lt;input
+            type=&quot;text&quot;
+            id=&quot;post-name&quot;
+            placeholder=&quot;Saisissez votre prénom&quot;
+            formControlName=&quot;prenom&quot;
+          /&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;email ref-item&quot;&gt;
+          &lt;label for=&quot;email&quot;&gt;Email*&lt;/label&gt;
+          &lt;input
+            type=&quot;text&quot;
+            id=&quot;email&quot;
+            placeholder=&quot;Saisissez votre email&quot;
+            formControlName=&quot;email&quot;
+          /&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;phone ref-item&quot;&gt;
+          &lt;label for=&quot;phone&quot;&gt;Téléphone*&lt;/label&gt;
+          &lt;input
+            type=&quot;text&quot;
+            id=&quot;phone&quot;
+            placeholder=&quot;Saisissez votre téléphone&quot;
+            formControlName=&quot;tel&quot;
+          /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;h5&gt;Autorisations&lt;/h5&gt;
+      &lt;label class=&quot;check&quot;&gt;
+        &lt;span&gt;
+          Le club souhaite obtenir la Licence « Club Fédéral » et confirme ainsi
+          son adhésion au dispositif, que l’ensemble des documents sont exacts,
+          qu’il autorise la FFF à examiner lesdits documents et à procéder, si
+          besoin, à une visite dans les locaux du club.
+        &lt;/span&gt;
+        &lt;input id=&quot;autorite&quot; type=&quot;checkbox&quot; formControlName=&quot;autorisation&quot; /&gt;
+        &lt;span for=&quot;autorite&quot; class=&quot;checkmark&quot;&gt;&lt;/span&gt;
+      &lt;/label&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div
+    *ngFor=&quot;let critere_big_title of ['CRITÈRES INCONTOURNABLES','CRITÈRES CUMULABLES']; let i = index&quot;
+  &gt;
+    &lt;div class=&quot;content margTop30&quot;&gt;
+      &lt;div class=&quot;rub&quot;&gt;
+        &lt;h3&gt;
+          &lt;span&gt;&lt;/span&gt;{{critere_big_title}}&lt;em class=&quot;pts&quot;&gt; (5000 POINTS)&lt;/em&gt;
+        &lt;/h3&gt;
+        &lt;div&gt;
+          &lt;span class=&quot;line&quot;&gt;&lt;/span&gt;
+          &lt;span
+            class=&quot;statut&quot;
+            customStyle
+            [evaluation]=&quot;i === 0 ? (eligibleOfIncon$ | async) : 2 &quot;
+          &gt;
+            {{ i === 0 ? (eligibleOfIncon$ | async | customString:
+            storageService.connectId) : (sumOfCumulable$ | async) + ' points' }}
+          &lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;content-dossier&quot;&gt;
+        &lt;div&gt;
+          &lt;div
+            *ngFor=&quot;let critere_small_title of critereTitleArray[i]; let j = index&quot;
+          &gt;
+            &lt;div class=&quot;grid&quot;&gt;
+              &lt;h5 class=&quot;col-9&quot; [ngClass]=&quot;{nomarg: j === 0}&quot;&gt;
+                {{critere_small_title}}
+              &lt;/h5&gt;
+              &lt;span
+                *ngIf=&quot;j === 0&quot;
+                class=&quot;responsiveHide eval col-3 text-center&quot;
+                &gt;Évaluation&lt;/span
+              &gt;
+            &lt;/div&gt;
+            &lt;div *ngIf=&quot;critereBigArray&quot;&gt;
+              &lt;div
+                *ngFor=&quot;let critere of critereBigArray[i][j]&quot;
+                [ngSwitch]=&quot;critere.code&quot;
+              &gt;
+                &lt;div&gt;
+                  &lt;lcf-file
+                    *ngSwitchCase=&quot;'PJ'&quot;
+                    (uploadFileCarrier)=&quot;uploadFile($event, critereNameArray[i][j], critere.id)&quot;
+                    (downloadFileCarrier)=&quot;downloadFile($event)&quot;
+                    [fileForm]=&quot;$any(dossierForm.get(critereNameArray[i][j] + '.' + critere.id.toString()))&quot;
+                    [overdue]=&quot;overdue&quot;
+                  &gt;
+                  &lt;/lcf-file&gt;
+                  &lt;lcf-terrain
+                    *ngSwitchCase=&quot;'TERRAIN'&quot;
+                    [terrainForm]=&quot;$any(dossierForm.get(critereNameArray[i][j]+ '.' + critere.id.toString())) &quot;
+                    [terrains]=&quot;terrains&quot;
+                  &gt;
+                  &lt;/lcf-terrain&gt;
+                  &lt;lcf-radio
+                    *ngSwitchCase=&quot;'RB'&quot;
+                    [radioForm]=&quot;$any(dossierForm.get(critereNameArray[i][j]+ '.' + critere.id.toString()))&quot;
+                  &gt;
+                  &lt;/lcf-radio&gt;
+                  &lt;lcf-wbs
+                    *ngSwitchCase=&quot;'WBS'&quot;
+                    [wbsForm]=&quot;$any(dossierForm.get(critereNameArray[i][j]+ '.' + critere.id.toString()))&quot;
+                  &gt;&lt;/lcf-wbs&gt;
+                  &lt;lcf-radio-three
+                    *ngSwitchCase=&quot;'RB3'&quot;
+                    [radioForm]=&quot;$any(dossierForm.get(critereNameArray[i][j]+ '.' + critere.id.toString()))&quot;
+                  &gt;
+                  &lt;/lcf-radio-three&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;hr
+                class=&quot;part&quot;
+                *ngIf=&quot;critere_small_title !== critereTitleArray[i][critereTitleArray[i].length - 1]&quot;
+              /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;content margTop30&quot;&gt;
+    &lt;div class=&quot;rub&quot;&gt;
+      &lt;span class=&quot;arrow&quot;
+        &gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;assets/img/arrow2-down.png&quot; alt=&quot;Fermer&quot; /&gt;&lt;/a
+      &gt;&lt;/span&gt;
+      &lt;h3&gt;&lt;span&gt;&lt;/span&gt;SIMULATION *&lt;/h3&gt;
+      &lt;div class=&quot;spe&quot;&gt;
+        &lt;span class=&quot;line&quot;&gt;&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;content-dossier desk&quot;&gt;
+      &lt;div class=&quot;contG&quot;&gt;
+        &lt;h5 class=&quot;reg nomarg&quot;&gt;Critères Incontournables&lt;/h5&gt;
+        &lt;h5 class=&quot;reg margTop2Rem&quot;&gt;Critères Cumulables&lt;/h5&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;contD crit nobd&quot;&gt;
+        &lt;span
+          class=&quot;statut reg nomarg&quot;
+          customStyle
+          [evaluation]=&quot;eligibleOfIncon$ | async&quot;
+        &gt;
+          {{eligibleOfIncon$ | async | customString: storageService.connectId }}
+          - {{(eligibleOfIncon$ | async) === 2 ? 5000 : 0}} point&lt;/span
+        &gt;
+        &lt;span class=&quot;statut reg green&quot;
+          &gt;{{ sumOfCumulable$ | async}} points&lt;/span
+        &gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;hr class=&quot;part&quot; /&gt;
+    &lt;div class=&quot;content-dossier desk&quot;&gt;
+      &lt;div class=&quot;contG&quot;&gt;
+        &lt;h5 class=&quot;margTop2Rem&quot;&gt;Éligibilité&lt;/h5&gt;
+        &lt;h5 class=&quot;margTop2Rem&quot;&gt;Aide financière&lt;/h5&gt;
+        &lt;em class=&quot;ment&quot;
+          &gt;* La simulation ne présente pas de caractère officiel et reste
+          indicative, dans l’attente de décision définitive du BELFA.&lt;/em
+        &gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;contD crit2 nobd&quot;&gt;
+        &lt;span
+          class=&quot;statut reg&quot;
+          customStyle
+          [evaluation]=&quot;eligibleOfIncon$ | async&quot;
+        &gt;
+          {{eligibleOfIncon$ | async | customString: storageService.connectId }}
+          - {{totalPoints$ | async}} points&lt;/span
+        &gt;
+        &lt;span class=&quot;statut big&quot; *ngIf=&quot;aideFinanciere$ | async; let aideFinan&quot;
+          &gt;{{aideFinan.pourcentage}}% - {{aideFinan.totalAide}}€&lt;/span
+        &gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;buttons&quot; *ngIf=&quot;buttonDisplayConditions(dossier)&quot;&gt;
+    &lt;button class=&quot;valider&quot; (click)=&quot;showForm()&quot;&gt;ShowForm&lt;/button&gt;
+    &lt;button class=&quot;valider&quot; (click)=&quot;isFormValid()&quot;&gt;isFormValid&lt;/button&gt;
+    &lt;button
+      class=&quot;valider&quot;
+      *ngIf=&quot;dossier.id_statuts_dossier_fk !== 4&quot;
+      (click)=&quot;saveDossier()&quot;
+    &gt;
+      Enregistrer
+    &lt;/button&gt;
+    &lt;button class=&quot;valider&quot; (click)=&quot;validerDossier()&quot;&gt;Valider&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="lcf-dcn"><a class="header" href="#lcf-dcn">LCF-DCN</a></h1>
+<h2 id="description-5"><a class="header" href="#description-5">Description:</a></h2>
+<p>LCF app is now connected as <code>DCN</code>. In <code>DEV</code> or <code>PROD</code> environment you will need a <code>PORTAILBLEU</code> cookie in your browser
+in order to get an access to the next page. This cookie is set automatically after a successfully authentication to <a href="https://portailbleuq.fff.fr/"><code>PORTAIL_BLEU</code></a> app. After passing this guard, we will be redirect to <a href="./dcn/dcn-accueil.html">DCN-ACCUEIL</a>. There are also 2 other pages can be accessed freely from here:</p>
+<ul>
+<li><a href="./dcn/dcn-parameters.html">DCN-PARAMETERS</a></li>
+<li><a href="./dcn//dcn-dossier.html">DCN-DOSSIER</a></li>
+</ul>
+<h2 id="files-5"><a class="header" href="#files-5">Files:</a></h2>
+<pre><code class="language-ignore">dcn
+|__components
+|  |__dcn-accueil
+|  |__dcn-dossier
+|  |__dcn-parameters
+|__dcn-routing.module.ts
+|__dcn.component.ts
+|__dcn.component.html
+|__dcn.component.scss
+|__dcn.module.ts
+</code></pre>
+<h2 id="routing-2"><a class="header" href="#routing-2">Routing:</a></h2>
+<p><code>dcn-routing.module.ts</code>:</p>
+<pre><code class="language-ts">const routes: Routes = [
+  {
+    path: &quot;&quot;,
+    component: DcnComponent,
+    children: [
+      {
+        path: &quot;404&quot;,
+        component: PageNotFoundComponent,
+      },
+      {
+        path: &quot;:sa_no&quot;,
+        redirectTo: &quot;:sa_no/lcf&quot;,
+        pathMatch: &quot;full&quot;,
+      },
+      {
+        path: &quot;:sa_no/lcf&quot;,
+        component: DcnAccueilComponent,
+      },
+      {
+        path: &quot;:sa_no/lcf/params&quot;,
+        component: DcnParametersComponent,
+      },
+      {
+        path: &quot;:sa_no/lcf/:cl_cod&quot;,
+        redirectTo: &quot;404&quot;,
+      },
+      {
+        path: &quot;:sa_no/lcf/:cl_cod/:competition&quot;,
+        component: DcnDossierComponent,
+      },
+    ],
+  },
+];
+</code></pre>
+<h2 id="functionalities-5"><a class="header" href="#functionalities-5">Functionalities:</a></h2>
+<h3 id="general-5"><a class="header" href="#general-5">General:</a></h3>
+<p><code>dcn.component.ts</code>:</p>
+<pre><code class="language-ts">ngOnInit(): void {
+  // redirect to page of the current season
+  if (this.router.url === '/dcn')
+    this.router.navigate([String(this.storageService.selectedSaisonSaNo),'lcf'],
+                          {relativeTo: this.activatedRoute});
+}
+</code></pre>
+<p>this component is just a parent component who contains 3 others child components:</p>
+<ul>
+<li><a href="./shared/header.html">header</a></li>
+<li><a href="./shared/sidenav.html">sidenav</a></li>
+<li><a href="./dcn/dcn-accueil.html">dcn-accueil</a> or <a href="./dcn/dcn-parameters.html">dcn-parameters</a> or <a href="./dcn/dcn-dossier.html">dcn-dossier</a></li>
+</ul>
+<h3 id="html-4"><a class="header" href="#html-4">HTML:</a></h3>
+<pre><code class="language-html">&lt;lcf-header&gt;&lt;/lcf-header&gt;
+
+&lt;lcf-side-nav&gt;
+  &lt;router-outlet&gt;&lt;/router-outlet&gt;
+&lt;/lcf-side-nav&gt;
+</code></pre>
+<p>Plug in <a href="./shared/header.html">HEADER</a> component and <a href="./shared/sidenav.html">SIDENAV</a> component.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="dcn-accueil"><a class="header" href="#dcn-accueil">DCN-ACCUEIL</a></h1>
+<p>The dcn homepage of the LCF application.</p>
+<h2 id="description-6"><a class="header" href="#description-6">Description:</a></h2>
+<p>The dcn homepage consists of a filter system and a table which displays all dossiers within a selected season.</p>
+<h2 id="files-6"><a class="header" href="#files-6">Files:</a></h2>
+<pre><code class="language-ignore">dcn-accueil.component.html
+dcn-accueil.component.scss
+dcn-accueil.component.ts
+</code></pre>
+<h2 id="functionalities-6"><a class="header" href="#functionalities-6">Functionalities:</a></h2>
+<h3 id="general-6"><a class="header" href="#general-6">General:</a></h3>
+<pre><code class="language-ts">ngOnInit(): void {
+  this.checkSaNoFromUrl();
+  const filtres: FiltresList = this.storageService.filtres;
+  this.competitions = filtres.competitions;
+  this.incontournables = filtres.incontournables;
+  this.statuts = filtres.statuts;
+  this.belfas = filtres.belfas;
+  this.subs.sink = this.storageService.selectedSaisonSaNo$
+    .pipe(
+      takeUntil(this.storageService.globalUnsubscribe),
+      switchMap((sa_no: number) =&gt; {
+        return this.dossierService.getFilteredDossiers(
+          sa_no,
+          this.filtreForm
+        );
+      })
+    )
+    .subscribe((result: any) =&gt; {
+      this.dcnTable = result;
+    });
+}
+</code></pre>
+<p>This component <a href="dcn/dcn-accueil.html#checksanofromurl">checkSaNoFromUrl</a> and listens to <code>season</code> change event. Upon selecting a <code>season</code> in <a href="dcn/../shared/header.html">HEADER</a>, it invokes a call to backend, retrieve a list of filtered <code>dossiers</code> and put it into <code>dcnTable</code> variable.</p>
+<h3 id="specific-3"><a class="header" href="#specific-3">Specific:</a></h3>
+<h4 id="checksanofromurl-2"><a class="header" href="#checksanofromurl-2">checkSaNoFromUrl</a></h4>
+<pre><code class="language-ts">/**
+ * Check `sa_no` in `url` is in range of `user.saisons.sa_no`.
+ * If true, set `selectedSaison` in `Store` to `sa_no`.
+ * If false, navigate to page 404
+ */
+private checkSaNoFromUrl(): void {
+    const saisonSaNoFromUrl = Number(this.route.snapshot.paramMap.get('sa_no'));
+    this.user = this.storageService.user;
+    if (this.storageService.checkSaisonInRange(this.user, saisonSaNoFromUrl)) {
+        this.storageService.selectedSaisonSaNo = saisonSaNoFromUrl;
+    } else {
+        this.router.navigate(['/', this.storageService.connectId, '404']);
+    }
+}
+</code></pre>
+<p>This function checks <code>sa_no</code> in <code>url</code> is in range of <code>user.saisons.sa_no</code>.</p>
+<ul>
+<li>If true, set <code>selectedSaison</code> in <code>Store</code> to <code>sa_no</code></li>
+<li>If false, navigate to page 404</li>
+</ul>
+<h4 id="onrecherche"><a class="header" href="#onrecherche">onRecherche</a></h4>
+<pre><code class="language-ts">onRecherche() {
+  this.subs.sink = this.dossierService
+    .getFilteredDossiers(
+      this.storageService.selectedSaisonSaNo,
+      this.filtreForm
+    )
+    .subscribe((result: any) =&gt; {
+      this.dcnTable = result;
+      console.log('onRecherche, dcnTable: ', result);
+    });
+}
+</code></pre>
+<p>This function request a filtered list of club dossiers within the selected <code>season</code> from backend and store them in <code>dcnTable</code> variable.</p>
+<h4 id="onreset"><a class="header" href="#onreset">onReset</a></h4>
+<pre><code class="language-ts">onReset() {
+  this.filtreForm.reset();
+}
+</code></pre>
+<p>This function resets the filter.</p>
+<h4 id="gotodossier"><a class="header" href="#gotodossier">goToDossier</a></h4>
+<pre><code class="language-ts">goToDossier(compet_id: number, cl_cod: number) {
+  // reset menuItem highlight
+  this.storageService.firstMenuItemActivated = false;
+  this.storageService.secondMenuItemActivated = false;
+
+  this.storageService.cl_cod = cl_cod;
+  this.subs.sink = this.dossierService
+    .requestDossier(
+      this.storageService.selectedSaisonSaNo,
+      cl_cod,
+      compet_id
+    )
+    .pipe(
+      combineLatestWith(
+        this.dossierService.requestTerrainsAttachesAuxClubs(cl_cod)
+      )
+    )
+    .subscribe(([dossier, terrains]: [any, any]) =&gt; {
+      console.log('storage.terrains:', terrains);
+      console.log('storage.dossier: ',dossier);
+      this.storageService.selectedDossier = dossier;
+      this.storageService.terrains = terrains;
+      this.router.navigate([
+        `/dcn/${
+          this.storageService.selectedSaisonSaNo
+        }/lcf/${cl_cod}/${UtilsService.getCompetitionByCode(compet_id)}`,
+      ]);
+    });
+}
+</code></pre>
+<p>Upon click on a club <code>dossier</code> among list of club <code>dossiers</code>, we will be redirect to the <a href="dcn/dcn-dossier.html">DCN-DOSSIER</a> page. Before directing to the page, we request from backend all <code>terrains</code> attached to that selected club along with all information about that <code>dossier</code>.</p>
+<h4 id="isrefus"><a class="header" href="#isrefus">isRefus</a></h4>
+<pre><code class="language-ts">isRefus(belfa: string) {
+  if (belfa.indexOf('Refus') !== -1) {
+    return true;
+  } else return false;
+}
+</code></pre>
+<p>This function returns <code>true</code> if it found <code>Refus</code> string in the <code>belfa</code> variable. This will later be used as a condition to or not to display motif popup when hovering above the <code>belfa status</code>.</p>
+<h4 id="exportexcel-saveasexcelfile"><a class="header" href="#exportexcel-saveasexcelfile">exportExcel, saveAsExcelFile</a></h4>
+<pre><code class="language-ts">exportExcel() {
+  const modifiedTable = this.renameKeyInDcnTable(this.dcnTable);
+
+  import('xlsx').then((xlsx) =&gt; {
+    const worksheet = xlsx.utils.json_to_sheet(modifiedTable);
+    const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = xlsx.write(workbook, {
+      bookType: 'xlsx',
+      type: 'array',
+    });
+    this.saveAsExcelFile(excelBuffer, 'resultats');
+  });
+}
+
+saveAsExcelFile(buffer: any, fileName: string): void {
+  let EXCEL_TYPE =
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+  let EXCEL_EXTENSION = '.xlsx';
+  const data: Blob = new Blob([buffer], {
+    type: EXCEL_TYPE,
+  });
+  saveAs(
+    data,
+    fileName +
+      '-' +
+      new Date().toDateString().replace(/ /g, '') +
+      EXCEL_EXTENSION
+  );
+}
+</code></pre>
+<p>These function are used for export the <code>dcnTable</code> as an <code>Excel</code> format file.</p>
+<h4 id="renamekeyindcntable"><a class="header" href="#renamekeyindcntable">renameKeyInDcnTable</a></h4>
+<pre><code class="language-ts">/**
+ * return a `COPY` of `dcnTable` with modified headers
+ */
+renameKeyInDcnTable(dcnTable: any[]) {
+  return dcnTable
+    .slice()
+    .map(({ compet_id, ...theRest }) =&gt; theRest)
+    .map((el) =&gt; ({
+      Saison: el.sa_no,
+      Compétition: el.competition,
+      Club: el.club,
+      Incontournables: el.incontournables,
+      Cumulables: el.cumulables,
+      Statut: el.statut,
+      'Décision BELFA': el.decision_belfa,
+    }));
+}
+</code></pre>
+<p>This function return a copy of <code>dcnTable</code> with modified readable string headers.</p>
+<h4 id="ngondestroy-2"><a class="header" href="#ngondestroy-2">ngOnDestroy</a></h4>
+<pre><code class="language-ts">ngOnDestroy(): void {
+    this.subs.unsubscribe();
+    // workaround bug: https://github.com/angular/angular/issues/28330
+    this.storageService.globalUnsubscribe.next();
+    this.storageService.globalUnsubscribe.complete();
+}
+</code></pre>
+<p>Upon being destroyed, unsubscribe from every dangling observables.</p>
+<h3 id="html-5"><a class="header" href="#html-5">HTML:</a></h3>
+<pre><code class="language-html">&lt;div class=&quot;content-pages spe&quot;&gt;
+  &lt;h1&gt;Recherche / Liste&lt;/h1&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;div class=&quot;form-content&quot;&gt;
+      &lt;div class=&quot;ref filtre columns&quot; [formGroup]=&quot;filtreForm&quot;&gt;
+        &lt;div class=&quot;ref-item&quot;&gt;
+          &lt;label&gt;Compétition&lt;/label&gt;
+          &lt;p-multiSelect
+            formControlName=&quot;competitions&quot;
+            [options]=&quot;competitions&quot;
+            defaultLabel=&quot;Sélectionner la compétition&quot;
+            display=&quot;chip&quot;
+            optionLabel=&quot;libelle&quot;
+            optionValue=&quot;code&quot;
+          &gt;
+          &lt;/p-multiSelect&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;ref-item&quot;&gt;
+          &lt;label&gt;Club&lt;/label&gt;
+          &lt;input
+            class=&quot;club-name&quot;
+            type=&quot;text&quot;
+            formControlName=&quot;club&quot;
+            placeholder=&quot;Saisissez le nom du club&quot;
+          /&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;ref-item&quot;&gt;
+          &lt;label&gt;Incontournables&lt;/label&gt;
+          &lt;p-multiSelect
+            formControlName=&quot;incontournables&quot;
+            [options]=&quot;incontournables&quot;
+            defaultLabel=&quot;Sélectionner l'éligibilité&quot;
+            display=&quot;chip&quot;
+            optionLabel=&quot;libelle&quot;
+            optionValue=&quot;id&quot;
+          &gt;
+          &lt;/p-multiSelect&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;ref-item cumul&quot;&gt;
+          &lt;label&gt;Cumulables&lt;/label&gt;
+          &lt;p-dropdown
+            [options]=&quot;cumulables&quot;
+            formControlName=&quot;cumulables&quot;
+            optionValue=&quot;code&quot;
+            optionLabel=&quot;libelle&quot;
+            placeholder=&quot;Sélectionner le nombre de points&quot;
+          &gt;
+          &lt;/p-dropdown&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;ref-item&quot;&gt;
+          &lt;label&gt;Statut&lt;/label&gt;
+          &lt;p-multiSelect
+            formControlName=&quot;statuts&quot;
+            [options]=&quot;statuts&quot;
+            defaultLabel=&quot;Sélectionner le statut du dossier&quot;
+            display=&quot;chip&quot;
+            optionLabel=&quot;libelle&quot;
+            optionValue=&quot;id&quot;
+          &gt;
+          &lt;/p-multiSelect&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;ref-item&quot;&gt;
+          &lt;label&gt;Décision BELFA&lt;/label&gt;
+          &lt;p-multiSelect
+            formControlName=&quot;belfas&quot;
+            [options]=&quot;belfas&quot;
+            defaultLabel=&quot;Sélectionner la décision BELFA&quot;
+            display=&quot;chip&quot;
+            optionLabel=&quot;libelle&quot;
+            optionValue=&quot;id&quot;
+          &gt;
+          &lt;/p-multiSelect&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;buttons&quot;&gt;
+    &lt;button
+      class=&quot;annuler&quot;
+      (click)=&quot; onReset();&quot;
+      style=&quot;margin-right: 20px; height: 3.6rem&quot;
+    &gt;
+      &lt;span&gt;&lt;/span&gt;Réinitialiser
+    &lt;/button&gt;
+    &lt;button class=&quot;rechercher&quot; (click)=&quot; onRecherche();&quot;&gt;
+      &lt;span class=&quot;recherche-icon&quot;&gt;&lt;/span&gt;Rechercher
+    &lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;content margTop30&quot;&gt;
+    &lt;div class=&quot;result&quot;&gt;
+      &lt;h3&gt;&lt;span&gt;&lt;/span&gt;RÉSULTATS&lt;/h3&gt;
+      &lt;button class=&quot;download&quot; (click)=&quot;downloadXLS.click()&quot;&gt;
+        &lt;span&gt;&lt;/span&gt;Télécharger
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;flex&quot; style=&quot;justify-content:end; &quot;&gt;
+      &lt;button
+        type=&quot;button&quot;
+        pButton
+        pRipple
+        icon=&quot;pi pi-file-excel&quot;
+        (click)=&quot;exportExcel()&quot;
+        #downloadXLS
+        class=&quot;p-button-success mr-2&quot;
+        pTooltip=&quot;XLS&quot;
+        tooltipPosition=&quot;bottom&quot;
+        style=&quot;display: none&quot;
+      &gt;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;p-table
+      class=&quot;dcn-table&quot;
+      [value]=&quot;dcnTable&quot;
+      [paginator]=&quot;true&quot;
+      [rows]=&quot;10&quot;
+      [showCurrentPageReport]=&quot;false&quot;
+      currentPageReportTemplate=&quot;{currentPage}&quot;
+      responsiveLayout=&quot;scroll&quot;
+      [rowsPerPageOptions]=&quot;[10,20,30]&quot;
+      [showJumpToPageDropdown]=&quot;true&quot;
+      [showPageLinks]=&quot;false&quot;
+    &gt;
+      &lt;ng-template pTemplate=&quot;header&quot;&gt;
+        &lt;tr style=&quot;font-size: 1.4rem;&quot;&gt;
+          &lt;th pSortableColumn=&quot;competition&quot;&gt;
+            Compétition&lt;p-sortIcon field=&quot;competition&quot;&gt;&lt;/p-sortIcon&gt;
+          &lt;/th&gt;
+          &lt;th pSortableColumn=&quot;club&quot;&gt;
+            Club&lt;p-sortIcon field=&quot;club&quot;&gt;&lt;/p-sortIcon&gt;
+          &lt;/th&gt;
+          &lt;th class=&quot;incon-col&quot; pSortableColumn=&quot;incontournables&quot;&gt;
+            Incontournables&lt;p-sortIcon field=&quot;incontournables&quot;&gt; &lt;/p-sortIcon&gt;
+          &lt;/th&gt;
+          &lt;th class=&quot;cumul-col&quot; pSortableColumn=&quot;cumulables&quot;&gt;
+            Cumulables&lt;p-sortIcon field=&quot;cumulables&quot;&gt;&lt;/p-sortIcon&gt;
+          &lt;/th&gt;
+          &lt;th pSortableColumn=&quot;statut&quot;&gt;
+            Statut&lt;p-sortIcon field=&quot;statut&quot;&gt;&lt;/p-sortIcon&gt;
+          &lt;/th&gt;
+          &lt;th class=&quot;belfa-col&quot; pSortableColumn=&quot;decision_belfa&quot;&gt;
+            Décision BELFA&lt;p-sortIcon field=&quot;decision_belfa&quot;&gt;&lt;/p-sortIcon&gt;
+          &lt;/th&gt;
+          &lt;th&gt;&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/ng-template&gt;
+      &lt;ng-template pTemplate=&quot;body&quot; let-dossier&gt;
+        &lt;tr style=&quot;font-size: 1.4rem&quot;&gt;
+          &lt;td style=&quot;color: #01407D&quot;&gt;{{dossier.competition ?? '-'}}&lt;/td&gt;
+          &lt;td style=&quot;color: #01407D&quot;&gt;
+            &lt;span pTooltip=&quot;Equipe: nom de l'equipe&quot;
+              &gt;{{dossier.club ?? '-'}}&lt;/span
+            &gt;
+          &lt;/td&gt;
+          &lt;td class=&quot;incon-col&quot; customStyle [libelle]=&quot;dossier.incontournables&quot;&gt;
+            {{dossier.incontournables ?? '-'}}
+          &lt;/td&gt;
+          &lt;td class=&quot;cumul-col&quot; style=&quot;color: #01407D&quot;&gt;
+            {{dossier.cumulables ?? '-'}}
+          &lt;/td&gt;
+          &lt;td customStyle [libelle]=&quot;dossier.statut&quot;&gt;
+            {{dossier.statut ?? '-'}}
+          &lt;/td&gt;
+          &lt;td class=&quot;belfa-col&quot; *ngIf=&quot;isRefus(dossier.decision_belfa)&quot;&gt;
+            &lt;span
+              customStyle
+              [libelle]=&quot;dossier.decision_belfa&quot;
+              pTooltip=&quot;Motif: {{dossier.motif_dossier}}&quot;
+              &gt;{{dossier.decision_belfa ?? '-'}}
+            &lt;/span&gt;
+          &lt;/td&gt;
+          &lt;td
+            class=&quot;belfa-col&quot;
+            *ngIf=&quot;!isRefus(dossier.decision_belfa)&quot;
+            customStyle
+            [libelle]=&quot;dossier.decision_belfa&quot;
+          &gt;
+            {{dossier.decision_belfa | customString }}
+          &lt;/td&gt;
+          &lt;td class=&quot;edit&quot; style=&quot;cursor: pointer;&quot;&gt;
+            &lt;img
+              src=&quot;../../../../../assets/img/pix-edit.png&quot;
+              width=&quot;20px&quot;
+              height=&quot;20px&quot;
+              alt=&quot;Edition&quot;
+              (click)=&quot;goToDossier(dossier.compet_id, dossier.cl_cod)&quot;
+            /&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/ng-template&gt;
+      &lt;ng-template pTemplate=&quot;paginatorleft&quot; let-state&gt;
+        {{state.totalRecords &gt; 0 ? state.first + 1 : state.first}} à
+        {{(state.first + state.rows &lt;= state.totalRecords) ? (state.first +
+        state.rows) : state.totalRecords}} / {{state.totalRecords}} élément(s)
+      &lt;/ng-template&gt;
+    &lt;/p-table&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="dcn-parameters"><a class="header" href="#dcn-parameters">DCN-PARAMETERS</a></h1>
+<p>The dcn parameters page of the LCF application.</p>
+<h2 id="description-7"><a class="header" href="#description-7">Description:</a></h2>
+<p>The dcn parameters page has a table which contains parameters used to calculate a financial aid. </p>
+<h2 id="files-7"><a class="header" href="#files-7">Files:</a></h2>
+<pre><code class="language-ignore">dcn-parameters.component.html
+dcn-parameters.component.scss
+dcn-parameters.component.ts
+</code></pre>
+<h2 id="functionalities-7"><a class="header" href="#functionalities-7">Functionalities:</a></h2>
+<h3 id="general-7"><a class="header" href="#general-7">General:</a></h3>
+<pre><code class="language-ts">ngOnInit(): void {
+    this.checkSaNoFromUrl();
+    this.initTable();
+  }
+</code></pre>
+<p>This component <a href="dcn/dcn-parameters.html#checksanofromurl">checkSaNoFromUrl</a> and initiates a <code>parameters</code> table within selected <code>season</code>.</p>
+<h3 id="specific-4"><a class="header" href="#specific-4">Specific:</a></h3>
+<h4 id="checksanofromurl-3"><a class="header" href="#checksanofromurl-3">checkSaNoFromUrl</a></h4>
+<pre><code class="language-ts">/**
+ * Check `sa_no` in `url` is in range of `user.saisons.sa_no`.
+ * If true, set `selectedSaison` in `Store` to `sa_no`.
+ * If false, navigate to page 404
+ */
+private checkSaNoFromUrl(): void {
+    const saisonSaNoFromUrl = Number(this.route.snapshot.paramMap.get('sa_no'));
+    this.user = this.storageService.user;
+    if (this.storageService.checkSaisonInRange(this.user, saisonSaNoFromUrl)) {
+        this.storageService.selectedSaisonSaNo = saisonSaNoFromUrl;
+    } else {
+        this.router.navigate(['/', this.storageService.connectId, '404']);
+    }
+}
+</code></pre>
+<p>This function checks <code>sa_no</code> in <code>url</code> is in range of <code>user.saisons.sa_no</code>.</p>
+<ul>
+<li>If true, set <code>selectedSaison</code> in <code>Store</code> to <code>sa_no</code></li>
+<li>If false, navigate to page 404</li>
+</ul>
+<h4 id="inittable"><a class="header" href="#inittable">initTable</a></h4>
+<pre><code class="language-ts">private initTable() {
+  this.cols = [
+    {
+      data: 'libelle',
+      title: 'Compétition',
+      editable: false,
+      class: '',
+      icon: '',
+    },
+    {
+      data: 'date',
+      title: 'Date limite candidature',
+      editable: true,
+      type: 'date',
+      class: 'date',
+      icon: '',
+    },
+    {
+      data: 'aide_financiere',
+      title: 'Aide financière',
+      editable: true,
+      type: 'number',
+      class: 'aide',
+      icon: '€',
+    },
+    {
+      data: 'pourcentage_incontournables',
+      title: 'Incontournables',
+      editable: true,
+      type: 'number',
+      class: '',
+      icon: '%',
+    },
+    {
+      data: 'pourcentage_cumulables_1',
+      title: 'Cumulables (&gt; 5 001 pts)',
+      editable: true,
+      type: 'number',
+      class: '',
+      icon: '%',
+    },
+    {
+      data: 'pourcentage_cumulables_2',
+      title: 'Cumulables (&gt;= 7 500 pts)',
+      editable: true,
+      type: 'number',
+      class: '',
+      icon: '%',
+    },
+  ];
+}
+</code></pre>
+<p>This function initiates a <code>parameters</code> table structure</p>
+<h4 id="saveparameters"><a class="header" href="#saveparameters">saveParameters</a></h4>
+<pre><code class="language-ts">saveParameters(parameters: any[]) {
+  if (this.verifPourcentage(parameters)) {
+    this.convertParamStringToNumber(parameters);
+    console.table(parameters);
+
+    this.subs.sink = this.parametersService
+      .patchParameters(this.storageService.selectedSaisonSaNo, parameters)
+      .subscribe({
+        next: (result: any) =&gt; {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: result.message,
+          });
+          this.storageService.parameters = parameters;
+        },
+        error: (err: any) =&gt; {
+          console.error(err);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err,
+          });
+        },
+      });
+  }
+}
+</code></pre>
+<p>This function saves <code>parameters</code> to backend.</p>
+<h4 id="verifpourcentage"><a class="header" href="#verifpourcentage">verifPourcentage</a></h4>
+<pre><code class="language-ts">private verifPourcentage(parameters: any[]) {
+  let percentageError = [];
+  parameters.forEach((param) =&gt; {
+    if (
+      parseInt(param.pourcentage_cumulables_1) +
+        parseInt(param.pourcentage_cumulables_2) +
+        parseInt(param.pourcentage_incontournables) &gt;
+      100
+    ) {
+      // @ts-ignore
+      percentageError.push(param['libelle']);
+    }
+  });
+  if (percentageError.length &gt; 0) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Somme des pourcentages invalide ',
+    });
+  }
+  return percentageError.length &lt;= 0;
+}
+</code></pre>
+<p>This function applies rule to <code>parameters</code> table. If the rule isn't satisfied, we can't <a href="dcn/dcn-parameters.html#saveparameters">saveParameters</a>.</p>
+<h4 id="convertparamstringtonumber"><a class="header" href="#convertparamstringtonumber">convertParamStringToNumber</a></h4>
+<pre><code class="language-ts">/**
+ * ngModel return a string even if the `type` directive of input = `number`.
+ * For that reseason, we have to convert them to number manually
+ */
+private convertParamStringToNumber(parameters: any[]) {
+  parameters.forEach((param: any) =&gt; {
+    param.aide_financiere = parseInt(param.aide_financiere);
+    param.pourcentage_cumulables_1 = parseInt(param.pourcentage_cumulables_1);
+    param.pourcentage_cumulables_2 = parseInt(param.pourcentage_cumulables_2);
+    param.pourcentage_incontournables = parseInt(
+      param.pourcentage_incontournables
+    );
+  });
+}
+</code></pre>
+<p>This function converts some strings in <code>parameters</code> table to <code>Integer</code>.</p>
+<h4 id="gotoaccueil"><a class="header" href="#gotoaccueil">goToAccueil</a></h4>
+<pre><code class="language-ts">goToAccueil() {
+  this.router.navigate([
+    '/dcn',
+    this.storageService.selectedSaisonSaNo,
+    'lcf',
+  ]);
+}
+</code></pre>
+<p>These function allows us to go back to <a href="dcn/dcn-accueil.html">DCN-ACCUEIL</a> page.</p>
+<h4 id="ngondestroy-3"><a class="header" href="#ngondestroy-3">ngOnDestroy</a></h4>
+<pre><code class="language-ts">ngOnDestroy(): void {
+    this.subs.unsubscribe();
+    // workaround bug: https://github.com/angular/angular/issues/28330
+    this.storageService.globalUnsubscribe.next();
+    this.storageService.globalUnsubscribe.complete();
+}
+</code></pre>
+<p>Upon being destroyed, unsubscribe from every dangling observables.</p>
+<h3 id="html-6"><a class="header" href="#html-6">HTML:</a></h3>
+<pre><code class="language-html">&lt;div
+  class=&quot;content-pages spe&quot;
+  *ngIf=&quot;storageService.parameters$ | async; let parameters&quot;
+&gt;
+  &lt;h1&gt;Paramètres&lt;/h1&gt;
+
+  &lt;div class=&quot;content margTop30&quot; *ngIf=&quot;parameters.length &gt; 0&quot;&gt;
+    &lt;div class=&quot;result&quot;&gt;
+      &lt;h3&gt;&lt;span&gt;&lt;/span&gt;Paramètres&lt;/h3&gt;
+    &lt;/div&gt;
+    &lt;p-table
+      [columns]=&quot;cols&quot;
+      [value]=&quot;parameters&quot;
+      [responsive]=&quot;true&quot;
+      styleClass=&quot;param-table&quot;
+    &gt;
+      &lt;ng-template pTemplate=&quot;header&quot; let-columns&gt;
+        &lt;tr&gt;
+          &lt;th *ngFor=&quot;let col of columns&quot;&gt;{{col.title}}&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/ng-template&gt;
+      &lt;ng-template pTemplate=&quot;body&quot; let-rowData let-columns=&quot;columns&quot;&gt;
+        &lt;tr id=&quot;{{rowData.id}}&quot;&gt;
+          &lt;td *ngFor=&quot;let col of columns&quot;&gt;
+            &lt;span *ngIf=&quot;col.editable&quot;&gt;
+              &lt;input
+                type=&quot;{{ col.type }}&quot;
+                [(ngModel)]=&quot;rowData[col.data]&quot;
+                class=&quot;{{ col.class }}&quot;
+                [min]=&quot;0&quot;
+              /&gt;
+              {{ col.icon }}
+            &lt;/span&gt;
+            &lt;span *ngIf=&quot;!col.editable&quot;&gt; {{rowData[col.data]}} &lt;/span&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/ng-template&gt;
+    &lt;/p-table&gt;
+  &lt;/div&gt;
+  &lt;div *ngIf=&quot;parameters.length === 0&quot;&gt;
+    &lt;h3&gt;No parameters found&lt;/h3&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;buttons&quot;&gt;
+    &lt;button class=&quot;annuler&quot; (click)=&quot;goToAccueil()&quot;&gt;Annuler&lt;/button&gt;
+    &lt;button type=&quot;submit&quot; class=&quot;valider&quot; (click)=&quot;saveParameters(parameters)&quot;&gt;
+      Valider
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="dcn-dossier"><a class="header" href="#dcn-dossier">DCN-DOSSIER</a></h1>
+<p>The dcn dossier page of the LCF application. It is a child component of <a href="dcn/../shared/dossier-template.html">DOSSIER-TEMPLATE</a> component.</p>
+<h2 id="description-8"><a class="header" href="#description-8">Description:</a></h2>
+<p>The dcn dossier displays a <code>dossierForm</code> for user to fill. This <a href="dcn/../dcn/dcn-dossier.html">DCN</a> dossier version could be considered as an <code>administration</code> of the <a href="dcn/../club/club-dossier.html">CLUB</a> version. This means everything a club can do, so does the <code>DCN</code> and more.</p>
+<h2 id="files-8"><a class="header" href="#files-8">Files:</a></h2>
+<pre><code class="language-ignore">dcn-dossier.component.html
+dcn-dossier.component.scss
+dcn-dossier.component.ts
+</code></pre>
+<h2 id="functionalities-8"><a class="header" href="#functionalities-8">Functionalities:</a></h2>
+<h3 id="general-8"><a class="header" href="#general-8">General:</a></h3>
+<pre><code class="language-ts">override ngOnInit(): void {
+  this.checkSaNoFromUrl();
+  this.getClCodFromUrl();
+  this.getCompetIdFromUrl();
+  this.storageService.showSaisonBox$.next(false); // hide saisonBox
+  if (!this.isEmpty(this.storageService.terrains)) {
+    this.updateTerrainsRattachesArray();
+  } else {
+    this.backupTerrains();
+  }
+  this.dossier = this.storageService.selectedDossier;
+  if (this.isEmpty(this.dossier)) {
+    this.backupDossier();
+  }
+  this.setupDossierContent();
+  this.spawnDcnStatusDossierHandler();
+}
+</code></pre>
+<p>Overriding <a href="dcn/../shared/dossier-template.html#general">ngOnInit</a> of <a href="dcn/../shared/dossier-template.html">DOSSIER-TEMPLATE</a>. The definition of some functions can be found here if they aren't included in <a href="dcn/../shared/dossier-template.html">DOSSIER-TEMPLATE</a> page.</p>
+<h3 id="specific-5"><a class="header" href="#specific-5">Specific:</a></h3>
+<h4 id="getclcodfromurl"><a class="header" href="#getclcodfromurl">getClCodFromUrl</a></h4>
+<pre><code class="language-ts">private getClCodFromUrl() {
+    const cl_cod_url = Number(this.route.snapshot.paramMap.get('cl_cod'));
+    if (this.storageService.cl_cod !== cl_cod_url) {
+      this.storageService.cl_cod = cl_cod_url;
+      console.log('cl_cod has been set with cl_cod in url!');
+    }
+  }
+</code></pre>
+<p>This function retrieves the <code>cl_cod</code> string in url at put it into <code>storage</code>.</p>
+<h4 id="backupterrains"><a class="header" href="#backupterrains">backupTerrains</a></h4>
+<pre><code class="language-ts">/**
+ * Request `terrains` from backend then do `updateTerrainsRattachesArray` function
+ */
+private backupTerrains() {
+  this.subs.sink = this.dossierService
+    .requestTerrainsAttachesAuxClubs(this.storageService.cl_cod)
+    .subscribe({
+      next: (terrains: any) =&gt; {
+        this.storageService.terrains = terrains;
+        this.updateTerrainsRattachesArray();
+        console.log('backupTerrainsAttaches: ', terrains);
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>This function requests <code>terrains</code> from backend then do the <a href="dcn/../shared/dossier-template.html#updateterrainsrattachesarray">updateTerrainsRattachesArray</a> function</p>
+<h4 id="isacumulcriterepointnull"><a class="header" href="#isacumulcriterepointnull">isACumulCriterePointNull</a></h4>
+<pre><code class="language-ts">private isACumulCriterePointNull(dossierForm: FormGroup) {
+  let foundNull: boolean = false;
+  for (let formField of UtilsService.cumulArray) {
+    let criteresField = dossierForm.get(formField) as FormGroup;
+
+    if (
+      Object.keys(criteresField.controls).find(
+        (id: string) =&gt;
+          criteresField.get(id + '.nb_points_calcule')?.value === null
+      )
+    ) {
+      foundNull = true;
+      break;
+    }
+  }
+  return foundNull;
+}
+</code></pre>
+<p>This function verifies if there exists a critere cumulable that has a <code>null</code> points.</p>
+<h4 id="validerdossier"><a class="header" href="#validerdossier">validerDossier</a></h4>
+<pre><code class="language-ts">override validerDossier(): void {
+  let isValid = this.isDossierFormValid(this.dossierForm);
+  let eligibiliteValid = this.isEligibiliteInconValid();
+  if (this.dossier.id &amp;&amp; isValid &amp;&amp; eligibiliteValid) {
+    this.sendDossierToBackend(
+      true,
+      this.storageService.connectId,
+      'Validation réussi'
+    );
+  } else {
+    if (!this.dossier.id) {
+      console.error('dossier.id is undefined or null');
+      console.info('dossier info:', this.dossier);
+    } else if (!isValid) {
+      console.error('The dossierForm is invalid!');
+      console.info('dossierForm info:', this.dossierForm);
+    } else if (!eligibiliteValid) {
+      console.error(
+        'Le statut des critères incontournables doit être différent à &quot;à évaluer&quot;!'
+      );
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail:
+          'Le statut des critères incontournables doit être différent à &quot;à évaluer&quot;',
+      });
+    }
+  }
+}
+</code></pre>
+<p>This function overrides the original <a href="dcn/../shared/dossier-template.html#validerdossier">validerDossier</a>. This newly version will also add another stricter verification (if <code>Criteres Incontournables</code> eligibilite is valid) and then sending <code>dossier</code> to backend.</p>
+<h4 id="validerdecision"><a class="header" href="#validerdecision">validerDecision</a></h4>
+<pre><code class="language-ts">validerDecision() {
+  this.updateDecisionValidators();
+  let eligibiliteValid = this.isEligibiliteInconValid();
+  let isDossierValid = this.isDossierFormValid(this.dossierForm);
+  if (this.decisionForm.valid &amp;&amp; isDossierValid &amp;&amp; eligibiliteValid) {
+    this.sendDecisionToBackend('Decision envoyé');
+    this.closeBothConfirmAndDecisionModal();
+  } else {
+    if (!this.decisionForm.valid)
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail: 'Decision est invalide',
+      });
+    else if (!eligibiliteValid) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erreur',
+        detail:
+          'Le statut des critères incontournables doit être différent à &quot;à évaluer&quot;',
+      });
+    }
+    this.closeConfirmOpenModal();
+  }
+}
+</code></pre>
+<p>This function checks if the <code>dossierForm</code> is valid, it also checks <code>Criteres Incontournables</code> eligibilite and then sending the <code>decisionForm</code> to backend. This function will later be used in <a href="dcn/dcn-dossier.html#makedecision">makeDecision</a>.</p>
+<h4 id="iseligibiliteinconvalid"><a class="header" href="#iseligibiliteinconvalid">isEligibiliteInconValid</a></h4>
+<pre><code class="language-ts">private isEligibiliteInconValid() {
+  if (this.eligibleOfIncon$.value === EligibiliteEnum.A_EVALUER) return false;
+  else return true;
+}
+</code></pre>
+<p>This function checks if <code>Criteres Incontournables</code> eligibilite is valid.</p>
+<h4 id="updatedecisionvalidators"><a class="header" href="#updatedecisionvalidators">updateDecisionValidators</a></h4>
+<pre><code class="language-ts">private updateDecisionValidators() {
+  // if not refus, reset commentaire and motif
+  if (this.decisionForm.value.decision !== 2) {
+    this.decisionForm.patchValue({
+      commentaire: '',
+      motif_decision: null,
+    });
+    this.decisionForm.get('motif_decision')?.clearValidators();
+    this.decisionForm.get('commentaire')?.clearValidators();
+  } else {
+    this.decisionForm
+      .get('motif_decision')
+      ?.setValidators(Validators.required);
+    this.decisionForm.get('commentaire')?.setValidators(Validators.required);
+  }
+  this.decisionForm.get('motif_decision')?.updateValueAndValidity();
+  this.decisionForm.get('commentaire')?.updateValueAndValidity();
+}
+</code></pre>
+<p>This function applies rules for updating <code>Validators</code> for <code>decisionForm</code>.</p>
+<h4 id="senddecisiontobackend"><a class="header" href="#senddecisiontobackend">sendDecisionToBackend</a></h4>
+<pre><code class="language-ts">private sendDecisionToBackend(success_message: string) {
+  this.subs.sink = this.dossierService
+    .sendDecision(
+      Number(this.dossier.id),
+      this.decisionForm
+    )
+    .pipe(
+      switchMap((send_decision_response: any) =&gt; {
+        console.log(
+          'dossier is sent, send_dossier_response:',
+          send_decision_response
+        );
+        return this.dossierService.requestDossier(
+          this.storageService.selectedSaisonSaNo,
+          this.storageService.cl_cod,
+          this.storageService.competId
+        );
+      })
+    )
+    .subscribe({
+      next: (dossier: Dossier) =&gt; {
+        this.storageService.selectedDossier = dossier;
+        console.log('storage.dossier: ', dossier);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Succès',
+          detail: success_message,
+        });
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>This function sends <code>decisionForm</code> to backend and then updating the <code>dossier</code> in <code>storage</code>.</p>
+<h4 id="resetmotifdecision"><a class="header" href="#resetmotifdecision">resetMotifDecision</a></h4>
+<pre><code class="language-ts">resetMotifDecision() {
+  this.decisionForm.patchValue({ motif_decision: null, commentaire: '' });
+}
+</code></pre>
+<p>This function resets the <code>motif</code> field inside the <code>decisionForm</code>. It is used when user changing their <code>decision</code> in <code>decisionForm</code>.</p>
+<h4 id="spawndcnstatusdossierhandler"><a class="header" href="#spawndcnstatusdossierhandler">spawnDcnStatusDossierHandler</a></h4>
+<pre><code class="language-ts">private spawnDcnStatusDossierHandler() {
+  this.subs.sink = this.storageService.selectedDossier$
+    .pipe(distinctUntilChanged())
+    .subscribe({
+      next: (dossier: Dossier) =&gt; {
+        if (dossier.id_statuts_dossier_fk === DossierStatusEnum.CLOS) {
+          this.disableDossierForm();
+        }
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>This function spawns a <code>dcn</code> version of dossier status handler. We only disable the <code>dossierForm</code> if and only if the dossier status is <code>CLOS</code>.</p>
+<h4 id="reopendossier"><a class="header" href="#reopendossier">reOpenDossier</a></h4>
+<pre><code class="language-ts">reOpenDossier() {
+  this.subs.sink = this.dossierService
+    .requestReOpenDossier(Number(this.dossier.id))
+    .pipe(
+      switchMap((reopen_response: any) =&gt; {
+        console.log('reopen_response:', reopen_response);
+        return this.dossierService.requestDossier(
+          this.storageService.selectedSaisonSaNo,
+          this.storageService.cl_cod,
+          this.storageService.competId
+        );
+      })
+    )
+    .subscribe({
+      next: (dossier: Dossier) =&gt; {
+        this.storageService.selectedDossier = dossier;
+        this.enableDossierForm();
+        console.log('storage.dossier:', dossier);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Succès',
+          detail: 'Dossier est réouvert',
+        });
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>This function allows <code>dcn</code> user to unlock a <code>CLOS</code> dossier. After unlocking, the dossier status will becomes <code>EN COURS</code>.</p>
+<h4 id="makedecision"><a class="header" href="#makedecision">makeDecision</a></h4>
+<pre><code class="language-ts">/**
+ * open decision modal only when `eligibiliteOfIncon` is diffenrent from `a_evaluer` and `refus_piece`
+ */
+makeDecision() {
+  if (
+    [1, 4].includes(this.eligibleOfIncon$.value) ||
+    this.isACumulCriterePointNull(this.dossierForm)
+  ) {
+    this.validerDossier();
+  } else {
+    this.showModal = true;
+  }
+}
+</code></pre>
+<p>This function is called after user click on <code>decision</code> button. If <code>dossier</code> status is different of <code>a evaluer</code> and <code>refus piece</code> and there is no <code>null points</code> critere cumulable, we open the <code>decisionForm</code> modal. Else, execute <a href="dcn/dcn-dossier.html#validerdossier">validerDossier</a> function.</p>
+<h3 id="html-7"><a class="header" href="#html-7">HTML:</a></h3>
+<pre><code class="language-html">&lt;div
+  class=&quot;content-pages&quot;
+  *ngIf=&quot;storageService.selectedDossier$ | async; let dossier&quot;
+&gt;
+  &lt;form action=&quot;traitement.php&quot;&gt;
+    &lt;div class=&quot;entete grid&quot; [ngClass]=&quot;compet_id_icon&quot;&gt;
+      &lt;div class=&quot;mr-5&quot;&gt;
+        &lt;img
+          class=&quot;icon-logo&quot;
+          [src]=&quot;dossier.icon_url&quot;
+          alt=&quot;icon-competition&quot;
+        /&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;h2&gt;Licence « Club Fédéral »&lt;/h2&gt;
+        &lt;h1 *ngIf=&quot;user&quot;&gt;{{storageService.cl_cod}} - {{dossier.cl_nom}}&lt;/h1&gt;
+        &lt;h4 [ngClass]=&quot;dossier_status_color&quot;&gt;
+          {{dossier.status_dossier_libelle | titlecase}}
+        &lt;/h4&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;content&quot;&gt;
+      &lt;h3&gt;&lt;span&gt;&lt;/span&gt;INFORMATIONS GÉNÉRALES&lt;/h3&gt;
+      &lt;div class=&quot;info&quot;&gt;
+        &lt;div&gt;
+          &lt;span class=&quot;bold&quot;&gt;Équipe&lt;/span&gt;
+          &lt;span class=&quot;blue&quot;&gt;So Romorantin 1&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;span class=&quot;bold&quot;&gt;Ligue d’appartenance&lt;/span&gt;
+          &lt;span class=&quot;blue&quot;&gt;2100 - Ligue du Centre Val-de-Loire&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div
+        class=&quot;form-content&quot;
+        [formGroup]=&quot;$any(dossierForm.get('info_general'))&quot;
+      &gt;
+        &lt;h5&gt;Référent club&lt;/h5&gt;
+        &lt;div class=&quot;ref&quot;&gt;
+          &lt;div class=&quot;ref-item&quot;&gt;
+            &lt;label for=&quot;name&quot;&gt;Nom*&lt;/label&gt;
+            &lt;input
+              type=&quot;text&quot;
+              id=&quot;name&quot;
+              placeholder=&quot;Saisissez votre nom&quot;
+              formControlName=&quot;nom&quot;
+            /&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;ref-item&quot;&gt;
+            &lt;label for=&quot;post-name&quot;&gt;Prénom*&lt;/label&gt;
+            &lt;input
+              type=&quot;text&quot;
+              id=&quot;post-name&quot;
+              placeholder=&quot;Saisissez votre prénom&quot;
+              formControlName=&quot;prenom&quot;
+            /&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;email ref-item&quot;&gt;
+            &lt;label for=&quot;email&quot;&gt;Email*&lt;/label&gt;
+            &lt;input
+              type=&quot;text&quot;
+              id=&quot;email&quot;
+              placeholder=&quot;Saisissez votre email&quot;
+              formControlName=&quot;email&quot;
+            /&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;phone ref-item&quot;&gt;
+            &lt;label for=&quot;phone&quot;&gt;Téléphone*&lt;/label&gt;
+            &lt;input
+              type=&quot;text&quot;
+              id=&quot;phone&quot;
+              placeholder=&quot;Saisissez votre téléphone&quot;
+              formControlName=&quot;tel&quot;
+            /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;h5&gt;Autorisations&lt;/h5&gt;
+        &lt;label class=&quot;check&quot;&gt;
+          &lt;span&gt;
+            Le club souhaite obtenir la Licence « Club Fédéral » et confirme
+            ainsi son adhésion au dispositif, que l’ensemble des documents sont
+            exacts, qu’il autorise la FFF à examiner lesdits documents et à
+            procéder, si besoin, à une visite dans les locaux du club.
+          &lt;/span&gt;
+          &lt;input id=&quot;autorite&quot; type=&quot;checkbox&quot; formControlName=&quot;autorisation&quot; /&gt;
+          &lt;span for=&quot;autorite&quot; class=&quot;checkmark&quot;&gt;&lt;/span&gt;
+        &lt;/label&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div
+      *ngFor=&quot;let critere_big_title of ['CRITÈRES INCONTOURNABLES','CRITÈRES CUMULABLES']; let i = index&quot;
+    &gt;
+      &lt;div class=&quot;content margTop30&quot;&gt;
+        &lt;div class=&quot;rub&quot;&gt;
+          &lt;h3&gt;
+            &lt;span&gt;&lt;/span&gt;{{critere_big_title}}&lt;em class=&quot;pts&quot;&gt;
+              (5000 POINTS)&lt;/em
+            &gt;
+          &lt;/h3&gt;
+          &lt;div&gt;
+            &lt;span class=&quot;line&quot;&gt;&lt;/span&gt;
+            &lt;span
+              class=&quot;statut&quot;
+              customStyle
+              [evaluation]=&quot;i === 0 ? (eligibleOfIncon$ | async) : 2 &quot;
+            &gt;
+              {{ i === 0 ? (eligibleOfIncon$ | async | customString:
+              storageService.connectId) : (sumOfCumulable$ | async) + ' points'
+              }}
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;content-dossier&quot;&gt;
+          &lt;div&gt;
+            &lt;div
+              *ngFor=&quot;let critere_small_title of critereTitleArray[i]; let j = index&quot;
+            &gt;
+              &lt;div class=&quot;grid&quot;&gt;
+                &lt;h5 class=&quot;col-9&quot; [ngClass]=&quot;{nomarg: j === 0}&quot;&gt;
+                  {{critere_small_title}}
+                &lt;/h5&gt;
+                &lt;span
+                  *ngIf=&quot;j === 0&quot;
+                  class=&quot;responsiveHide eval col-3 text-center&quot;
+                  &gt;Évaluation&lt;/span
+                &gt;
+              &lt;/div&gt;
+              &lt;div *ngIf=&quot;critereBigArray&quot;&gt;
+                &lt;div
+                  *ngFor=&quot;let critere of critereBigArray[i][j]&quot;
+                  [ngSwitch]=&quot;critere.code&quot;
+                &gt;
+                  &lt;div&gt;
+                    &lt;lcf-file
+                      *ngSwitchCase=&quot;'PJ'&quot;
+                      (uploadFileCarrier)=&quot;uploadFile($event, critereNameArray[i][j], critere.id)&quot;
+                      (downloadFileCarrier)=&quot;downloadFile($event)&quot;
+                      [fileForm]=&quot;$any(dossierForm.get(critereNameArray[i][j] + '.' + critere.id.toString()))&quot;
+                    &gt;
+                    &lt;/lcf-file&gt;
+                    &lt;lcf-terrain
+                      *ngSwitchCase=&quot;'TERRAIN'&quot;
+                      [terrainForm]=&quot;$any(dossierForm.get(critereNameArray[i][j]+ '.' + critere.id.toString())) &quot;
+                      [terrains]=&quot;terrains&quot;
+                    &gt;
+                    &lt;/lcf-terrain&gt;
+                    &lt;lcf-radio
+                      *ngSwitchCase=&quot;'RB'&quot;
+                      [radioForm]=&quot;$any(dossierForm.get(critereNameArray[i][j]+ '.' + critere.id.toString()))&quot;
+                    &gt;
+                    &lt;/lcf-radio&gt;
+                    &lt;lcf-wbs
+                      *ngSwitchCase=&quot;'WBS'&quot;
+                      [wbsForm]=&quot;$any(dossierForm.get(critereNameArray[i][j]+ '.' + critere.id.toString()))&quot;
+                    &gt;&lt;/lcf-wbs&gt;
+                    &lt;lcf-radio-three
+                      *ngSwitchCase=&quot;'RB3'&quot;
+                      [radioForm]=&quot;$any(dossierForm.get(critereNameArray[i][j]+ '.' + critere.id.toString()))&quot;
+                    &gt;
+                    &lt;/lcf-radio-three&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;hr
+                  class=&quot;part&quot;
+                  *ngIf=&quot;critere_small_title !== critereTitleArray[i][critereTitleArray[i].length - 1]&quot;
+                /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;content margTop30&quot;&gt;
+      &lt;div class=&quot;rub&quot;&gt;
+        &lt;span class=&quot;arrow&quot;
+          &gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;assets/img/arrow2-down.png&quot; alt=&quot;Fermer&quot; /&gt;&lt;/a
+        &gt;&lt;/span&gt;
+        &lt;h3&gt;&lt;span&gt;&lt;/span&gt;SIMULATION *&lt;/h3&gt;
+        &lt;div class=&quot;spe&quot;&gt;
+          &lt;span class=&quot;line&quot;&gt;&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;content-dossier desk&quot;&gt;
+        &lt;div class=&quot;contG&quot;&gt;
+          &lt;h5 class=&quot;reg nomarg&quot;&gt;Critères Incontournables&lt;/h5&gt;
+          &lt;h5 class=&quot;reg margTop2Rem&quot;&gt;Critères Cumulables&lt;/h5&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;contD crit nobd&quot;&gt;
+          &lt;span
+            class=&quot;statut reg nomarg&quot;
+            customStyle
+            [evaluation]=&quot;eligibleOfIncon$ | async&quot;
+          &gt;
+            {{eligibleOfIncon$ | async | customString: storageService.connectId
+            }} - {{(eligibleOfIncon$ | async) === 2 ? 5000 : 0}} point&lt;/span
+          &gt;
+          &lt;span class=&quot;statut reg green&quot;
+            &gt;{{ sumOfCumulable$ | async}} points&lt;/span
+          &gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;hr class=&quot;part&quot; /&gt;
+      &lt;div class=&quot;content-dossier desk&quot;&gt;
+        &lt;div class=&quot;contG&quot;&gt;
+          &lt;h5 class=&quot;margTop2Rem&quot;&gt;Éligibilité&lt;/h5&gt;
+          &lt;h5 class=&quot;margTop2Rem&quot;&gt;Aide financière&lt;/h5&gt;
+          &lt;em class=&quot;ment&quot;
+            &gt;* La simulation ne présente pas de caractère officiel et reste
+            indicative, dans l’attente de décision définitive du BELFA.&lt;/em
+          &gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;contD crit2 nobd&quot;&gt;
+          &lt;span
+            class=&quot;statut reg&quot;
+            customStyle
+            [evaluation]=&quot;eligibleOfIncon$ | async&quot;
+          &gt;
+            {{eligibleOfIncon$ | async | customString: storageService.connectId
+            }} - {{totalPoints$ | async}} points&lt;/span
+          &gt;
+
+          &lt;span
+            class=&quot;statut big&quot;
+            *ngIf=&quot;aideFinanciere$ | async; let aideFinan&quot;
+            &gt;{{aideFinan.pourcentage}}% - {{aideFinan.totalAide}}€&lt;/span
+          &gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div
+      class=&quot;buttons&quot;
+      *ngIf=&quot;dossier.id_statuts_dossier_fk !== 3; else reopenButton&quot;
+    &gt;
+      &lt;button class=&quot;valider&quot; (click)=&quot;showForm()&quot;&gt;ShowForm&lt;/button&gt;
+      &lt;button class=&quot;valider&quot; (click)=&quot;isFormValid()&quot;&gt;isFormValid&lt;/button&gt;
+      &lt;button
+        class=&quot;valider&quot;
+        *ngIf=&quot;dossier.id_statuts_dossier_fk !== 4&quot;
+        (click)=&quot;saveDossier()&quot;
+      &gt;
+        Enregistrer
+      &lt;/button&gt;
+      &lt;button class=&quot;valider&quot; (click)=&quot;makeDecision()&quot;&gt;Decision&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;ng-template #reopenButton&gt;
+      &lt;div class=&quot;buttons&quot;&gt;
+        &lt;button class=&quot;valider&quot; (click)=&quot;reOpenDossier()&quot;&gt;Réouverture&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/ng-template&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;ModalGen&quot; class=&quot;modal&quot; [ngClass]=&quot;{'show': showModal}&quot;&gt;
+  &lt;div class=&quot;modal-background&quot; (click)=&quot;closeModal($event)&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;modal-content&quot;&gt;
+    &lt;span class=&quot;close&quot;
+      &gt;&lt;a href=&quot;#&quot; (click)=&quot;closeModal($event)&quot;&gt;&amp;nbsp;&lt;/a&gt;&lt;/span
+    &gt;
+    &lt;div
+      class=&quot;content&quot;
+      *ngIf=&quot;storageService.selectedDossier$| async; let dossier&quot;
+      [formGroup]=&quot;decisionForm&quot;
+    &gt;
+      &lt;h3&gt;&lt;span&gt;&lt;/span&gt;DÉCISION BELFA&lt;/h3&gt;
+      &lt;div class=&quot;ent&quot;&gt;
+        &lt;div&gt;
+          &lt;span class=&quot;bold margBot10&quot;&gt;Date décision&lt;/span&gt;
+          &lt;input
+            class=&quot;blue&quot;
+            type=&quot;date&quot;
+            formControlName=&quot;date_decision&quot;
+            [ngClass]=&quot;{'input-error': addDateDecisionControl &amp;&amp; !decisionForm.controls.date_decision.valid}&quot;
+            value=&quot;{{dossier.belfa_date | date: 'dd/MM/yyyy'}}&quot;
+          /&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;span class=&quot;bold margBot10&quot;&gt;Décision&lt;/span&gt;
+
+          &lt;select
+            class=&quot;blue&quot;
+            formControlName=&quot;decision&quot;
+            (change)=&quot;resetMotifDecision()&quot;
+          &gt;
+            &lt;option value=&quot;null&quot; disabled selected&gt;
+              Sélectionner décision
+            &lt;/option&gt;
+            &lt;option
+              *ngFor=&quot;let decision of storageService.filtres.decisions&quot;
+              [ngValue]=&quot;decision.id&quot;
+            &gt;
+              {{decision.libelle}}
+            &lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;margTop10&quot; *ngIf=&quot;decisionForm.value.decision === 2&quot;&gt;
+        &lt;span class=&quot;bold margBot10&quot;&gt;Motif&lt;/span&gt;
+        &lt;select class=&quot;blue&quot; formControlName=&quot;motif_decision&quot;&gt;
+          &lt;option value=&quot;Sélectionner decision&quot; disabled selected&gt;
+            Sélectionner motif
+          &lt;/option&gt;
+          &lt;option
+            *ngFor=&quot;let motif of storageService.filtres.motifs&quot;
+            [ngValue]=&quot;motif.id&quot;
+          &gt;
+            {{motif.libelle}}
+          &lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;margTop10&quot; *ngIf=&quot;decisionForm.value.decision === 2&quot;&gt;
+        &lt;span class=&quot;bold margBot10&quot;&gt;Commentaire&lt;/span&gt;
+        &lt;textarea class=&quot;blue&quot; formControlName=&quot;commentaire&quot;&gt;
+{{dossier.belfa_commentaire}}&lt;/textarea
+        &gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;buttons&quot;&gt;
+      &lt;button class=&quot;valider&quot; (click)=&quot;openConfirmCloseModal()&quot;&gt;Valider&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;ModalGen2&quot; class=&quot;modal&quot; [ngClass]=&quot;{'show': showConfirm}&quot;&gt;
+  &lt;div class=&quot;modal-background&quot; (click)=&quot;closeConfirmOpenModal()&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;modal-content&quot;&gt;
+    &lt;span class=&quot;close&quot; style=&quot;cursor: pointer;&quot;
+      &gt;&lt;a (click)=&quot;closeConfirmOpenModal()&quot;&gt;&amp;nbsp;&lt;/a&gt;&lt;/span
+    &gt;
+    &lt;div class=&quot;content&quot;&gt;
+      &lt;h3&gt;&lt;span&gt;&lt;/span&gt;Confirmation&lt;/h3&gt;
+      &lt;div&gt;Etes-vous sur avec votre decision?&lt;/div&gt;
+      &lt;div class=&quot;buttons&quot;&gt;
+        &lt;button class=&quot;annuler&quot; (click)=&quot;closeConfirmOpenModal()&quot;&gt;
+          Annuler
+        &lt;/button&gt;
+        &lt;button class=&quot;valider&quot; (click)=&quot;validerDecision()&quot;&gt;Valider&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="shared"><a class="header" href="#shared">SHARED</a></h1>
+<h2 id="description-9"><a class="header" href="#description-9">Description:</a></h2>
+<p>Shared folder is where all common and reusable components are stored.</p>
+<ul>
+<li><a href="./shared/dossier-template.html">DOSSIER-TEMPLATE</a></li>
+<li><a href="./shared/header.html">HEADER</a></li>
+<li><a href="./shared/sidenav.html">SIDENAV</a></li>
+<li><a href="./shared/page-not-found.html">PAGE-NOT-FOUND</a></li>
+<li><a href="./shared/lcf-file.html">LCF-FILE</a></li>
+<li><a href="./shared/lcf-terrain.html">LCF-TERRAIN</a></li>
+<li><a href="./shared/lcf-radio.html">LCF-RADIO</a></li>
+<li><a href="./shared/lcf-radio-three.html">LCF-RADIO-THREE</a></li>
+</ul>
+<h2 id="files-9"><a class="header" href="#files-9">Files:</a></h2>
+<pre><code class="language-ignore">shared
+|__dossier-template
+|  |__dossier-template.component.html
+|  |__dossier-template.component.ts
+|__header
+|  |__header.component.html
+|  |__header.component.scss
+|  |__header.component.ts
+|__side-nav
+|  |__side-nav.component.html
+|  |__side-nav.component.scss 
+|  |__side-nav.component.ts 
+|__page-not-found
+|  |__page-not-found.component.html
+|  |__page-not-found.component.scss
+|  |__page-not-found.component.ts
+|__lcf-file
+|  |__lcf-file.component.html
+|  |__lcf-file.component.scss
+|  |__lcf-file.component.ts
+|__lcf-radio
+|  |__lcf-radio.component.html
+|  |__lcf-radio.component.scss
+|  |__lcf-radio.component.ts
+|__lcf-radio-three
+|  |__lcf-radio-three.component.html
+|  |__lcf-radio-three.component.scss
+|  |__lcf-radio-three.component.ts
+|__lcf-terrain
+|  |__lcf-terrain.component.html
+|  |__lcf-terrain.component.scss
+|  |__lcf-terrain.component.ts
+|__lcf-wbs
+|  |__lcf-wbs.component.html
+|  |__lcf-wbs.component.scss
+|  |__lcf-wbs.component.ts
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="dossier-template"><a class="header" href="#dossier-template">DOSSIER-TEMPLATE</a></h1>
+<p>The template (parent component) for both <a href="shared/../dcn/dcn-dossier.html">DCN-DOSSIER</a> and <a href="shared/../club/club-dossier.html">CLUB-DOSSIER</a>.</p>
+<h2 id="description-10"><a class="header" href="#description-10">Description:</a></h2>
+<p>This component stores all core functionalities that will later be used by <a href="shared/../dcn/dcn-dossier.html">DCN-DOSSIER</a> component and <a href="shared/../club/club-dossier.html">CLUB-DOSSIER</a> component. These functionalities can be easily overriden if <a href="shared/../dcn/dcn-dossier.html">DCN-DOSSIER</a> or <a href="shared/../club/club-dossier.html">CLUB-DOSSIER</a> has different implementations from the original implementation.</p>
+<h2 id="files-10"><a class="header" href="#files-10">Files:</a></h2>
+<pre><code class="language-ignore">dossier-template.component.ts
+</code></pre>
+<h2 id="functionalities-9"><a class="header" href="#functionalities-9">Functionalities:</a></h2>
+<h3 id="general-9"><a class="header" href="#general-9">General:</a></h3>
+<pre><code class="language-ts">ngOnInit(): void {}
+</code></pre>
+<p>This is only a template that will later be used/overriden by <a href="shared/../dcn/dcn-dossier.html">DCN-DOSSIER</a> component and <a href="shared/../club/club-dossier.html">CLUB-DOSSIER</a> component. There will be no html or scss render by this component.</p>
+<h3 id="specific-6"><a class="header" href="#specific-6">Specific:</a></h3>
+<h4 id="initcriteresformandcriteresarrays"><a class="header" href="#initcriteresformandcriteresarrays">initCriteresFormAndCriteresArrays</a></h4>
+<pre><code class="language-ts">initCriteresFormAndCriteresArrays(criteres: Critere[]) {
+  for (let critere of criteres) {
+    this.initCriteresForm(this.dossierForm, critere);
+    switch (critere.id_ref_thematique_fk) {
+      case 1:
+        this.incon_struct_org.push(critere);
+        break;
+      case 2:
+        if (critere.id_ref_type_critere_fk === 1)
+          this.incon_insta_sport.push(critere);
+        else if (critere.id_ref_type_critere_fk === 2)
+          this.cumul_insta_sport.push(critere);
+        break;
+      case 3:
+        if (critere.id_ref_type_critere_fk === 1)
+          this.incon_trans_finan.push(critere);
+        else if (critere.id_ref_type_critere_fk === 2)
+          this.cumul_trans_finan.push(critere);
+        break;
+      case 4:
+        this.cumul_struct_equip.push(critere);
+        break;
+      case 5:
+        this.cumul_proj_sport.push(critere);
+        break;
+    }
+  }
+  // side effect: store all arrays in bigArray, later be used in html template
+  this.critereBigArray = [
+    [this.incon_struct_org, this.incon_insta_sport, this.incon_trans_finan],
+    [
+      this.cumul_insta_sport,
+      this.cumul_struct_equip,
+      this.cumul_trans_finan,
+      this.cumul_proj_sport,
+    ],
+  ];
+}
+</code></pre>
+<p>The objective of this function is to initiate the <a href="shared/dossier-template.html#initcriteresform"><code>criteresForm</code></a> of <code>dossierForm</code> and build a <code>critereBigArray</code> structure that match the dossier form in the UI. The <code>dossierForm</code> has the following structure:</p>
+<ul>
+<li>Criteres Incontournables (<code>id_ref_type_critere_fk === 1</code>):
+<ul>
+<li>Structuration et organisation du club</li>
+<li>Installations Sportives</li>
+<li>Transparence financière</li>
+</ul>
+</li>
+<li>Criteres Cumulables (<code>id_ref_type_critere_fk === 2</code>):
+<ul>
+<li>Installations Sportives</li>
+<li>Structuration des équipes et encadrement sportif</li>
+<li>Transparence financière</li>
+<li>Projet Sportif Jeunes</li>
+</ul>
+</li>
+</ul>
+<h4 id="updateterrainsrattachesarray"><a class="header" href="#updateterrainsrattachesarray">updateTerrainsRattachesArray</a></h4>
+<pre><code class="language-ts">/**
+   * Remove terrains with `te_nom` == `STADE EN SUPRESSION` and construct
+   * `title` field in order to display it in select box
+   */
+updateTerrainsRattachesArray() {
+  this.terrains = [];
+  for (let terrain of this.storageService.getTerrains) {
+    if (terrain.te_nom !== 'STADE EN SUPPRESSION')
+      this.terrains.push({
+        nni: terrain.nni,
+        classement_eclairage: terrain.classement_eclairage,
+        classement_installation: terrain.classement_installation,
+        title:
+          String(terrain.nni) +
+          ' - ' +
+          terrain.te_loca +
+          ' - ' +
+          terrain.te_nom,
+      });
+  }
+}
+</code></pre>
+<p>This function is used to build an array that contains all the <code>filtered</code> terrains attached to the club. It is used in the select dropdown box in the <code>html</code>. The filtered array is a list of terrains that has <code>te_nom</code> different from <code>STADE EN SUPPRESSION</code>. Also note that, the list of terrains in <code>storage</code> has already been sorted by <code>nni</code> in the backend so we don't need to sort them in the frontend.</p>
+<h4 id="initcriteresform"><a class="header" href="#initcriteresform">initCriteresForm</a></h4>
+<pre><code class="language-ts">private initCriteresForm(dossierForm: FormGroup, critere: Critere) {
+  switch (critere.id_ref_type_critere_fk) {
+    case 1: // incontournables
+      switch (critere.id_ref_thematique_fk) {
+        case 1: // struct_org
+          this.buildField('incon_struct_org', dossierForm, critere);
+          break;
+        case 2: // installation sportive
+          this.buildField('incon_insta_sport', dossierForm, critere);
+          break;
+        case 3: // transparence financiere
+          this.buildField('incon_trans_finan', dossierForm, critere);
+          break;
+      }
+      break;
+    case 2: // cumulables
+      switch (critere.id_ref_thematique_fk) {
+        // case 1: // struct_org
+        //   this.buildField('cumul_struct_org', dossierForm, critere);
+        //   break;
+        case 2: // installation sportive
+          this.buildField('cumul_insta_sport', dossierForm, critere);
+          break;
+        case 3: // transparence financiere
+          this.buildField('cumul_trans_finan', dossierForm, critere);
+          break;
+        case 4:
+          this.buildField('cumul_struct_equip', dossierForm, critere);
+          break;
+        case 5:
+          this.buildField('cumul_proj_sport', dossierForm, critere);
+          break;
+      }
+      break;
+  }
+}
+
+private buildField(
+  field_name: string,
+  dossierForm: FormGroup,
+  critere: Critere
+) {
+  switch (critere.code) {
+    case 'TERRAIN':
+      this.addTerrain(dossierForm, field_name, critere);
+      break;
+    case 'RB':
+      this.addRadio(dossierForm, field_name, critere);
+      break;
+    case 'RB3':
+      this.addRadioThree(dossierForm, field_name, critere);
+      break;
+    case 'PJ':
+      this.addFile(dossierForm, field_name, critere);
+      break;
+    case 'WBS':
+      this.addRadio(dossierForm, field_name, critere);
+      break;
+  }
+}
+
+private addTerrain(
+  dossierForm: FormGroup,
+  form_field: string,
+  critere: Critere
+) {
+  let fieldGroup = dossierForm.get(form_field) as FormGroup;
+
+  fieldGroup.addControl(
+    String(critere.id),
+    this.fb.group({
+      search: [''],
+      rattache: [critere.valeur],
+      terrain: [
+        critere.nni
+          ? {
+              classement_eclairage: critere.classement_eclairage,
+              classement_installation: critere.classement_installation,
+              nni: critere.nni,
+            }
+          : null,
+      ],
+      libelle: [critere.libelle],
+      id: [critere.id],
+      type: [critere.code],
+      eligibilite: [critere.eligibilite],
+      ref_eligibilite: [critere.eligibilite],
+      nb_points_calcule: [critere.nb_points_calcule],
+      nb_points_max: [critere.nb_points_max],
+      nb_points_min: [critere.nb_points_min],
+      code: [critere.id_ref_thematique_fk],
+      modification_manuelle: [critere.modification_manuelle],
+    })
+  );
+}
+
+private addRadio(
+  dossierForm: FormGroup,
+  form_field: string,
+  critere: Critere
+) {
+  let fieldGroup = dossierForm.get(form_field) as FormGroup;
+  fieldGroup.addControl(
+    String(critere.id),
+    this.fb.group({
+      valeur: [critere.valeur],
+      libelle: [critere.libelle],
+      id: [critere.id],
+      type: [critere.code],
+      eligibilite: [critere.eligibilite],
+      ref_eligibilite: [critere.eligibilite],
+      nb_points_calcule: [critere.nb_points_calcule],
+      nb_points_max: [critere.nb_points_max],
+      nb_points_min: [critere.nb_points_min],
+      code: [critere.id_ref_thematique_fk],
+    })
+  );
+}
+
+private addRadioThree(
+  dossierForm: FormGroup,
+  form_field: string,
+  critere: Critere
+) {
+  let fieldGroup = dossierForm.get(form_field) as FormGroup;
+  fieldGroup.addControl(
+    String(critere.id),
+    this.fb.group({
+      valeur: [critere.valeur],
+      libelle: [critere.libelle],
+      id: [critere.id],
+      type: [critere.code],
+      eligibilite: [critere.eligibilite],
+      ref_eligibilite: [critere.eligibilite],
+      nb_points_calcule: [critere.nb_points_calcule],
+      nb_points_max: [critere.nb_points_max],
+      nb_points_min: [critere.nb_points_min],
+      radio_label: [critere.radio_label],
+      code: [critere.id_ref_thematique_fk],
+    })
+  );
+}
+
+private addFile(
+  dossierForm: FormGroup,
+  form_field: string,
+  critere: Critere
+) {
+  let fieldGroup = dossierForm.get(form_field) as FormGroup;
+  fieldGroup.addControl(
+    String(critere.id),
+    this.fb.group({
+      statut_general: [critere.statut_manager_general],
+      file: [
+        null,
+        !critere.eligibilite || critere.eligibilite === 4
+          ? Validators.required
+          : null,
+      ],
+      azure_name: [critere.azure_name],
+      file_name: [critere.file_name],
+      new_file_name: [null],
+      ref_file_name: [critere.file_name],
+      libelle: [critere.libelle],
+      id: [critere.id],
+      type: [critere.code],
+      eligibilite: [critere.eligibilite],
+      ref_eligibilite: [critere.eligibilite], // previous status stored in database
+      motif_pj: [critere.motif_pj],
+      ref_motif_pj: [critere.motif_pj], // previous motif stored in database
+      code: [critere.id_ref_thematique_fk],
+    })
+  );
+}
+</code></pre>
+<p>Above are <code>critreresForm</code> dynamic building functions. Depending on the <code>critere.type</code> (PJ, TERRAIN, RB, RB3 or WBS), we'll generate the corresponding form control. It will be used together with <a href="shared/dossier-template.html#initinfogenerale">initInfoGenerale</a> to create a <code>dossierForm</code>.</p>
+<h4 id="initinfogenerale"><a class="header" href="#initinfogenerale">initInfoGenerale</a></h4>
+<pre><code class="language-ts">private initInfoGenerale() {
+  let info_general = this.dossierForm.get('info_general') as FormGroup;
+  info_general.patchValue({
+    nom: this.dossier.referent_nom,
+    prenom: this.dossier.referent_prenom,
+    email: this.dossier.referent_mail,
+    tel: this.dossier.referent_telephone,
+    autorisation: this.dossier.autorisation_adhesion,
+  });
+}
+</code></pre>
+<p>This function initiate the <code>Information Generale</code> field of <code>dossierForm</code>. It will later be used together with <a href="shared/dossier-template.html#initcriteresform">initCriteresForm</a> to create a <code>dossierForm</code></p>
+<h4 id="resetallcriterearrays"><a class="header" href="#resetallcriterearrays">resetAllCritereArrays</a></h4>
+<pre><code class="language-ts">/**
+ * In order to avoid the bug where child component rerenders 2 times,
+ * we reset all arrays before pushing new criteres to those arrays
+ */
+resetAllCritereArrays() {
+  this.incon_struct_org = [];
+  this.incon_insta_sport = [];
+  this.incon_trans_finan = [];
+  this.cumul_insta_sport = [];
+  this.cumul_trans_finan = [];
+  this.cumul_struct_equip = [];
+  this.cumul_proj_sport = [];
+}
+</code></pre>
+<p>This function resets all critere arrays. It is needed to overcome a known bug in Angular: <a href="https://github.com/angular/angular/issues/28330">https://github.com/angular/angular/issues/28330</a></p>
+<h4 id="isempty"><a class="header" href="#isempty">isEmpty</a></h4>
+<pre><code class="language-ts">/**
+ * Check if object is an empty array or an empty json
+ */
+isEmpty(object: any) {
+  if (object) return Object.keys(object).length === 0;
+  else return true;
+}
+</code></pre>
+<p>This is just a helper function which helps to detect whether an object is empty or not.</p>
+<h4 id="backupdossier"><a class="header" href="#backupdossier">backupDossier</a></h4>
+<pre><code class="language-ts">/**
+ * Request `dossier` from backend.
+ * In case not found, navigate to page `404`
+ */
+backupDossier() {
+  const sa_no = this.storageService.selectedSaisonSaNo;
+  const cl_cod = this.storageService.cl_cod;
+  const compet_id = this.storageService.competId;
+  this.subs.sink = this.dossierService
+    .requestDossier(sa_no, cl_cod, compet_id)
+    .pipe(takeUntil(this.storageService.globalUnsubscribe))
+    .subscribe({
+      next: (dossier: Dossier) =&gt; {
+        console.log('backupDossier: ', dossier);
+        this.dossier = dossier;
+        this.storageService.selectedDossier = dossier;
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+        this.router.navigate(['/', this.storageService.connectId, '404']);
+      },
+    });
+}
+</code></pre>
+<p>This function is called if and only if user refresh the dossier page. When the page is refreshed, <code>LCF</code> will reset its internal memory which leads to no <code>dossier</code> state in <code>storage</code>. Therefore, we have to get another <code>dossier</code> from backend and reput it into the frontend <code>storage</code>.</p>
+<h4 id="validerdossier-1"><a class="header" href="#validerdossier-1">validerDossier</a></h4>
+<pre><code class="language-ts">validerDossier() {
+  let isValid = this.isDossierFormValid(this.dossierForm);
+  if (this.dossier.id &amp;&amp; isValid) {
+    this.sendDossierToBackend(
+      true,
+      this.storageService.connectId,
+      'Validation réussi'
+    );
+  } else {
+    if (!this.dossier.id) {
+      console.error('dossier.id is undefined or null');
+      console.info('dossier info:', this.dossier);
+    } else if (!isValid) {
+      console.error('The dossierForm is invalid!');
+      console.info('dossierForm info:', this.dossierForm);
+    }
+  }
+}
+</code></pre>
+<p>This function is called after user click on <code>VALIDER</code> button on the <code>dossier</code> page. It will check if <code>dossierForm</code> is valid then send the <code>dossierForm</code> to backend.</p>
+<h4 id="savedossier"><a class="header" href="#savedossier">saveDossier</a></h4>
+<pre><code class="language-ts">/**
+ * save `dossier` without checking if form is valid
+ * still checking if info_general is valid though
+ */
+saveDossier() {
+  let info_general = this.dossierForm.get('info_general') as FormGroup;
+  let is_info_general_valid = this.isInfoGeneralValid(info_general);
+  if (this.dossier.id &amp;&amp; is_info_general_valid) {
+    this.sendDossierToBackend(
+      false,
+      this.storageService.connectId,
+      'Enregistrement réussi'
+    );
+  } else {
+    if (!this.dossier.id) {
+      console.error('dossier.id is undefined or null');
+      console.info('dossier info:', this.dossier);
+    } else if (!is_info_general_valid) {
+      console.error('The info_general is invalid!');
+      console.info(
+        'dossierForm info:',
+        this.dossierForm.controls['info_general']
+      );
+    }
+  }
+}
+</code></pre>
+<p>This function is called after user click on <code>ENREGISTRER</code> button on the <code>dossier</code> page. It will check only if <code>Information Generale</code> field is valid then send the <code>dossierForm</code> to backend.</p>
+<h4 id="senddossiertobackend"><a class="header" href="#senddossiertobackend">sendDossierToBackend</a></h4>
+<pre><code class="language-ts">sendDossierToBackend(
+  isDossierValid: boolean,
+  connectId: string,
+  success_message: string
+) {
+  this.subs.sink = this.dossierService
+    .sendDossier(
+      Number(this.dossier.id),
+      Number(this.dossier.id_statuts_dossier_fk),
+      this.dossierForm,
+      isDossierValid,
+      connectId,
+      this.eligibleOfIncon$.value,
+      this.sumOfCumulable$.value,
+      this.totalPoints$.value,
+      this.aideFinanciere$.value
+    )
+    .pipe(
+      switchMap((result: any) =&gt; {
+        console.log('backendResponse:', result);
+        const dossier$ = this.dossierService.requestDossier(
+          this.storageService.selectedSaisonSaNo,
+          this.storageService.cl_cod,
+          this.storageService.competId
+        );
+        const dossiers$ = this.dossierService.requestDossiers(
+          this.storageService.selectedSaisonSaNo,
+          this.storageService.cl_cod
+        );
+        return combineLatest([dossiers$, dossier$]);
+      })
+    )
+    .subscribe(([dossiers, dossier]) =&gt; {
+      console.log('storage.dossiers:', dossiers);
+      console.log('storage.selectedDossier:', dossier);
+      this.storageService.selectedDossier = dossier;
+      this.storageService.dossiers = dossiers;
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Succès',
+        detail: success_message,
+      });
+    });
+}
+</code></pre>
+<p>This function is used to send a <code>dossierForm</code> with some other important variables (.e.g <code>points calculation</code>) to backend and then retrieve a new <code>dossier</code> + <code>dossiers</code> from backend and put it into <code>storage</code>. It also allows us to customize the toastr <code>success_message</code> which appears after the <code>dossierForm</code> has been successfully sent.
+The <code>isDossierValid</code> parameter is just there to differentiate situations where user clicked on <code>ENREGISTRER</code> button (dossier not valid but it's ok to be sent) or <code>VALIDER</code> button.</p>
+<div class="table-wrapper"><table><thead><tr><th></th><th>VALIDER</th><th>ENREGISTRER</th></tr></thead><tbody>
+<tr><td>isDossierValid</td><td>true</td><td>false</td></tr>
+</tbody></table>
+</div>
+<h4 id="isdossierformvalid"><a class="header" href="#isdossierformvalid">isDossierFormValid</a></h4>
+<pre><code class="language-ts">isDossierFormValid(dossierForm: FormGroup): boolean {
+  let info_general = dossierForm.get('info_general') as FormGroup;
+  let validToken1 = this.isInfoGeneralValid(info_general);
+  let validToken2: boolean = true;
+  for (let formField of UtilsService.fieldArray) {
+    let criteresField = dossierForm.get(formField) as FormGroup;
+    validToken2 =
+      this.isCritereValid(criteresField, formField) &amp;&amp; validToken2;
+  }
+  return validToken1 &amp;&amp; validToken2;
+}
+</code></pre>
+<p>This function return whether or not a dossier is <code>valid</code>.</p>
+<h4 id="isinfogeneralvalid"><a class="header" href="#isinfogeneralvalid">isInfoGeneralValid</a></h4>
+<pre><code class="language-ts">private isInfoGeneralValid(info_general: FormGroup): boolean {
+  let validToken: boolean = true;
+  // check validity of nom and prenom
+
+  for (let field of ['nom', 'prenom']) {
+    if (
+      !info_general.controls[field].valid &amp;&amp;
+      info_general.controls[field].enabled
+    ) {
+      this.messageService.add({
+        severity: 'error',
+        summary: UtilsService.toReadableString(field) + ' Incomplet',
+        detail: 'Veuillez saisir le ' + field + ' du référent du dossier',
+        // sticky: true,
+      });
+      validToken = false;
+    }
+  }
+
+  // check validity of email
+  if (
+    !info_general.controls['email'].valid &amp;&amp;
+    info_general.controls['email'].enabled
+  ) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Email Invalide',
+      detail: 'Mail du référent invalide',
+      // sticky: true,
+    });
+    validToken = false;
+  }
+
+  // check validity of telephone
+  if (
+    !info_general.controls['tel'].valid &amp;&amp;
+    info_general.controls['tel'].enabled
+  ) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Telephone Invalide',
+      detail:
+        'Numéro de téléphone invalide. Caractères autorisés: chiffres, +, -, (), espaces',
+      // sticky: true,
+    });
+    validToken = false;
+  }
+
+  // check validity of autorisation
+  if (
+    !info_general.controls['autorisation'].valid &amp;&amp;
+    info_general.controls['autorisation'].enabled
+  ) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Autorisations Incomplet',
+      detail:
+        &quot;Veuillez accepter les mentions d'autorisation FFF en haut de la page&quot;,
+      // sticky: true,
+    });
+    validToken = false;
+  }
+
+  return validToken;
+}
+</code></pre>
+<p>This function returns whether or not the <code>Information Generale</code> field is valid. It will later be used in <a href="shared/dossier-template.html#isdossierformvalid">isDossierFormValid</a> function. Note that, a <code>disabled</code> field will be considered as <code>valid</code> too.</p>
+<h4 id="iscriterevalid"><a class="header" href="#iscriterevalid">isCritereValid</a></h4>
+<pre><code class="language-ts">private isCritereValid(criteresField: FormGroup, formField: string): boolean {
+  let validToken = true;
+  Object.keys(criteresField.controls).forEach((id: string, index: number) =&gt; {
+    let position = index + 1;
+    switch (criteresField.get([id, 'type'])?.value) {
+      case 'PJ':
+        if (
+          !criteresField.get([id, 'file'])?.valid &amp;&amp;
+          criteresField.get([id, 'file'])?.enabled
+        ) {
+          this.messageService.add({
+            severity: 'error',
+            summary:
+              UtilsService.toReadableString(formField) +
+              ': Critère ' +
+              position +
+              ' Incomplet',
+            detail: 'Veuillez insérer une pièce jointe',
+            // sticky: true,
+          });
+          validToken = false;
+        }
+        break;
+
+      case 'TERRAIN':
+        if (
+          !criteresField.get([id, 'terrain'])?.valid &amp;&amp;
+          criteresField.get([id, 'terrain'])?.enabled
+        ) {
+          this.messageService.add({
+            severity: 'error',
+            summary:
+              UtilsService.toReadableString(formField) +
+              ': Critère ' +
+              position +
+              ' Incomplet',
+            detail:
+              'Vous devez sélectionner une installation dans la liste déroulante, ou cliquer sur &quot;Pas d\'installation&quot;',
+            // sticky: true,
+          });
+          validToken = false;
+        }
+        break;
+
+      case 'RB':
+        if (
+          !criteresField.get([id, 'valeur'])?.valid &amp;&amp;
+          criteresField.get([id, 'valeur'])?.enabled
+        ) {
+          this.messageService.add({
+            severity: 'error',
+            summary:
+              UtilsService.toReadableString(formField) +
+              ': Critère ' +
+              position +
+              ' Incomplet',
+            detail: 'Vous devez donner une réponse (Oui ou Non)',
+            // sticky: true,
+          });
+          validToken = false;
+        }
+        break;
+
+      case 'RB3':
+        if (
+          !criteresField.get([id, 'valeur'])?.valid &amp;&amp;
+          criteresField.get([id, 'valeur'])?.enabled
+        ) {
+          this.messageService.add({
+            severity: 'error',
+            summary:
+              UtilsService.toReadableString(formField) +
+              ': Critère ' +
+              position +
+              ' Incomplet',
+            detail: 'Vous devez donner une réponse (Oui ou Non)',
+            // sticky: true,
+          });
+          validToken = false;
+        }
+        break;
+
+      case 'WBS':
+        //TODO
+        break;
+    }
+  });
+  return validToken;
+}
+</code></pre>
+<p>This function returns whether or not a <code>Critere</code> field is valid. It will later be used in <a href="shared/dossier-template.html#isdossierformvalid">isDossierFormValid</a> function. Note that, a <code>disabled</code> field will be considered as <code>valid</code> too. If a <code>critere</code> is not valid, we provide an error message indicates which and where the invalid event occurs. Putting the <code>formField</code> into function <a href="shared/">toReadableString</a> will result in a more comprehensive critere location message.</p>
+<h4 id="setcompetidicon"><a class="header" href="#setcompetidicon">setCompetIdIcon</a></h4>
+<pre><code class="language-ts">// set up classes with conditions later be used by ngClass in the html template
+setCompetIdIcon() {
+  this.compet_id_icon = {
+    national: Number(this.dossier.id_ref_competitions_fk) &gt;= 1,
+    feminin: this.dossier.id_ref_competitions_fk === 4,
+    futsal: this.dossier.id_ref_competitions_fk === 5,
+  };
+}
+</code></pre>
+<p>This function sets up a ngClass for competition icon later be used in the html template.</p>
+<h4 id="setdossierstatuscolor"><a class="header" href="#setdossierstatuscolor">setDossierStatusColor</a></h4>
+<pre><code class="language-ts">// set up classes with conditions later be used by ngClass in the html template
+setDossierStatusColor() {
+  this.dossier_status_color = {
+    red: this.dossier.id_statuts_dossier_fk === 1,
+    yellow: this.dossier.id_statuts_dossier_fk === 2,
+    green: this.dossier.id_statuts_dossier_fk === 3,
+  };
+}
+</code></pre>
+<p>This function sets up a ngClass for dossier statut color later be used in the html template.</p>
+<h4 id="checksanofromurl-4"><a class="header" href="#checksanofromurl-4">checkSaNoFromUrl</a></h4>
+<pre><code class="language-ts">/**
+ * Check `sa_no` from `url` is in range of `user.saisons.sa_no`.
+ * If true, set `selectedSaison` in `Store` to `sa_no`.
+ * If false, navigate to page 404
+ */
+checkSaNoFromUrl(): void {
+  const saisonSaNoFromUrl = Number(this.route.snapshot.paramMap.get('sa_no'));
+  this.user = this.storageService.user;
+  if (this.storageService.checkSaisonInRange(this.user, saisonSaNoFromUrl)) {
+    this.storageService.selectedSaisonSaNo = saisonSaNoFromUrl;
+  } else {
+    this.router.navigate(['/', this.storageService.connectId, '404']);
+  }
+}
+</code></pre>
+<p>This function check <code>sa_no</code> from <code>url</code> to see if it is in range of <code>user.saisons.sa_no</code>.</p>
+<ul>
+<li>If true, set <code>selectedSaison</code> in <code>storage</code> to <code>sa_no</code></li>
+<li>If false, navigate to page 404</li>
+</ul>
+<h4 id="getcompetidfromurl"><a class="header" href="#getcompetidfromurl">getCompetIdFromUrl</a></h4>
+<pre><code class="language-ts">getCompetIdFromUrl() {
+  const competition = this.route.snapshot.paramMap.get('competition');
+  if (competition) {
+    this.storageService.competId = Number(
+      UtilsService.getCodeByCompetition(competition)
+    );
+  }
+}
+</code></pre>
+<p>This function get the <code>competition</code> string in <code>url</code>, convert it to a number then store it in <code>storage</code>.</p>
+<h4 id="uploadfile"><a class="header" href="#uploadfile">uploadFile</a></h4>
+<pre><code class="language-ts">uploadFile(file: any, field_name: string, critere_id: number) {
+  let fileForm = this.dossierForm.get([
+    field_name, // form field which has critere.code == 'PJ' .i.e 'incon_struct_org'
+    String(critere_id),
+  ]);
+  if (file) {
+    const reader: FileReader = new FileReader();
+    reader.readAsDataURL(file); // read as base64
+    reader.onload = () =&gt; {
+      const { categorie, nature } = UtilsService.getCategorieNatureById(
+        fileForm?.value.id
+      );
+      const fileToUpload = {
+        file_name: file.name,
+        content: String(reader.result).split(',')[1], // strip the first part before the comma
+        content_type: file.type,
+        categorie: categorie,
+        nature: nature,
+      };
+      // upload a file with content
+      fileForm?.patchValue({
+        file: fileToUpload,
+        eligibilite: 1, // set status to en attente FFF after uploading a file
+        motif_pj: '', // reset motif_pj to ''
+      });
+    };
+  }
+  // upload nothing (file == null)
+  else {
+    fileForm?.patchValue({
+      file: null,
+      // if file uploading is null, restore eligibilite to the eligibilite value in backend
+      eligibilite: fileForm.value.ref_eligibilite,
+    });
+  }
+}
+</code></pre>
+<p>This function parses the uploaded <code>file</code> as <code>base64</code> format and update its <code>fileForm</code> value. If the user remove the <code>file</code>, the <code>eligibilite</code> of the <code>fileForm</code> will be reset to its <code>ref_eligibilite</code> (considered as a <code>const</code> in frontend) which is the original value gotten from backend.</p>
+<p>For example, in the case of <code>REFUS_PIECE</code>, the current eligibilite is <code>refus piece</code>, the user (<code>club</code>) will upload another file to the frontend, the eligibilite will pass to <code>en attent FFF</code>. To undo the change, user will remove the file by clicking on <code>Cancel</code> after the file upload window pop up. The eligibilite will now return to its original value which is <code>refus piece</code>.</p>
+<h4 id="downloadfile-1"><a class="header" href="#downloadfile-1">downloadFile</a></h4>
+<pre><code class="language-ts">/**
+ * WIP - can be improved by linking to storage on Azure Stack Edge
+ * https://cdn-transverse.azureedge.net
+ */
+async downloadFile(file: any) {
+  this.subs.sink = this.dossierService
+    .requestDownloadFile(
+      file.categorie,
+      file.nature,
+      file.azure_name ? file.azure_name : null
+    )
+    .subscribe({
+      next: (result: any) =&gt; {
+        UtilsService.open_file(result);
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>This function is used to open a new tab that allows user to view the <code>PDF</code> file which is stored in <code>AzureStorage</code>. User can later decide whether or not to download the file.</p>
+<h4 id="spawndossierobservableandinitdossierformassideeffects"><a class="header" href="#spawndossierobservableandinitdossierformassideeffects">spawnDossierObservableAndInitDossierFormAsSideEffects</a></h4>
+<pre><code class="language-ts">/**
+ * Create a `dossier$` stream. After subscribing to this stream,
+ * a `dossierForm` building + some setup processes will be initialized as side effects
+ */
+private spawnDossierObservableAndInitDossierFormAsSideEffects() {
+  return this.storageService.selectedDossier$.pipe(
+    // side effects if subscribe to this stream
+    tap((dossier: Dossier) =&gt; {
+      if (dossier.criteres) {
+        this.dossier = dossier;
+        this.resetAllCritereArrays();
+        // init dossierForm
+        this.initInfoGenerale();
+        this.initCriteresFormAndCriteresArrays(dossier.criteres);
+        // setting ngClass object in html
+        this.setCompetIdIcon();
+        this.setDossierStatusColor();
+        // init eligibleOfIncon$
+        this.eligibleOfIncon$.next(
+          this.dossierService.getInconEligibilite(this.dossierForm)
+        );
+        // init sumOfCumulable$
+        this.sumOfCumulable$.next(
+          this.dossierService.getSumOfCumulPoints(this.dossierForm)
+        );
+        // init totalPoints$
+        this.totalPoints$.next(
+          this.dossierService.getPointFromEligibilite(
+            this.eligibleOfIncon$.value
+          ) + this.sumOfCumulable$.value
+        );
+        // init aideFinanciere$
+        this.aideFinanciere$.next(
+          this.dossierService.calculAideFinan(
+            this.storageService.competId,
+            this.eligibleOfIncon$.value,
+            this.totalPoints$.value
+          )
+        );
+      }
+    }),
+    takeUntil(this.storageService.globalUnsubscribe)
+  );
+}
+</code></pre>
+<p>This function will create a <code>dossier$</code> stream. After subscribing to this stream, a <code>dossierForm</code> building + some setup processes will be initialized as side effects</p>
+<h4 id="subscribeeligiblefromdossier"><a class="header" href="#subscribeeligiblefromdossier">subscribeEligibleFromDossier</a></h4>
+<pre><code class="language-ts">/** Subscribe to `dossier$`, switch the stream to `Incontournables` Observable,
+ * calculate the `eligibilite` in `Incontournables`, also update `totalPoints` and `aideFinanciere`
+ */
+private subscribeEligibleFromDossier(dossier$: Observable&lt;Dossier&gt;) {
+  return dossier$
+    .pipe(
+      switchMap(() =&gt; {
+        return this.dossierService.eligibleChangeObserver(this.dossierForm);
+      })
+    )
+    .subscribe({
+      next: () =&gt; {
+        this.eligibleOfIncon$.next(
+          this.dossierService.getInconEligibilite(this.dossierForm)
+        );
+        this.totalPoints$.next(
+          this.dossierService.getPointFromEligibilite(
+            this.eligibleOfIncon$.value
+          ) + this.sumOfCumulable$.value
+        );
+        this.aideFinanciere$.next(
+          this.dossierService.calculAideFinan(
+            this.storageService.competId,
+            this.eligibleOfIncon$.value,
+            this.totalPoints$.value
+          )
+        );
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>This function subscribe to <code>dossier$</code> stream, then switch the stream to <code>Incontournables</code> observable, calculate the <code>eligibilite</code> in <code>Criteres Incontournables</code> field, it also updates <code>totalPoints</code> and <code>aideFinanciere</code>. This function will later be used in <a href="shared/dossier-template.html#setupdossiercontent">setupDossierContent</a> function.</p>
+<h4 id="subscribecumulablefromdossier"><a class="header" href="#subscribecumulablefromdossier">subscribeCumulableFromDossier</a></h4>
+<pre><code class="language-ts">/** Subscribe to `dossier$`, switch the stream to `Cummulables` Observable,
+ * calculate the `points` in `Cumulables`, also update `totalPoints` and `aideFinanciere`
+ */
+private subscribeCumulableFromDossier(dossier$: Observable&lt;Dossier&gt;) {
+  return dossier$
+    .pipe(
+      switchMap(() =&gt; {
+        return this.dossierService.pointsChangeObserver(this.dossierForm);
+      })
+    )
+    .subscribe({
+      next: () =&gt; {
+        this.sumOfCumulable$.next(
+          this.dossierService.getSumOfCumulPoints(this.dossierForm)
+        );
+        this.totalPoints$.next(
+          this.dossierService.getPointFromEligibilite(
+            this.eligibleOfIncon$.value
+          ) + this.sumOfCumulable$.value
+        );
+        this.aideFinanciere$.next(
+          this.dossierService.calculAideFinan(
+            this.storageService.competId,
+            this.eligibleOfIncon$.value,
+            this.totalPoints$.value
+          )
+        );
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>This function subscribes to <code>dossier$</code> stream, then switch the stream to <code>Cummulables</code> observable, calculate the <code>points</code> in <code>Criteres Cumulables</code> field, it also updates <code>totalPoints</code> and <code>aideFinanciere</code>. This function will later be used in <a href="shared/dossier-template.html#setupdossiercontent">setupDossierContent</a> function.</p>
+<h4 id="setupdossiercontent"><a class="header" href="#setupdossiercontent">setupDossierContent</a></h4>
+<pre><code class="language-ts">/**
+ * Spawn `dossier$` and init `dossierForm` in its side effects.
+ * Immediately subscribe to `eligibilite$` and `cumulables$` piped from `dossier$`
+ * in order to calculate `incontournables` eligibilite, `cumulables` points and `totalPoints`
+ */
+setupDossierContent() {
+  this.subs.sink = this.subscribeEligibleFromDossier(
+    this.spawnDossierObservableAndInitDossierFormAsSideEffects()
+  );
+  this.subs.sink = this.subscribeCumulableFromDossier(
+    this.spawnDossierObservableAndInitDossierFormAsSideEffects()
+  );
+}
+</code></pre>
+<p>This function will spawn a <code>dossier$</code> stream and init <code>dossierForm</code> in its side effects. Immediately after that, we switch the stream to <code>eligibilite$</code> stream and <code>cumulables$</code> stream in order to calculate <code>Criteres Incontournables</code> eligibilite, <code>Criteres Cumulables</code> points and <code>totalPoints</code>.</p>
+<h4 id="ngafterviewchecked"><a class="header" href="#ngafterviewchecked">ngAfterViewChecked</a></h4>
+<pre><code class="language-ts">ngAfterViewChecked(): void {
+    this.cdRef.detectChanges();
+  }
+</code></pre>
+<p>Because there are some proccesses such as setting competition icon, dossier statut color, etc... are initiated after the view is checked (because a <code>dossier</code> in <code>dossier$</code> stream could be updated at anytime after the view was checked, a http request could take a while to get the response). Therefore, we have to implement another change detection after the view is checked. Our application is just a small one so it does not impact much on the performance nor user experience.</p>
+<h4 id="ngondestroy-4"><a class="header" href="#ngondestroy-4">ngOnDestroy</a></h4>
+<pre><code class="language-ts">ngOnDestroy(): void {
+  // unhide saisonBox
+  this.storageService.showSaisonBox$.next(true);
+  this.subs.unsubscribe();
+  this.storageService.globalUnsubscribe.next();
+  this.storageService.globalUnsubscribe.complete();
+}
+</code></pre>
+<p>Upon destroying this component, we unhide the season selection dropdown box. We also terminate all the <code>dangling</code> observables (this is important, we did it to overcome the <code>child component duplication</code> bug)</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="header"><a class="header" href="#header">HEADER</a></h1>
+<p>The header of the app.</p>
+<h2 id="description-11"><a class="header" href="#description-11">Description:</a></h2>
+<p>This header always appears on top of the application. There is a season selection dropdown box on the right of the header.</p>
+<h2 id="files-11"><a class="header" href="#files-11">Files:</a></h2>
+<pre><code class="language-ignore">header.component.html
+header.component.scss
+header.component.ts
+</code></pre>
+<h2 id="functionalities-10"><a class="header" href="#functionalities-10">Functionalities:</a></h2>
+<h3 id="general-10"><a class="header" href="#general-10">General:</a></h3>
+<pre><code class="language-ts">ngOnInit(): void {
+  this.currentUser = this.storageService.user;
+  this.updateLogoClubUrl();
+  this.subs.sink = this.subscribeDossiersFromSaNo(this.spawnSaNoObservable());
+  this.subs.sink = this.subscribeParametersFromSaNo(this.spawnSaNoObservable());
+}
+</code></pre>
+<p>Upon initialization, this header will spawn 2 observables that listen to value changes of <code>season</code>.
+When a selected <code>season</code> changes, it invokes a call to backend and retrieves <code>dossiers</code> and <code>parameters</code> within the <code>season</code>.
+Also, if connected <code>user</code> has a <code>cl_cod</code>, we'll update the club logo at the top right of the header.</p>
+<h3 id="specific-7"><a class="header" href="#specific-7">Specific:</a></h3>
+<h4 id="spawnsanoobservable"><a class="header" href="#spawnsanoobservable">spawnSaNoObservable</a></h4>
+<pre><code class="language-ts">private spawnSaNoObservable() {
+  return this.storageService.getSelectedSaisonSaNo$.pipe(
+    tap((sa_no: number) =&gt; {
+      this.selectedSaisonSaNo = sa_no;
+    }),
+    distinctUntilChanged()
+  );
+}
+</code></pre>
+<p>Spawn an observable that listen to value changes of <code>season</code>.
+Upon receive a new one which is different from the old one (<code>distincUntilChanged()</code>), assign the new value to variable <code>this.selectedSaisonSaNo</code></p>
+<h4 id="subscribedossiersfromsano"><a class="header" href="#subscribedossiersfromsano">subscribeDossiersFromSaNo</a></h4>
+<pre><code class="language-ts">private subscribeDossiersFromSaNo(saNo$: Observable&lt;number&gt;) {
+  return saNo$
+    .pipe(
+      switchMap((sa_no: number) =&gt; {
+        // in case connected as 'club'
+        if (
+          this.storageService.connectId === 'club' &amp;&amp;
+          this.currentUser.cl_cod
+        ) {
+          return this.dossierService.requestDossiers(
+            sa_no,
+            this.currentUser.cl_cod
+          );
+        }
+        // case connected as 'dcn', do nothing
+        else return of();
+      })
+    )
+    .subscribe({
+      next: (dossier: any) =&gt; {
+        console.log('storage.dossiers: ', dossier);
+        this.storageService.dossiers = dossier;
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>Subscribe to the <code>season</code> observable. Upon a <code>season</code> changes, invoke a call to backend, retrieve and set the new <code>dossiers</code> of that <code>season</code> to the <code>storage</code>.</p>
+<h4 id="subscribeparametersfromsano"><a class="header" href="#subscribeparametersfromsano">subscribeParametersFromSaNo</a></h4>
+<pre><code class="language-ts">private subscribeParametersFromSaNo(saNo$: Observable&lt;number&gt;) {
+  return saNo$
+    .pipe(
+      switchMap((sa_no: number) =&gt; {
+        return this.parametersService.requestParameters(sa_no);
+      })
+    )
+    .subscribe({
+      next: (params: any) =&gt; {
+        console.log('storage.parameters: ', params.results);
+        this.storageService.parameters = params.results;
+      },
+      error: (err: any) =&gt; {
+        console.error(err);
+      },
+    });
+}
+</code></pre>
+<p>Suscribe to the <code>season</code> observable. Upon a <code>season</code> changes, invoke a call to backend, retrieve and set the new <code>parameters</code> of that <code>season</code> to the <code>storage</code>.</p>
+<h4 id="saisonchanged"><a class="header" href="#saisonchanged">saisonChanged</a></h4>
+<pre><code class="language-ts">saisonChanged($event: any) {
+  if ($event?.target?.value) {
+    const sa_no = parseInt($event.target.value);
+    this.storageService.selectedSaisonSaNo = sa_no;
+    this.changeRouteToSelectedSaisonSaNo(sa_no);
+  }
+}
+</code></pre>
+<p>Upon selecting another <code>season</code> in dropdown box, correcting the <code>season</code> string in url by using <code>regex</code> pattern matching.</p>
+<h4 id="changeroutetoselectedsaisonsano"><a class="header" href="#changeroutetoselectedsaisonsano">changeRouteToSelectedSaisonSaNo</a></h4>
+<pre><code class="language-ts">private changeRouteToSelectedSaisonSaNo(sa_no: number): void {
+  const newUrl = this.router.url.replace(/\d+/, String(sa_no));
+  this.router.navigate([newUrl]);
+}
+</code></pre>
+<p>Do <code>regex</code> pattern matching which finds the first number in the string, replace the <code>season</code> string then redirect to that new path.</p>
+<h3 id="html-8"><a class="header" href="#html-8">HTML:</a></h3>
+<pre><code class="language-html">&lt;header&gt;
+  &lt;div class=&quot;partG logo cursor-pointer&quot; [routerLink]=&quot;['/']&quot;&gt;
+    &lt;div&gt;
+      &lt;div class=&quot;filet&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;projetclub&quot;&gt;
+        &lt;div class=&quot;log&quot;&gt;&lt;/div&gt;
+        &lt;div&gt;Projet &lt;span&gt;Club&lt;/span&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;partD&quot; *ngIf=&quot;currentUser&quot;&gt;
+    &lt;div class=&quot;saison&quot; *ngIf=&quot;storageService.showSaisonBox$ | async&quot;&gt;
+      &lt;label&gt;Saison&lt;/label&gt;
+      &lt;select (change)=&quot;saisonChanged($event)&quot; [(ngModel)]=&quot;selectedSaisonSaNo&quot;&gt;
+        &lt;option
+          *ngFor=&quot;let saison of currentUser.saisons&quot;
+          [value]=&quot;saison?.sa_no&quot;
+          [selected]=&quot;saison?.sa_no === selectedSaisonSaNo&quot;
+        &gt;
+          {{saison?.cs_lib}}
+        &lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;user&quot;&gt;
+      &lt;img
+        class=&quot;logo-club&quot;
+        [src]=&quot;logoUrl&quot;
+        (error)=&quot;logoClubErrorHandler($event)&quot;
+        alt=&quot;Logo Club&quot;
+      /&gt;
+      &lt;div&gt;
+        &lt;span class=&quot;name&quot;&gt;{{currentUser.nom}}&lt;/span&gt;
+        &lt;span class=&quot;club&quot;
+          &gt;{{currentUser.cl_cod}} - {{currentUser.club_nom}}&lt;/span
+        &gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+
+&lt;!-- The header component always appears on top of every page
+  (it won't be destroyed when navigating from page to page (page refresh does not count!)) so does the toast.
+  Therefore, do not use this toast anywhere else,
+  if does, a dubplication of toast will be created on top of each other! --&gt;
+&lt;p-toast styleClass=&quot;custom-toast&quot; position=&quot;bottom-right&quot;&gt;&lt;/p-toast&gt;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="side-nav"><a class="header" href="#side-nav">SIDE-NAV</a></h1>
+<p>The side navigation bar of the LCF application.</p>
+<h2 id="description-12"><a class="header" href="#description-12">Description:</a></h2>
+<p>This sidenav always appears on the left of the application. There are two versions of the sidenav, one for <a href="shared/../lcf-club.html">CLUB</a> and one for <a href="shared/../lcf-dcn.html">DCN</a></p>
+<h2 id="files-12"><a class="header" href="#files-12">Files:</a></h2>
+<pre><code class="language-ignore">side-nav.component.html
+side-nav.component.scss
+side-nav.component.ts
+</code></pre>
+<h2 id="functionalities-11"><a class="header" href="#functionalities-11">Functionalities:</a></h2>
+<h3 id="general-11"><a class="header" href="#general-11">General:</a></h3>
+<pre><code class="language-ts">ngOnInit(): void {
+    if (this.storageService.connectId === 'dcn') {
+      this.showClubSideNavBar = false;
+    } else {
+      this.showClubSideNavBar = true;
+    }
+
+    this.sub = this.storageService.getSelectedSaisonSaNo$.subscribe(
+      (sa_no: number) =&gt; {
+        this.selectedSaisonSaNo = sa_no;
+      }
+    );
+}
+</code></pre>
+<p>Depending on who connected to the application (<a href="shared/../lcf-club.html">CLUB</a> or <a href="shared/../lcf-dcn.html">DCN</a>), show the corresponding <code>side-nav</code> version</p>
+<h3 id="specific-8"><a class="header" href="#specific-8">Specific:</a></h3>
+<pre><code class="language-ts">clickFirstEl() {
+    this.storageService.firstMenuItemActivated = true;
+    this.storageService.secondMenuItemActivated = false;
+}
+
+clickSecondEl() {
+    this.storageService.firstMenuItemActivated = false;
+    this.storageService.secondMenuItemActivated = true;
+}
+
+resetAllEl() {
+    this.storageService.firstMenuItemActivated = false;
+    this.storageService.secondMenuItemActivated = false;
+}
+</code></pre>
+<p>Highlight an item in <code>side-nav</code> upon clicking on it.</p>
+<h3 id="html-9"><a class="header" href="#html-9">HTML:</a></h3>
+<pre><code class="language-html">&lt;div class=&quot;container h100&quot;&gt;
+  &lt;div class=&quot;colG&quot; *ngIf=&quot;showClubSideNavBar&quot;&gt;
+    &lt;ul&gt;
+      &lt;li class=&quot;nv0&quot;&gt;
+        &lt;a [routerLink]=&quot;['/club',selectedSaisonSaNo]&quot; (click)=&quot;clickFirstEl()&quot;
+          &gt;Projet Club &lt;span&gt;&lt;/span
+        &gt;&lt;/a&gt;
+        &lt;ul class=&quot;nav&quot;&gt;
+          &lt;li class=&quot;nav-accueil&quot;&gt;
+            &lt;a
+              [ngClass]=&quot;{'active': storageService.firstMenuItemActivated$ | async}&quot;
+              [routerLink]=&quot;['/club', selectedSaisonSaNo]&quot;
+              (click)=&quot;clickFirstEl()&quot;
+              &gt;Accueil&lt;/a
+            &gt;
+          &lt;/li&gt;
+          &lt;li class=&quot;nav-licence&quot;&gt;
+            &lt;a
+              [ngClass]=&quot;{'active': storageService.secondMenuItemActivated$ | async}&quot;
+              [routerLink]=&quot;['/club', selectedSaisonSaNo,'lcf']&quot;
+              (click)=&quot;clickSecondEl()&quot;
+              &gt;Licence « Club Fédéral »&lt;/a
+            &gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;colG nav2&quot; *ngIf=&quot;!showClubSideNavBar&quot;&gt;
+    &lt;ul class=&quot;vl margTop10&quot;&gt;
+      &lt;li class=&quot;nv0 nva&quot;&gt;
+        &lt;a
+          [routerLink]=&quot;['/dcn',selectedSaisonSaNo,'lcf']&quot;
+          (click)=&quot;clickFirstEl()&quot;
+          &gt;Licence « Club Fédéral » &lt;span&gt;&lt;/span
+        &gt;&lt;/a&gt;
+        &lt;ul class=&quot;nav&quot;&gt;
+          &lt;li class=&quot;nav-search&quot;&gt;
+            &lt;a
+              [ngClass]=&quot;{'active': storageService.firstMenuItemActivated$ | async}&quot;
+              [routerLink]=&quot;['/dcn',selectedSaisonSaNo,'lcf']&quot;
+              (click)=&quot;clickFirstEl()&quot;
+              &gt;Recherche / Liste&lt;/a
+            &gt;
+          &lt;/li&gt;
+          &lt;li class=&quot;nav-settings&quot;&gt;
+            &lt;a
+              [ngClass]=&quot;{'active': storageService.secondMenuItemActivated$ | async}&quot;
+              [routerLink]=&quot;['/dcn',selectedSaisonSaNo,'lcf','params']&quot;
+              (click)=&quot;clickSecondEl()&quot;
+              &gt;Paramètres&lt;/a
+            &gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+  &lt;router-outlet&gt;&lt;/router-outlet&gt;
+&lt;/div&gt;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="page-not-found"><a class="header" href="#page-not-found">PAGE-NOT-FOUND</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="lcf-file"><a class="header" href="#lcf-file">LCF-FILE</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="lcf-terrain"><a class="header" href="#lcf-terrain">LCF-TERRAIN</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="lcf-radio"><a class="header" href="#lcf-radio">LCF-RADIO</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="lcf-radio-three"><a class="header" href="#lcf-radio-three">LCF-RADIO-THREE</a></h1>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </body>
+</html>
