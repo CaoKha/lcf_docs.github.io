@@ -226,9 +226,7 @@ private backupTerrains() {
 <p>This function verifies if there exists a critere cumulable that has a <code>null</code> points.</p>
 <h4 id="validerdossier"><a class="header" href="#validerdossier">validerDossier</a></h4>
 <pre><code class="language-ts">override validerDossier(): void {
-  let isValid = this.isDossierFormValid(this.dossierForm);
-  let eligibiliteValid = this.isEligibiliteInconValid();
-  if (this.dossier.id &amp;&amp; isValid &amp;&amp; eligibiliteValid) {
+  if (this.dossier.id) {
     this.sendDossierToBackend(
       true,
       this.storageService.connectId,
@@ -236,32 +234,17 @@ private backupTerrains() {
     );
   } else {
     if (!this.dossier.id) {
-      console.error('dossier.id is undefined or null');
+      console.log('dossier.id is undefined or null');
       console.info('dossier info:', this.dossier);
-    } else if (!isValid) {
-      console.error('The dossierForm is invalid!');
-      console.info('dossierForm info:', this.dossierForm);
-    } else if (!eligibiliteValid) {
-      console.error(
-        'Le statut des critères incontournables doit être différent à &quot;à évaluer&quot;!'
-      );
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Erreur',
-        detail:
-          'Le statut des critères incontournables doit être différent à &quot;à évaluer&quot;',
-      });
     }
   }
 }
 </code></pre>
-<p>This function overrides the original <a href="../shared/dossier-template.html#validerdossier">validerDossier</a>. This newly version will also add another stricter verification (if <code>Criteres Incontournables</code> eligibilite is valid) and then sending <code>dossier</code> to backend.</p>
+<p>This function overrides the original <a href="../shared/dossier-template.html#validerdossier">validerDossier</a>. This newly version removes validity check because the validity check is done at <a href="#makedecision">makeDecision</a> and then sending <code>dossier</code> to backend.</p>
 <h4 id="validerdecision"><a class="header" href="#validerdecision">validerDecision</a></h4>
 <pre><code class="language-ts">validerDecision() {
   this.updateDecisionValidators();
-  let eligibiliteValid = this.isEligibiliteInconValid();
-  let isDossierValid = this.isDossierFormValid(this.dossierForm);
-  if (this.decisionForm.valid &amp;&amp; isDossierValid &amp;&amp; eligibiliteValid) {
+  if (this.decisionForm.valid) {
     this.sendDecisionToBackend('Decision envoyé');
     this.closeBothConfirmAndDecisionModal();
   } else {
@@ -271,19 +254,46 @@ private backupTerrains() {
         summary: 'Erreur',
         detail: 'Decision est invalide',
       });
-    else if (!eligibiliteValid) {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Erreur',
-        detail:
-          'Le statut des critères incontournables doit être différent à &quot;à évaluer&quot;',
-      });
-    }
     this.closeConfirmOpenModal();
   }
 }
 </code></pre>
-<p>This function checks if the <code>dossierForm</code> is valid, it also checks <code>Criteres Incontournables</code> eligibilite and then sending the <code>decisionForm</code> to backend. This function will later be used in <a href="#makedecision">makeDecision</a>.</p>
+<p>This function checks if the <code>decisionForm</code> is valid and then sending the <code>decisionForm</code> to backend. This function will later be used in <a href="#makedecision">makeDecision</a>.</p>
+<h4 id="makedecision"><a class="header" href="#makedecision">makeDecision</a></h4>
+<pre><code class="language-ts">/**
+ * open decision modal only when `eligibiliteOfIncon` is diffenrent from `a_evaluer` and `refus_piece`
+ */
+makeDecision() {
+  let isValid = this.isDossierFormValid(this.dossierForm);
+  let isEligibiliteValid = this.isEligibiliteInconValid();
+  let isCumulValid = !this.isACumulCriterePointNull(this.dossierForm);
+  if (isValid &amp;&amp; isEligibiliteValid &amp;&amp; isCumulValid) {
+    if ([1, 4].includes(this.eligibleOfIncon$.value)) {
+      this.validerDossier();
+    } else {
+      this.showModal = true;
+    }
+  } else if (!isValid) {
+    console.log('The dossierForm is invalid!');
+    console.info('dossierForm info:', this.dossierForm);
+  } else if (!isEligibiliteValid) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Erreur',
+      detail:
+        'Le statut des critères incontournables doit être différent à &quot;à évaluer&quot;',
+    });
+  } else if (!isCumulValid) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Erreur',
+      detail:
+        'Tous les statuts des critères cumulables doivent être différent à &quot;null&quot;',
+    });
+  }
+}
+</code></pre>
+<p>This function is called after user click on <code>decision</code> button. Firstly, we check the validity of <code>dossier</code>, the <code>eligibilite</code> of <code>criteres incontournables</code> is different of <code>a evaluer</code> and aucun <code>critere cumulable</code> est a <code>null</code>, we then open the <code>decisionForm</code> modal if the <code>eligibilite</code> of <code>criteres incontournables</code> is different from <code>refus piece</code>. Else, execute <a href="#validerdossier">validerDossier</a> function.</p>
 <h4 id="iseligibiliteinconvalid"><a class="header" href="#iseligibiliteinconvalid">isEligibiliteInconValid</a></h4>
 <pre><code class="language-ts">private isEligibiliteInconValid() {
   if (this.eligibleOfIncon$.value === EligibiliteEnum.A_EVALUER) return false;
@@ -404,22 +414,6 @@ private backupTerrains() {
 }
 </code></pre>
 <p>This function allows <code>dcn</code> user to unlock a <code>CLOS</code> dossier. After unlocking, the dossier status will becomes <code>EN COURS</code>.</p>
-<h4 id="makedecision"><a class="header" href="#makedecision">makeDecision</a></h4>
-<pre><code class="language-ts">/**
- * open decision modal only when `eligibiliteOfIncon` is diffenrent from `a_evaluer` and `refus_piece`
- */
-makeDecision() {
-  if (
-    [1, 4].includes(this.eligibleOfIncon$.value) ||
-    this.isACumulCriterePointNull(this.dossierForm)
-  ) {
-    this.validerDossier();
-  } else {
-    this.showModal = true;
-  }
-}
-</code></pre>
-<p>This function is called after user click on <code>decision</code> button. If <code>dossier</code> status is different of <code>a evaluer</code> and <code>refus piece</code> and there is no <code>null points</code> critere cumulable, we open the <code>decisionForm</code> modal. Else, execute <a href="#validerdossier">validerDossier</a> function.</p>
 <h3 id="html"><a class="header" href="#html">HTML:</a></h3>
 <pre><code class="language-html">&lt;div
   class=&quot;content-pages&quot;
